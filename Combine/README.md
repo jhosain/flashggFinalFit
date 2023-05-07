@@ -4,6 +4,8 @@ Now the signal and background models and the datacard has been produced, it is t
 
 ## Copy everything across
 
+cp FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase.py ../../HiggsAnalysis/CombinedLimit/python/
+
 The very first step is to copy your signal and background models, and the `.txt` datacard to this directory. I have not written a script for this yet so please do it by hand. The signal and background models must match the specified paths in the `.txt` datacard (the default is `./Models/signal` and `./Models/background`, you can change this with the `--sigModelWSDir` and `--bkgModelWSDir` options in the `Datacard/RunYields.py` script) i.e.
 ```
 mkdir Models

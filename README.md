@@ -41,6 +41,13 @@ In every new shell run the following to add `tools/commonTools` and `tools/commo
 cmsenv
 source setup.sh
 ```
+## Copy Physics model in the CombinedLimit 
+```
+cd Combine
+cp FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase.py ../../HiggsAnalysis/CombinedLimit/python/
+```
+
+
 
 ## Contents
 The Finals Fits package contains several subfolders which are used for the following steps:
