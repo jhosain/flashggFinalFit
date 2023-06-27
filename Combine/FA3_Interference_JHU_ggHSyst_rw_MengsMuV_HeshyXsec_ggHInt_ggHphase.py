@@ -7,11 +7,12 @@ import re
 class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(PhysicsModel):
     def doParametersOfInterest(self):
         #Create POI and other parameters, and define the POI set.
+        # Generator specific (JHUGen) values of inclusive xsec H->ZZ>4l taken from https://twiki.cern.ch/twiki/bin/view/CMS/Run2MCProductionforHiggsProperties#JHUGen_H_2jets_Production_JHUGen
         xsecs = {
-            "sigma1_HZZ": 290.58626, # Inclusive cross-section in 2e2mu used as benchmark 
+            "sigma1_HZZ": 290.58626,  
             "sigma3_HZZ": 44.670158,
 
-            "sigma1_VBF": 968.674,   # Generator-specific valus for JHUGen samples
+            "sigma1_VBF": 968.674,   
             "sigma3_VBF": 10909.54,
             "sigma1_ZH":  9022.36,
             "sigma3_ZH":  434763.7,
@@ -25,7 +26,7 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
             "sigma_SM_ggH": 15980,
             "sigma_BSM_ggH": 15981, # sigma_BSM_ggH:=sigma2_ggH =sigma3_ggH ( follows from a2_ggH = a3_ggH = 1; fa3_ggH = 0.5 )
 
-            "categories": 12,
+            "categories": 12, # 500,300,200
 
         }
 
