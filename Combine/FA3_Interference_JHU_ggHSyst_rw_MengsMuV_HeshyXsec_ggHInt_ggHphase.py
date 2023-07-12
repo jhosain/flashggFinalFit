@@ -46,7 +46,7 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
         self.modelBuilder.doVar('expr::a3_ggH("(@0>0 ? -1 : 1) * sqrt(abs(@0))", fa3_ggH)'.format(**xsecs)) # sigma2_ggH/sigma3_ggH = 1
 
         # Convenience parameter muV_c = prefactor* muV. Prefactor reabsorbed in overall normalization, see from eq. 23, using Taylor expansion for fa1~1(SM case) and fa3~0
-        self.modelBuilder.factory_('expr::muVc("@1/(1+@2*abs(@0))", fa3,muV,categories)'.format(**xsecs))  
+        self.modelBuilder.factory_('expr::muVc("@1/(1+12*abs(@0))", fa3,muV)'.format(**xsecs))  
 
         # Amplitude decomposition in SM, int, bsm terms such that all terms poistive definite (to avoid negative norms for pdf in combine)
         self.modelBuilder.factory_('expr::smCoupling_VBF("@0*@1**2 - @0*@1*@2*sqrt({sigma3_VBF}/{sigma1_VBF})", muVc,a1,a3)'.format(**xsecs))
