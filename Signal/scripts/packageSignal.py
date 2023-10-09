@@ -13,7 +13,7 @@ def get_options():
   parser.add_option("--outputExt", dest='outputExt', default='packaged', help="Output extension")
   parser.add_option("--massPoints", dest='massPoints', default='120,125,130', help="Comma separated list of mass points")
   parser.add_option("--mergeYears", dest='mergeYears', default=False, action="store_true", help="Merge specified categories across years")
-  parser.add_option("--year", dest="year", default="2016", help="If not merging, then specify year for output file name")
+  parser.add_option("--year", dest="year", default="2017", help="If not merging, then specify year for output file name")
   return parser.parse_args()
 (opt,args) = get_options()
 

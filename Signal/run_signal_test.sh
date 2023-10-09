@@ -49,8 +49,8 @@ signalScriptCfg = {
 }" > config_sig_$k\_bin_$i.py
 
 python RunSignalScripts.py --inputConfig config_sig_$k\_bin_$i.py --mode fTest  --modeOpts "--nProcsToFTest 1 --threshold 5 --doPlots "
-python RunSignalScripts.py --inputConfig config_sig_$k\_bin_$i.py --mode signalFit  --groupSignalFitJobsByCat --modeOpts "--skipSystematics --replacementThreshold 5 --doPlots" 
-
+python RunSignalScripts.py --inputConfig config_sig_$k\_bin_$i.py --mode getEffAcc
+python RunSignalScripts.py --inputConfig config_sig_$k\_bin_$i.py --mode signalFit  --groupSignalFitJobsByCat --modeOpts "--skipSystematics --nBins --doEffAccFromJson --replacementThreshold 5 --doPlots --skipVertexScenarioSplit"
 
 echo " ################## Finished the whole process for Bin$i $k  ################ "
 

@@ -23,12 +23,12 @@ globalReplacementMap["example"]["catRVMap"] = od()
 globalReplacementMap["example"]["catRVMap"]["Untagged_Tag0"] = "Untagged_Tag0"
 globalReplacementMap["example"]["catRVMap"]["VBF_Tag0"] = "VBF_Tag0"
 
-
 globalReplacementMap['AC'] = od()
 globalReplacementMap['AC']['procWV'] = "GG2H"
 globalReplacementMap['AC']['catWV'] = "GG2H"
 globalReplacementMap['AC']['procRVMap'] = od()
-globalReplacementMap["AC"]["procRVMap"]["AC_Tag0"] = "GG2H"
+#globalReplacementMap["AC"]["procRVMap"]["AC_Tag0"] = "GG2H"
+globalReplacementMap["AC"]["procRVMap"]["AC_Bin0"] = "GG2H"
 
 #HHH analysis
 globalReplacementMap['HHH'] = od()

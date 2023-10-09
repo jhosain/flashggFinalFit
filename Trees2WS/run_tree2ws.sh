@@ -1,7 +1,7 @@
 
 #!bin/sh/                                                                                                                        
 
-echo "Input the path directory of your ntuplese and No '/' at the end of the path directory" 
+echo "Input the path directory of your ntuplese and No \ at the end of the path directory" 
 read InputTreePathdirectory
 
 echo "Number of Bin?"
@@ -89,13 +89,9 @@ echo " @@@@ output_Data.root was created & renamed to allData.root @@@@"
 
 echo " ###### Running T2WS for the Signal ########## "
 
-#python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0P --year 2017
-#python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_GluGluHToGGPlusTwoJets_CPodd_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0M --year 2017
-#python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_GluGluHToGGPlusTwoJets_MM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0Mf05ph0  --year 2017
-
-python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_JJHiggs0PMToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root  --productionMode jjh0P --year 2017
-python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_JJHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root  --productionMode jjh0M --year 2017
-python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_JJHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode jjh0Mf05ph0  --year 2017
+python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0P --year 2017
+python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_GluGluHToGGPlusTwoJets_CPodd_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0M --year 2017
+python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_GluGluHToGGPlusTwoJets_MM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0Mf05ph0  --year 2017
 python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_VBFHiggs0PHToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode vbf0P  --year 2017
 python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_VBFHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode vbf0M  --year 2017
 python trees2ws.py  --inputConfig config_sig_bin$i.py  --inputTreeFile $InputTreePathdirectory/Bin$i/output_VBFHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode vbf0Mf05ph0  --year 2017
