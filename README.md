@@ -6,7 +6,7 @@ Slides from the flashgg tutorial series can be found [here](https://indico.cern.
 ## Download and setup instructions for Combine version 8
 
 ```
-export SCRAM_ARCH=slc7_amd64_gcc900
+export SCRAM_ARCH=slc7_amd64_gcc700
 cmsrel CMSSW_10_2_13
 cd CMSSW_10_2_13/src
 cmsenv
