@@ -1,5 +1,3 @@
-
-
 #!bin/sh
 
 echo "Input the path directory of your workspace"
@@ -8,12 +6,15 @@ read InputWSDirPath
 echo "Number of Bin?"
 read bin
 
+echo "Initial Bin"
+read initial_bin
+
 ###################
 
 j="_"
 
 
-for ((i = 0; i < $bin; i++));
+for ((i = $initial_bin; i < $bin; i++));
 do
 
 for k in GG2HbsmM GG2Hsm GG2HMf05ph0 VBFbsmM VBFsm VBFMf05ph0

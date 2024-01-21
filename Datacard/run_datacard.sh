@@ -34,7 +34,7 @@ fi
 echo "all the root files are copied to WS"
 
 
-python RunYields.py --inputWSDirMap 2017=$InputTreePathdirectory/Bin$i/WS  --cats AC_Bin$i --procs auto --batch local --queue hep.q --ext bin$i
+python RunYields.py --inputWSDirMap 2017=$InputTreePathdirectory/Bin$i/WS  --skipZeroes True --cats AC_Bin$i --procs auto --batch local --queue hep.q --ext bin$i
 
 python makeDatacard.py --ext bin$i --output Datacard_AC_Bin$i
 
