@@ -26,14 +26,14 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
             "sigma_SM_ggH": 15980,
             "sigma_BSM_ggH": 15981, # sigma_BSM_ggH:=sigma2_ggH =sigma3_ggH ( follows from a2_ggH = a3_ggH = 1; fa3_ggH = 0.5 )
 
-            "categories": 12, # 500,300,200
+            "categories": 30, # 500,300,200
 
         }
 
         # Individual fit with 2 POIs, fa3_ggH and mu_ggH, other params fa3 and muV profiled in fit, fai set to 0 for i !=3
         self.modelBuilder.doVar("fa3[0.0,-1.0,1.0]");            # := a3**2 *sigma3_HZZ / {a3**2 *sigma3_HZZ + a1**2 *sigma1_HZZ}     
         self.modelBuilder.doVar("fa3_ggH[0.0,-1.0,1.0]");        # := (a3_gg)**2 /{ (a3_gg)**2 + (a2_gg)**2 }
-        self.modelBuilder.doVar("mu_ggH[1.0,0,10]");             # := sigma{ggH,obs}     /sigma_{SM,exp}
+        self.modelBuilder.doVar("mu_ggH[1.0,0,10]");             # := sigma{ggH/ttH,obs}     /sigma_{SM,exp} applicable for both ggH and ttH production mode
         self.modelBuilder.doVar("muV[1.0,0.0,10.0]");            # := sigma{(VBF+VH),obs}/sigma_{SM,exp}
         self.modelBuilder.doSet("POI","fa3,fa3_ggH,muV,mu_ggH")
 
@@ -46,7 +46,7 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
         self.modelBuilder.doVar('expr::a3_ggH("(@0>0 ? -1 : 1) * sqrt(abs(@0))", fa3_ggH)'.format(**xsecs)) # sigma2_ggH/sigma3_ggH = 1
 
         # Convenience parameter muV_c = prefactor* muV. Prefactor reabsorbed in overall normalization, see from eq. 23, using Taylor expansion for fa1~1(SM case) and fa3~0
-        self.modelBuilder.factory_('expr::muVc("@1/(1+12*abs(@0))", fa3,muV)'.format(**xsecs))  
+        self.modelBuilder.factory_('expr::muVc("@1/(1+30*abs(@0))", fa3,muV)'.format(**xsecs))  
 
         # Amplitude decomposition in SM, int, bsm terms such that all terms poistive definite (to avoid negative norms for pdf in combine)
         self.modelBuilder.factory_('expr::smCoupling_VBF("@0*@1**2 - @0*@1*@2*sqrt({sigma3_VBF}/{sigma1_VBF})", muVc,a1,a3)'.format(**xsecs))
@@ -68,32 +68,125 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
 
     def getYieldScale(self,bin,process):
 
+        if process in ["GG2Hsm_2016preVFP_hgg",]:
+            return 'smCoupling_ggH'
+        if process in ["GG2HbsmM_2016preVFP_hgg",]:
+            return 'bsmCoupling_ggH'
+        if process in ["GG2HMf05ph0_2016preVFP_hgg"]:
+            return 'intCoupling_ggH'
+        if process in ["vbf0P_2016preVFP_hgg",]:
+            return 'smCoupling_VBF'
+        if process in ["vbf0M_2016preVFP_hgg",]:
+            return 'bsmCoupling_VBF'
+        if process in ["vbf0Mf05ph0_2016preVFP_hgg"]:
+            return 'intCoupling_VBF'
+        if process in ["wh0P_2016preVFP_hgg",]:
+            return 'smCoupling_WH'
+        if process in ["wh0M_2016preVFP_hgg",]:
+            return 'bsmCoupling_WH'
+        if process in ["wh0Mf05ph0_2016preVFP_hgg"]:
+            return 'intCoupling_WH'
+        if process in ["zh0P_2016preVFP_hgg",]:
+            return 'smCoupling_ZH'
+        if process in ["zh0M_2016preVFP_hgg",]:
+            return 'bsmCoupling_ZH'
+        if process in ["zh0Mf05ph0_2016preVFP_hgg"]:
+            return 'intCoupling_ZH'
+
+        if process in ["tth0P_2016preVFP_hgg",]:
+            return 'mu_ggH'
+
+
+        if process in ["GG2Hsm_2016postVFP_hgg",]:
+            return 'smCoupling_ggH'
+        if process in ["GG2HbsmM_2016postVFP_hgg",]:
+            return 'bsmCoupling_ggH'
+        if process in ["GG2HMf05ph0_2016postVFP_hgg"]:
+            return 'intCoupling_ggH'
+        if process in ["vbf0P_2016postVFP_hgg",]:
+            return 'smCoupling_VBF'
+        if process in ["vbf0M_2016postVFP_hgg",]:
+            return 'bsmCoupling_VBF'
+        if process in ["vbf0Mf05ph0_2016postVFP_hgg"]:
+            return 'intCoupling_VBF'
+        if process in ["wh0P_2016postVFP_hgg",]:
+            return 'smCoupling_WH'
+        if process in ["wh0M_2016postVFP_hgg",]:
+            return 'bsmCoupling_WH'
+        if process in ["wh0Mf05ph0_2016postVFP_hgg"]:
+            return 'intCoupling_WH'
+        if process in ["zh0P_2016postVFP_hgg",]:
+            return 'smCoupling_ZH'
+        if process in ["zh0M_2016postVFP_hgg",]:
+            return 'bsmCoupling_ZH'
+        if process in ["zh0Mf05ph0_2016postVFP_hgg"]:
+            return 'intCoupling_ZH'
+
+        if process in ["tth0P_2016postVFP_hgg",]:
+            return 'mu_ggH'
+
+
         if process in ["GG2Hsm_2017_hgg",]:
             return 'smCoupling_ggH'
         if process in ["GG2HbsmM_2017_hgg",]:
             return 'bsmCoupling_ggH'
-        if process in ["vbf0P_2017_hgg",]:
-            return 'smCoupling_VBF'
-        if process in ["reweighted_WH_htt_0PM",]:
-            return 'smCoupling_WH'
-        if process in ["reweighted_ZH_htt_0PM",]:
-            return 'smCoupling_ZH'
-        if process in ["vbf0M_2017_hgg",]:
-            return 'bsmCoupling_VBF'
-        if process in ["reweighted_WH_htt_0M",]:
-            return 'bsmCoupling_WH'
-        if process in ["reweighted_ZH_htt_0M",]:
-            return 'bsmCoupling_ZH'
-        if process in ["vbf0Mf05ph0_2017_hgg"]:
-            return 'intCoupling_VBF'
-        if process in ["reweighted_ZH_htt_0Mf05ph0"]:
-            return 'intCoupling_ZH'
-        if process in ["reweighted_WH_htt_0Mf05ph0"]:
-            return 'intCoupling_WH'
         if process in ["GG2HMf05ph0_2017_hgg"]:
             return 'intCoupling_ggH'
+        if process in ["vbf0P_2017_hgg",]:
+            return 'smCoupling_VBF'
+        if process in ["vbf0M_2017_hgg",]:
+            return 'bsmCoupling_VBF'
+        if process in ["vbf0Mf05ph0_2017_hgg"]:
+            return 'intCoupling_VBF'
+        if process in ["wh0P_2017_hgg",]:
+            return 'smCoupling_WH'
+        if process in ["wh0M_2017_hgg",]:
+            return 'bsmCoupling_WH'
+        if process in ["wh0Mf05ph0_2017_hgg"]:
+            return 'intCoupling_WH'
+        if process in ["zh0P_2017_hgg",]:
+            return 'smCoupling_ZH'
+        if process in ["zh0M_2017_hgg",]:
+            return 'bsmCoupling_ZH'
+        if process in ["zh0Mf05ph0_2017_hgg"]:
+            return 'intCoupling_ZH'
+
+        if process in ["tth0P_2017_hgg",]:
+            return 'mu_ggH'
+
+
+        if process in ["GG2Hsm_2018_hgg",]:
+            return 'smCoupling_ggH'
+        if process in ["GG2HbsmM_2018_hgg",]:
+            return 'bsmCoupling_ggH'
+        if process in ["GG2HMf05ph0_2018_hgg"]:
+            return 'intCoupling_ggH'
+        if process in ["vbf0P_2018_hgg",]:
+            return 'smCoupling_VBF'
+        if process in ["vbf0M_2018_hgg",]:
+            return 'bsmCoupling_VBF'
+        if process in ["vbf0Mf05ph0_2018_hgg"]:
+            return 'intCoupling_VBF'
+        if process in ["wh0P_2018_hgg",]:
+            return 'smCoupling_WH'
+        if process in ["wh0M_2018_hgg",]:
+            return 'bsmCoupling_WH'
+        if process in ["wh0Mf05ph0_2018_hgg"]:
+            return 'intCoupling_WH'
+        if process in ["zh0P_2018_hgg",]:
+            return 'smCoupling_ZH'
+        if process in ["zh0M_2018_hgg",]:
+            return 'bsmCoupling_ZH'
+        if process in ["zh0Mf05ph0_2018_hgg"]:
+            return 'intCoupling_ZH'
+
+        if process in ["tth0P_2018_hgg",]:
+            return 'mu_ggH'
+
         return 1
 
 
 FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase = FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase()
+
+
 
