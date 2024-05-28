@@ -126,4 +126,28 @@ Be careful: if you are running the observed impacts, the unblinded value of the 
 
 ## Bias studies
 
-Scripts/instructions for bias studies are in `Checks` folder.
+
+Step 01:
+source run_bias.sh -s bias-setup --year 2018
+Step 02:
+
+When step 01 is done you can run step 02
+
+source run_bias.sh -s bias-generate --year 2018
+
+Step 03: 
+Once steps 01 and 02 are done you can run steps 03
+
+source run_bias.sh -s bias-fixed --year 2018
+source run_bias.sh -s bias-envelope --year 2018
+
+you can run both of the above commands at the same time
+
+Step 04:
+
+Once steps 01,02 and 03 are done you can run steps 04 & 05
+
+
+source run_bias.sh -s bias-hadd --year 2018
+source run_bias.sh -s bias-plot --year 2018
+
