@@ -1,4 +1,4 @@
-# Final Fits (lite)
+# Final Fits (lite & Combine v9)
 Welcome to the new Final Fits package. Here lies a a series of scripts which are used to run the final stages of the CMS Hgg analysis: signal modelling, background modelling, datacard creation, final statistical interpretation and final result plots.
 
 Slides from the flashgg tutorial series can be found [here](https://indico.cern.ch/event/963619/contributions/4112177/attachments/2151275/3627204/finalfits_tutorial_201126.pdf)
@@ -6,34 +6,33 @@ Slides from the flashgg tutorial series can be found [here](https://indico.cern.
 ## Download and setup instructions
 
 ```
-export SCRAM_ARCH=slc7_amd64_gcc700
-cmsrel CMSSW_10_2_13
-cd CMSSW_10_2_13/src
+
+cmssw-el7
+cmsrel CMSSW_11_3_4
+cd CMSSW_11_3_4/src
 cmsenv
-git cms-init
 
-# Install the GBRLikelihood package which contains the RooDoubleCBFast implementation
-git clone git@github.com:jonathon-langford/HiggsAnalysis.git
+# Install Combine
+git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
+cd HiggsAnalysis/CombinedLimit
 
-# Install Combine as per the documentation here: cms-analysis.github.io/HiggsAnalysis-CombinedLimit/
-git clone git@github.com:cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
-
-# Switch to combine v8.2.0
 cd $CMSSW_BASE/src/HiggsAnalysis/CombinedLimit
 git fetch origin
-git checkout v8.2.0
-cd $CMSSW_BASE/src
+git checkout v9.2.1
+scramv1 b clean; scramv1 b # always make a clean build
 
 # Install Combine Harvester for parallelizing fits
 git clone https://github.com/cms-analysis/CombineHarvester.git CombineHarvester
-
-# Compile external libraries
-cmsenv
-scram b -j 9
+scram b
 
 # Install Flashgg Final Fit packages
-git clone -b dev_fggfinalfits_lite git@github.com:cms-analysis/flashggFinalFit.git
+git clone -b gghAC-dev git@github.com:jhosain/flashggFinalFit.git 
 cd flashggFinalFit/
+```
+
+In every new shell run the following to export Condor
+```
+source start_el7.sh
 ```
 
 In every new shell run the following to add `tools/commonTools` and `tools/commonObjects` to your `${PYTHONPATH}`:
