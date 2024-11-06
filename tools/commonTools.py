@@ -72,7 +72,7 @@ def signalFromFileName(_fileName):
     if "ZToLL" in _fileName: d = "_ZToLL"
     elif "ZToNuNu" in _fileName: d = "_ZToNuNu"
     else: d = "_ZToQQ"
-  elif "GluGlu" in _fileName: p = "ggh"
+  elif "GluGlu" in _fileName: p = "jjh"
   elif "VBF" in _fileName: p = "vbf"
   elif "WH" in _fileName: p = "wh"
   elif "ZH" in _fileName: p = "zh"
@@ -87,8 +87,27 @@ def signalFromFileName(_fileName):
 
 # Function for converting STXS process to production mode in dataset name
 procToDataMap = od()
+procToDataMap['HHH'] = 'gghhh'
 procToDataMap['GG2H'] = 'ggh'
+procToDataMap['GluGluHToGGPlusTwoJets_CPodd'] = 'jjh0M'
+procToDataMap['GluGluHToGGPlusTwoJets_MM'] = 'jjh0Mf05ph0'
+procToDataMap['GluGluHToGGPlusTwoJets_SM'] = 'jjh0P'
+procToDataMap['GG2HbsmM'] = 'jjh0M'
+procToDataMap['GG2HMf05ph0'] = 'jjh0Mf05ph0'
+procToDataMap['GG2Hsm'] = 'jjh0P'
 procToDataMap['VBF'] = 'vbf'
+procToDataMap['VBFbsmM'] = 'vbf0M'
+procToDataMap['VBFMf05ph0'] = 'vbf0Mf05ph0'
+procToDataMap['VBFsm'] = 'vbf0P'
+procToDataMap['WHbsmM'] = 'wh0M'
+procToDataMap['WHMf05ph0'] = 'wh0Mf05ph0'
+procToDataMap['WHsm'] = 'wh0P'
+procToDataMap['ZHbsmM'] = 'zh0M'
+procToDataMap['ZHMf05ph0'] = 'zh0Mf05ph0'
+procToDataMap['ZHsm'] = 'zh0P'
+procToDataMap['TTHbsmM'] = 'tth0M'
+procToDataMap['TTHMf05ph0'] = 'tth0Mf05ph0'
+procToDataMap['TTHsm'] = 'tth0P'
 procToDataMap['WH2HQQ'] = 'wh'
 procToDataMap['ZH2HQQ'] = 'zh'
 procToDataMap['QQ2HLNU'] = 'wh'
@@ -113,7 +132,23 @@ def dataToProc( _d ):
 # Mapping of process to name in datacard
 procToDatacardNameMap = od()
 procToDatacardNameMap['GG2H'] = "ggH"
-procToDatacardNameMap['VBF'] = "qqH"
+procToDatacardNameMap['HHH'] = "gghhh"
+procToDatacardNameMap['GluGluHToGGPlusTwoJets_CPodd'] = 'jjh0M'
+procToDatacardNameMap['GluGluHToGGPlusTwoJets_MM'] = 'jjh0Mf05ph0'
+procToDatacardNameMap['GluGluHToGGPlusTwoJets_SM'] = 'jjh0P'
+procToDatacardNameMap['VBF'] = "vbf"
+procToDatacardNameMap['VBFbsmM'] = 'vbf0M'
+procToDatacardNameMap['VBFMf05ph0'] = 'vbf0Mf05ph0'
+procToDatacardNameMap['VBFsm'] = 'vbf0P'
+procToDatacardNameMap['WHbsmM'] = 'wh0M'
+procToDatacardNameMap['WHMf05ph0'] = 'wh0Mf05ph0'
+procToDatacardNameMap['WHsm'] = 'wh0P'
+procToDatacardNameMap['ZHbsmM'] = 'zh0M'
+procToDatacardNameMap['ZHMf05ph0'] = 'zh0Mf05ph0'
+procToDatacardNameMap['ZHsm'] = 'zh0P'
+procToDatacardNameMap['TTHbsmM'] = 'tth0M'
+procToDatacardNameMap['TTHMf05ph0'] = 'tth0Mf05ph0'
+procToDatacardNameMap['TTHsm'] = 'tth0P'
 procToDatacardNameMap['WH2HQQ'] = "WH_had"
 procToDatacardNameMap["ZH2HQQ"] = "ZH_had"
 procToDatacardNameMap["QQ2HLNU"] = "WH_lep"
