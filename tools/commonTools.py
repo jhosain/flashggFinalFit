@@ -72,7 +72,7 @@ def signalFromFileName(_fileName):
     if "ZToLL" in _fileName: d = "_ZToLL"
     elif "ZToNuNu" in _fileName: d = "_ZToNuNu"
     else: d = "_ZToQQ"
-  elif "GluGlu" in _fileName: p = "jjh"
+  elif "GluGlu" in _fileName: p = "ggh"
   elif "VBF" in _fileName: p = "vbf"
   elif "WH" in _fileName: p = "wh"
   elif "ZH" in _fileName: p = "zh"
@@ -89,9 +89,6 @@ def signalFromFileName(_fileName):
 procToDataMap = od()
 procToDataMap['HHH'] = 'gghhh'
 procToDataMap['GG2H'] = 'ggh'
-procToDataMap['GluGluHToGGPlusTwoJets_CPodd'] = 'jjh0M'
-procToDataMap['GluGluHToGGPlusTwoJets_MM'] = 'jjh0Mf05ph0'
-procToDataMap['GluGluHToGGPlusTwoJets_SM'] = 'jjh0P'
 procToDataMap['GG2HbsmM'] = 'jjh0M'
 procToDataMap['GG2HMf05ph0'] = 'jjh0Mf05ph0'
 procToDataMap['GG2Hsm'] = 'jjh0P'
@@ -133,9 +130,12 @@ def dataToProc( _d ):
 procToDatacardNameMap = od()
 procToDatacardNameMap['GG2H'] = "ggH"
 procToDatacardNameMap['HHH'] = "gghhh"
-procToDatacardNameMap['GluGluHToGGPlusTwoJets_CPodd'] = 'jjh0M'
-procToDatacardNameMap['GluGluHToGGPlusTwoJets_MM'] = 'jjh0Mf05ph0'
-procToDatacardNameMap['GluGluHToGGPlusTwoJets_SM'] = 'jjh0P'
+procToDatacardNameMap['GGH2JetspseudoscalarM'] = 'jjh0M'
+procToDatacardNameMap['GGH2JetspseudoscalarMf05ph0'] = 'jjh0Mf05ph0'
+procToDatacardNameMap['GGH2Jetssm'] = 'jjh0P'
+procToDatacardNameMap['GG2HbsmM'] = 'jjh0M'
+procToDatacardNameMap['GG2HMf05ph0'] = 'jjh0Mf05ph0'
+procToDatacardNameMap['GG2Hsm'] = 'jjh0P'
 procToDatacardNameMap['VBF'] = "vbf"
 procToDatacardNameMap['VBFbsmM'] = 'vbf0M'
 procToDatacardNameMap['VBFMf05ph0'] = 'vbf0Mf05ph0'

@@ -36,7 +36,7 @@ with open(opt.inputDatacard,'r') as f:
 procs = []
 cats = []
 for c in catLine.split(" "):
-  if "RECO" in c: cats.append(c)
+  if "ch" in c: cats.append(c)
 for p in procLine.split(" "):
   if ("hgg" in p)|("bkg" in p): procs.append(p)
 
@@ -175,7 +175,7 @@ for syst in opt.systMap.split("+"):
 # Write to file
 with open("output_addLine.txt","w") as fout:
   for s,vals in systs.iteritems():
-     sline = "%-50s  %s  "%(s,sprior)
-     for v in vals.itervalues(): sline += "%s "%v    
+     sline = "%s\t\t%s\t\t\t "%(s,sprior)
+     for v in vals.itervalues(): sline += "%s\t\t\t"%v    
      sline = sline[:-1]
-     fout.write("%s\n\n"%sline)
+     fout.write("%s\n"%sline)
