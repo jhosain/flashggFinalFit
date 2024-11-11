@@ -62,17 +62,17 @@ elif [[ $STEP == "mc-wosys" ]]; then
     python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_VBFHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode vbf0M  --year ${YEAR} 
     python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_VBFHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode vbf0Mf05ph0  --year ${YEAR} 
 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_WHiggs0PMToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0P --year $year 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_WHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0M --year $year 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_WHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0Mf05ph0  --year $year 
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_WHiggs0PMToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0P --year ${YEAR}
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_WHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0M --year ${YEAR}
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_WHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0Mf05ph0  --year ${YEAR}
 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ZH_HToGG_ZToAll_M125_TuneCP5_13TeV-powheg-pythia8.root --productionMode zh0P --year $year 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ZHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode zh0M --year $year 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ZHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode zh0Mf05ph0  --year $year 
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ZH_HToGG_ZToAll_M125_TuneCP5_13TeV-powheg-pythia8.root --productionMode zh0P --year ${YEAR}
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ZHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode zh0M --year ${YEAR} 
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ZHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode zh0Mf05ph0  --year ${YEAR}
 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ttHJetToGG_M125_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8.root --productionMode tth0P --year $year 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ttHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode tth0M --year $year 
-    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ttHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode tth0Mf05ph0  --year $year 
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ttHJetToGG_M125_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8.root --productionMode tth0P --year ${YEAR}
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ttHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode tth0M --year ${YEAR}
+    python trees2ws.py  --inputConfig config_simple.py  --inputTreeFile ${DIR}/Trees_${YEAR}/output_ttHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode tth0Mf05ph0  --year ${YEAR}
 
 
     #python RunWSScripts.py --inputConfig config.py --inputDir ${DIR}/Trees_${YEAR} --mode trees2ws --year ${YEAR} --ext ${YEAR} ${QUEUE}     
