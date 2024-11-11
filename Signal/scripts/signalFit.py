@@ -35,7 +35,7 @@ def get_options():
   parser.add_option("--proc", dest='proc', default='', help="Signal process")
   parser.add_option("--cat", dest='cat', default='', help="RECO category")
   parser.add_option("--year", dest='year', default='2016', help="Year")
-  parser.add_option("--analysis", dest='analysis', default='STXS', help="Analysis handle: used to specify replacement map and XS*BR normalisations")
+  parser.add_option("--analysis", dest='analysis', default='HHH', help="Analysis handle: used to specify replacement map and XS*BR normalisations")
   parser.add_option('--massPoints', dest='massPoints', default='120,125,130', help="Mass points to fit")
   parser.add_option('--doEffAccFromJson', dest='doEffAccFromJson', default=False, action="store_true", help="Extract eff x acc from json (produced by getEffAcc). Else, extract from nominal weights in flashgg workspaces")
   parser.add_option('--skipBeamspotReweigh', dest='skipBeamspotReweigh', default=False, action="store_true", help="Skip beamspot reweigh to match beamspot distribution in data")
@@ -53,7 +53,7 @@ def get_options():
   parser.add_option("--scalesGlobal", dest='scalesGlobal', default='', help='Photon shape systematics: scalesGlobal')
   parser.add_option("--smears", dest='smears', default='', help='Photon shape systematics: smears')
   # Parameter values
-  parser.add_option('--replacementThreshold', dest='replacementThreshold', default=100, type='int', help="Nevent threshold to trigger replacement dataset")
+  parser.add_option('--replacementThreshold', dest='replacementThreshold', default=1, type='int', help="Nevent threshold to trigger replacement dataset")
   parser.add_option('--beamspotWidthData', dest='beamspotWidthData', default=3.4, type='float', help="Width of beamspot in data [cm]")
   parser.add_option('--beamspotWidthMC', dest='beamspotWidthMC', default=5.14, type='float', help="Width of beamspot in MC [cm]")
   parser.add_option('--MHPolyOrder', dest='MHPolyOrder', default=1, type='int', help="Order of polynomial for MH dependence")
@@ -151,6 +151,9 @@ nominalDatasets = od()
 # For RV (or if skipping vertex scenario split)
 datasetRVForFit = od()
 for mp in opt.massPoints.split(","):
+  print(opt.inputWSDir)
+  print(mp)
+  print (procRVFit)
   WSFileName = glob.glob("%s/output*M%s*%s.root"%(opt.inputWSDir,mp,procRVFit))[0]
   f = ROOT.TFile(WSFileName,"read")
   inputWS = f.Get(inputWSName__)
@@ -165,6 +168,8 @@ for mp in opt.massPoints.split(","):
 if( datasetRVForFit[MHNominal].numEntries() < opt.replacementThreshold  )|( datasetRVForFit[MHNominal].sumEntries() < 0. ):
   nominal_numEntries = datasetRVForFit[MHNominal].numEntries()
   procReplacementFit, catReplacementFit = rMap['procRVMap'][opt.cat], rMap['catRVMap'][opt.cat]
+  print("Running fit for the RV")
+  print(procReplacementFit, catReplacementFit)
   for mp in opt.massPoints.split(","):
     WSFileName = glob.glob("%s/output*M%s*%s.root"%(opt.inputWSDir,mp,procReplacementFit))[0]
     f = ROOT.TFile(WSFileName,"read")
@@ -217,8 +222,12 @@ if not opt.skipVertexScenarioSplit:
   if( datasetWVForFit[MHNominal].numEntries() < opt.replacementThreshold  )|( datasetWVForFit[MHNominal].sumEntries() < 0. ):
     nominal_numEntries = datasetWVForFit[MHNominal].numEntries()
     procReplacementFit, catReplacementFit = rMap['procWV'], rMap['catWV']
+    print("Running fit for the WV")
+    print(procReplacementFit, catReplacementFit)
     for mp in opt.massPoints.split(","):
+      print(opt.inputWSDir,mp,procReplacementFit)
       WSFileName = glob.glob("%s/output*M%s*%s.root"%(opt.inputWSDir,mp,procReplacementFit))[0]
+      print(WSFileName)
       f = ROOT.TFile(WSFileName,"read")
       inputWS = f.Get(inputWSName__)
       d = reduceDataset(inputWS.data("%s_%s_%s_%s"%(procToData(procReplacementFit.split("_")[0]),mp,sqrts__,catReplacementFit)),aset)

@@ -12,9 +12,34 @@ globalXSBRMap = od()
 
 # For case of inclusive production mode then have no additional factor beyond V branching ratios
 globalXSBRMap['example'] = od()
+
 globalXSBRMap['example']['decay'] = {'mode':'hgg'}
 globalXSBRMap['example']['GG2H'] = {'mode':'ggH'}
+globalXSBRMap['example']['HHH'] = {'mode':'ggH'}
+globalXSBRMap['example']['GG2HbsmM'] = {'mode':'ggH'}
+globalXSBRMap['example']['GG2Hsm'] =  {'mode':'ggH'}
+globalXSBRMap['example']['GG2HMf05ph0'] = {'mode':'ggH'}
+globalXSBRMap['example']['jjh0P'] = {'mode':'ggH'}
+globalXSBRMap['example']['jjh0M'] = {'mode':'ggH'}
+globalXSBRMap['example']['jjh0Mf05ph0'] = {'mode':'ggH'}
+globalXSBRMap['example']['vbf0Mf05ph0'] = {'mode':'qqH'}
+globalXSBRMap['example']['vbf0P'] = {'mode':'qqH'}
+globalXSBRMap['example']['vbf0M'] = {'mode':'qqH'}
 globalXSBRMap['example']['VBF'] = {'mode':'qqH'}
+globalXSBRMap['example']['VBFbsmM'] = {'mode':'qqH'}
+globalXSBRMap['example']['VBFsm'] = {'mode':'qqH'}
+globalXSBRMap['example']['VBFMf05ph0'] = {'mode':'qqH'}
+globalXSBRMap['example']['WHbsmM'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['example']['WHsm'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['example']['WHMf05ph0'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['example']['ZHbsmM'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['example']['ZHsm'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['example']['ZHMf05ph0'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['example']['TTHbsmM'] = {'mode':'ttH'}
+globalXSBRMap['example']['TTHsm'] = {'mode':'ttH'}
+globalXSBRMap['example']['TTHMf05ph0'] = {'mode':'ttH'}
+globalXSBRMap['example']['HHH'] = {'mode':'ggH'}
+globalXSBRMap['example']['gghhh'] = {'mode':'ggH'} 
 globalXSBRMap['example']['WH2HQQ'] = {'mode':'WH','factor':BR_W_qq}
 globalXSBRMap['example']['ZH2HQQ'] = {'mode':'qqZH','factor':BR_Z_qq}
 globalXSBRMap['example']['QQ2HLNU'] = {'mode':'WH','factor':BR_W_lnu}
@@ -28,10 +53,69 @@ globalXSBRMap['example']['THQ'] = {'mode':'tHq'}
 globalXSBRMap['example']['THW'] = {'mode':'tHW'}
 # ...
 
+
+# ggH AC analysis : add factor for bin composition
+globalXSBRMap['AC'] = od()
+globalXSBRMap['AC']['decay'] = {'mode':'hgg'}
+# ggH AC process
+globalXSBRMap['AC']['GG2H'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['AC']['GG2HbsmM'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['AC']['GG2Hsm'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['AC']['GG2HMf05ph0'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['AC']['jjh0P'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['AC']['jjh0M'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['AC']['jjh0Mf05ph0'] = {'mode':'ggH','factor':1.0}
+
+globalXSBRMap['AC']['vbf0P'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['AC']['vbf0M'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['AC']['vbf0Mf05ph0'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['AC']['VBF'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['AC']['VBFbsmM'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['AC']['VBFsm'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['AC']['VBFMf05ph0'] = {'mode':'qqH','factor':1.0}
+
+globalXSBRMap['AC']['WHbsmM'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['AC']['WHsm'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['AC']['WHMf05ph0'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['AC']['ZHbsmM'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['AC']['ZHsm'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['AC']['ZHMf05ph0'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['AC']['TTHbsmM'] = {'mode':'ttH','factor':1.0}
+globalXSBRMap['AC']['TTHsm'] = {'mode':'ttH','factor':1.0}
+globalXSBRMap['AC']['TTHMf05ph0'] = {'mode':'ttH','factor':1.0}
+
+globalXSBRMap['AC']['TTH'] = {'mode':'ttH','factor':1.0}
+
+
 # STXS analysis: add factor for bin composition
 globalXSBRMap['STXS'] = od()
 globalXSBRMap['STXS']['decay'] = {'mode':'hgg'}
 # ggH STXS stage 1.2 bins
+globalXSBRMap['STXS']['HHH'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['gghhh'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['GG2H'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['GG2HbsmM'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['GG2Hsm'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['GG2HMf05ph0'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['jjh0P'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['jjh0M'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['jjh0Mf05ph0'] = {'mode':'ggH','factor':1.0}
+globalXSBRMap['STXS']['vbf0P'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['STXS']['vbf0M'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['STXS']['vbf0Mf05ph0'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['STXS']['VBF'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['STXS']['VBFbsmM'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['STXS']['VBFsm'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['STXS']['VBFMf05ph0'] = {'mode':'qqH','factor':1.0}
+globalXSBRMap['STXS']['WHbsmM'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['STXS']['WHsm'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['STXS']['WHMf05ph0'] = {'mode':'WH','factor':BR_W_qq}
+globalXSBRMap['STXS']['ZHbsmM'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['STXS']['ZHsm'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['STXS']['ZHMf05ph0'] = {'mode':'qqZH','factor':BR_Z_qq}
+globalXSBRMap['STXS']['TTHbsmM'] = {'mode':'ttH','factor':1.0}
+globalXSBRMap['STXS']['TTHsm'] = {'mode':'ttH','factor':1.0}
+globalXSBRMap['STXS']['TTHMf05ph0'] = {'mode':'ttH','factor':1.0}
 globalXSBRMap['STXS']['GG2H_FWDH'] = {'mode':'ggH','factor':0.0809}
 globalXSBRMap['STXS']['GG2H_PTH_200_300'] = {'mode':'ggH','factor':0.0098}
 globalXSBRMap['STXS']['GG2H_PTH_300_450'] = {'mode':'ggH','factor':0.0025}

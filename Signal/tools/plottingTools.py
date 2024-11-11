@@ -90,6 +90,7 @@ def plotFTest(ssfs,_opt=1,_outdir='./',_extension='',_proc='',_cat='',_mass='125
   # Extract data histogram
   hists['data'] = ssf.xvar.createHistogram("h_data%s"%_extension,ROOT.RooFit.Binning(ssf.nBins))
   ssf.DataHists[_mass].fillHistogram(hists['data'],ROOT.RooArgList(ssf.xvar))
+  hists['data'].Scale(1./hists['data'].Integral())
   hists['data'].Scale(float(ssf.nBins)/1600)
   hists['data'].SetMarkerStyle(20)
   hists['data'].SetMarkerColor(1)
@@ -424,7 +425,8 @@ def plotSplines(_finalModel,_outdir="./",_nominalMass='125',splinesToPlot=['xs',
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Function for plotting final signal model: neat
 def plotSignalModel(_hists,_opt,_outdir=".",offset=0.02):
-  colorMap = {'2016':38,'2017':30,'2018':46}
+  #colorMap = {'2016':38,'2017':30,'2018':46}
+  colorMap = {'2016':38,'2016preVFP': 38, '2016postVFP': 35,'2017':30,'2018':46}
   canv = ROOT.TCanvas("c","c",650,600)
   canv.SetBottomMargin(0.12)
   canv.SetLeftMargin(0.15)
