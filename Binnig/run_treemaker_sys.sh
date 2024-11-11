@@ -70,7 +70,12 @@ Nbinz=2  #CPodd bdt bins
 
 vars=("Up" "Down")
 
-systematics=( "FNUFEE" "FNUFEB" "JEC" "JER" "JetHEM" "MCScaleGain1EB" "MCScaleGain6EB" "MCScaleHighR9EB" "MCScaleHighR9EE" "MCScaleLowR9EB" "MCScaleLowR9EE" "MCSmearHighR9EBPhi" "MCSmearHighR9EBRho" "MCSmearHighR9EEPhi" "MCSmearHighR9EERho" "MCSmearLowR9EBPhi" "MCSmearLowR9EBRho" "MCSmearLowR9EEPhi" "MCSmearLowR9EERho" "MaterialCentralBarrel" "MaterialForward" "MaterialOuterBarrel" "MvaShift" "PUJIDShift" "ShowerShapeHighR9EB" "ShowerShapeHighR9EE" "ShowerShapeLowR9EB" "ShowerShapeLowR9EE" "SigmaEOverEShift") # add other systematicss (total 28 syst)
+# Check if year is 2018
+if [ "$year" -eq 2018 ]; then
+    systematics=( "FNUFEE" "FNUFEB" "JEC" "JER" "JetHEM" "MCScaleGain1EB" "MCScaleGain6EB" "MCScaleHighR9EB" "MCScaleHighR9EE" "MCScaleLowR9EB" "MCScaleLowR9EE" "MCSmearHighR9EBPhi" "MCSmearHighR9EBRho" "MCSmearHighR9EEPhi" "MCSmearHighR9EERho" "MCSmearLowR9EBPhi" "MCSmearLowR9EBRho" "MCSmearLowR9EEPhi" "MCSmearLowR9EERho" "MaterialCentralBarrel" "MaterialForward" "MaterialOuterBarrel" "MvaShift" "PUJIDShift" "ShowerShapeHighR9EB" "ShowerShapeHighR9EE" "ShowerShapeLowR9EB" "ShowerShapeLowR9EE" "SigmaEOverEShift" "ExtraSystFor2018" ) # 29 systematics for 2018
+else
+    systematics=( "FNUFEE" "FNUFEB" "JEC" "JER" "MCScaleGain1EB" "MCScaleGain6EB" "MCScaleHighR9EB" "MCScaleHighR9EE" "MCScaleLowR9EB" "MCScaleLowR9EE" "MCSmearHighR9EBPhi" "MCSmearHighR9EBRho" "MCSmearHighR9EEPhi" "MCSmearHighR9EERho" "MCSmearLowR9EBPhi" "MCSmearLowR9EBRho" "MCSmearLowR9EEPhi" "MCSmearLowR9EERho" "MaterialCentralBarrel" "MaterialForward" "MaterialOuterBarrel" "MvaShift" "PUJIDShift" "ShowerShapeHighR9EB" "ShowerShapeHighR9EE" "ShowerShapeLowR9EB" "ShowerShapeLowR9EE" "SigmaEOverEShift" ) # 28 systematics for other years
+fi
 
 
 echo -n "initial proc : "
