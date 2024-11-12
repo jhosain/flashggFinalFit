@@ -1,7 +1,6 @@
 // Do NOT change. Changes will be lost next time file is generated
 
 #define R__DICTIONARY_FILENAME RootDict
-#define R__NO_DEPRECATION
 
 /*******************************************************************/
 #include <stddef.h>
@@ -34,105 +33,101 @@
 
 #include "TDataMember.h"
 
-// The generated code does not explicitly qualifies STL entities
+// Since CINT ignores the std namespace, we need to do so in this file.
 namespace std {} using namespace std;
 
 // Header files passed as explicit arguments
-#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V9/CMSSW_11_3_4/src/flashggFinalFit/Background/interface/PdfModelBuilder.h"
-#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V9/CMSSW_11_3_4/src/flashggFinalFit/Background/interface/ProfileMultiplePdfs.h"
-#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V9/CMSSW_11_3_4/src/flashggFinalFit/Background/interface/RooExponentialSum.h"
-#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V9/CMSSW_11_3_4/src/flashggFinalFit/Background/interface/RooPowerLaw.h"
-#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V9/CMSSW_11_3_4/src/flashggFinalFit/Background/interface/RooPowerLawSum.h"
-#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V9/CMSSW_11_3_4/src/flashggFinalFit/Background/interface/WSTFileWrapper.h"
+#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Background/interface/RooPowerLawSum.h"
+#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Background/interface/WSTFileWrapper.h"
+#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Background/interface/RooExponentialSum.h"
+#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Background/interface/RooPowerLaw.h"
+#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Background/interface/ProfileMultiplePdfs.h"
+#include "/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Background/interface/PdfModelBuilder.h"
 
 // Header files passed via #pragma extra_include
 
 namespace ROOT {
-   static TClass *PdfModelBuilder_Dictionary();
-   static void PdfModelBuilder_TClassManip(TClass*);
-   static void *new_PdfModelBuilder(void *p = 0);
-   static void *newArray_PdfModelBuilder(Long_t size, void *p);
-   static void delete_PdfModelBuilder(void *p);
-   static void deleteArray_PdfModelBuilder(void *p);
-   static void destruct_PdfModelBuilder(void *p);
+   static TClass *RooPowerLawSum_Dictionary();
+   static void RooPowerLawSum_TClassManip(TClass*);
+   static void *new_RooPowerLawSum(void *p = 0);
+   static void *newArray_RooPowerLawSum(Long_t size, void *p);
+   static void delete_RooPowerLawSum(void *p);
+   static void deleteArray_RooPowerLawSum(void *p);
+   static void destruct_RooPowerLawSum(void *p);
 
    // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::PdfModelBuilder*)
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::RooPowerLawSum*)
    {
-      ::PdfModelBuilder *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::PdfModelBuilder));
+      ::RooPowerLawSum *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::RooPowerLawSum));
       static ::ROOT::TGenericClassInfo 
-         instance("PdfModelBuilder", "interface/PdfModelBuilder.h", 21,
-                  typeid(::PdfModelBuilder), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &PdfModelBuilder_Dictionary, isa_proxy, 0,
-                  sizeof(::PdfModelBuilder) );
-      instance.SetNew(&new_PdfModelBuilder);
-      instance.SetNewArray(&newArray_PdfModelBuilder);
-      instance.SetDelete(&delete_PdfModelBuilder);
-      instance.SetDeleteArray(&deleteArray_PdfModelBuilder);
-      instance.SetDestructor(&destruct_PdfModelBuilder);
+         instance("RooPowerLawSum", "interface/RooPowerLawSum.h", 26,
+                  typeid(::RooPowerLawSum), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &RooPowerLawSum_Dictionary, isa_proxy, 0,
+                  sizeof(::RooPowerLawSum) );
+      instance.SetNew(&new_RooPowerLawSum);
+      instance.SetNewArray(&newArray_RooPowerLawSum);
+      instance.SetDelete(&delete_RooPowerLawSum);
+      instance.SetDeleteArray(&deleteArray_RooPowerLawSum);
+      instance.SetDestructor(&destruct_RooPowerLawSum);
       return &instance;
    }
-   TGenericClassInfo *GenerateInitInstance(const ::PdfModelBuilder*)
+   TGenericClassInfo *GenerateInitInstance(const ::RooPowerLawSum*)
    {
-      return GenerateInitInstanceLocal((::PdfModelBuilder*)0);
+      return GenerateInitInstanceLocal((::RooPowerLawSum*)0);
    }
    // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::PdfModelBuilder*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::RooPowerLawSum*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
 
    // Dictionary for non-ClassDef classes
-   static TClass *PdfModelBuilder_Dictionary() {
-      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::PdfModelBuilder*)0x0)->GetClass();
-      PdfModelBuilder_TClassManip(theClass);
+   static TClass *RooPowerLawSum_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::RooPowerLawSum*)0x0)->GetClass();
+      RooPowerLawSum_TClassManip(theClass);
    return theClass;
    }
 
-   static void PdfModelBuilder_TClassManip(TClass* ){
+   static void RooPowerLawSum_TClassManip(TClass* ){
    }
 
 } // end of namespace ROOT
 
 namespace ROOT {
-   static TClass *ProfileMultiplePdfs_Dictionary();
-   static void ProfileMultiplePdfs_TClassManip(TClass*);
-   static void *new_ProfileMultiplePdfs(void *p = 0);
-   static void *newArray_ProfileMultiplePdfs(Long_t size, void *p);
-   static void delete_ProfileMultiplePdfs(void *p);
-   static void deleteArray_ProfileMultiplePdfs(void *p);
-   static void destruct_ProfileMultiplePdfs(void *p);
+   static TClass *WSTFileWrapper_Dictionary();
+   static void WSTFileWrapper_TClassManip(TClass*);
+   static void delete_WSTFileWrapper(void *p);
+   static void deleteArray_WSTFileWrapper(void *p);
+   static void destruct_WSTFileWrapper(void *p);
 
    // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::ProfileMultiplePdfs*)
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::WSTFileWrapper*)
    {
-      ::ProfileMultiplePdfs *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::ProfileMultiplePdfs));
+      ::WSTFileWrapper *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::WSTFileWrapper));
       static ::ROOT::TGenericClassInfo 
-         instance("ProfileMultiplePdfs", "interface/ProfileMultiplePdfs.h", 18,
-                  typeid(::ProfileMultiplePdfs), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &ProfileMultiplePdfs_Dictionary, isa_proxy, 0,
-                  sizeof(::ProfileMultiplePdfs) );
-      instance.SetNew(&new_ProfileMultiplePdfs);
-      instance.SetNewArray(&newArray_ProfileMultiplePdfs);
-      instance.SetDelete(&delete_ProfileMultiplePdfs);
-      instance.SetDeleteArray(&deleteArray_ProfileMultiplePdfs);
-      instance.SetDestructor(&destruct_ProfileMultiplePdfs);
+         instance("WSTFileWrapper", "interface/WSTFileWrapper.h", 10,
+                  typeid(::WSTFileWrapper), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &WSTFileWrapper_Dictionary, isa_proxy, 0,
+                  sizeof(::WSTFileWrapper) );
+      instance.SetDelete(&delete_WSTFileWrapper);
+      instance.SetDeleteArray(&deleteArray_WSTFileWrapper);
+      instance.SetDestructor(&destruct_WSTFileWrapper);
       return &instance;
    }
-   TGenericClassInfo *GenerateInitInstance(const ::ProfileMultiplePdfs*)
+   TGenericClassInfo *GenerateInitInstance(const ::WSTFileWrapper*)
    {
-      return GenerateInitInstanceLocal((::ProfileMultiplePdfs*)0);
+      return GenerateInitInstanceLocal((::WSTFileWrapper*)0);
    }
    // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::ProfileMultiplePdfs*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::WSTFileWrapper*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
 
    // Dictionary for non-ClassDef classes
-   static TClass *ProfileMultiplePdfs_Dictionary() {
-      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::ProfileMultiplePdfs*)0x0)->GetClass();
-      ProfileMultiplePdfs_TClassManip(theClass);
+   static TClass *WSTFileWrapper_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::WSTFileWrapper*)0x0)->GetClass();
+      WSTFileWrapper_TClassManip(theClass);
    return theClass;
    }
 
-   static void ProfileMultiplePdfs_TClassManip(TClass* ){
+   static void WSTFileWrapper_TClassManip(TClass* ){
    }
 
 } // end of namespace ROOT
@@ -228,132 +223,129 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
-   static TClass *RooPowerLawSum_Dictionary();
-   static void RooPowerLawSum_TClassManip(TClass*);
-   static void *new_RooPowerLawSum(void *p = 0);
-   static void *newArray_RooPowerLawSum(Long_t size, void *p);
-   static void delete_RooPowerLawSum(void *p);
-   static void deleteArray_RooPowerLawSum(void *p);
-   static void destruct_RooPowerLawSum(void *p);
+   static TClass *ProfileMultiplePdfs_Dictionary();
+   static void ProfileMultiplePdfs_TClassManip(TClass*);
+   static void *new_ProfileMultiplePdfs(void *p = 0);
+   static void *newArray_ProfileMultiplePdfs(Long_t size, void *p);
+   static void delete_ProfileMultiplePdfs(void *p);
+   static void deleteArray_ProfileMultiplePdfs(void *p);
+   static void destruct_ProfileMultiplePdfs(void *p);
 
    // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::RooPowerLawSum*)
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::ProfileMultiplePdfs*)
    {
-      ::RooPowerLawSum *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::RooPowerLawSum));
+      ::ProfileMultiplePdfs *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::ProfileMultiplePdfs));
       static ::ROOT::TGenericClassInfo 
-         instance("RooPowerLawSum", "interface/RooPowerLawSum.h", 26,
-                  typeid(::RooPowerLawSum), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &RooPowerLawSum_Dictionary, isa_proxy, 0,
-                  sizeof(::RooPowerLawSum) );
-      instance.SetNew(&new_RooPowerLawSum);
-      instance.SetNewArray(&newArray_RooPowerLawSum);
-      instance.SetDelete(&delete_RooPowerLawSum);
-      instance.SetDeleteArray(&deleteArray_RooPowerLawSum);
-      instance.SetDestructor(&destruct_RooPowerLawSum);
+         instance("ProfileMultiplePdfs", "interface/ProfileMultiplePdfs.h", 18,
+                  typeid(::ProfileMultiplePdfs), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &ProfileMultiplePdfs_Dictionary, isa_proxy, 0,
+                  sizeof(::ProfileMultiplePdfs) );
+      instance.SetNew(&new_ProfileMultiplePdfs);
+      instance.SetNewArray(&newArray_ProfileMultiplePdfs);
+      instance.SetDelete(&delete_ProfileMultiplePdfs);
+      instance.SetDeleteArray(&deleteArray_ProfileMultiplePdfs);
+      instance.SetDestructor(&destruct_ProfileMultiplePdfs);
       return &instance;
    }
-   TGenericClassInfo *GenerateInitInstance(const ::RooPowerLawSum*)
+   TGenericClassInfo *GenerateInitInstance(const ::ProfileMultiplePdfs*)
    {
-      return GenerateInitInstanceLocal((::RooPowerLawSum*)0);
+      return GenerateInitInstanceLocal((::ProfileMultiplePdfs*)0);
    }
    // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::RooPowerLawSum*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::ProfileMultiplePdfs*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
 
    // Dictionary for non-ClassDef classes
-   static TClass *RooPowerLawSum_Dictionary() {
-      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::RooPowerLawSum*)0x0)->GetClass();
-      RooPowerLawSum_TClassManip(theClass);
+   static TClass *ProfileMultiplePdfs_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::ProfileMultiplePdfs*)0x0)->GetClass();
+      ProfileMultiplePdfs_TClassManip(theClass);
    return theClass;
    }
 
-   static void RooPowerLawSum_TClassManip(TClass* ){
+   static void ProfileMultiplePdfs_TClassManip(TClass* ){
    }
 
 } // end of namespace ROOT
 
 namespace ROOT {
-   static TClass *WSTFileWrapper_Dictionary();
-   static void WSTFileWrapper_TClassManip(TClass*);
-   static void delete_WSTFileWrapper(void *p);
-   static void deleteArray_WSTFileWrapper(void *p);
-   static void destruct_WSTFileWrapper(void *p);
+   static TClass *PdfModelBuilder_Dictionary();
+   static void PdfModelBuilder_TClassManip(TClass*);
+   static void *new_PdfModelBuilder(void *p = 0);
+   static void *newArray_PdfModelBuilder(Long_t size, void *p);
+   static void delete_PdfModelBuilder(void *p);
+   static void deleteArray_PdfModelBuilder(void *p);
+   static void destruct_PdfModelBuilder(void *p);
 
    // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::WSTFileWrapper*)
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::PdfModelBuilder*)
    {
-      ::WSTFileWrapper *ptr = 0;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::WSTFileWrapper));
+      ::PdfModelBuilder *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(::PdfModelBuilder));
       static ::ROOT::TGenericClassInfo 
-         instance("WSTFileWrapper", "interface/WSTFileWrapper.h", 10,
-                  typeid(::WSTFileWrapper), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &WSTFileWrapper_Dictionary, isa_proxy, 0,
-                  sizeof(::WSTFileWrapper) );
-      instance.SetDelete(&delete_WSTFileWrapper);
-      instance.SetDeleteArray(&deleteArray_WSTFileWrapper);
-      instance.SetDestructor(&destruct_WSTFileWrapper);
+         instance("PdfModelBuilder", "interface/PdfModelBuilder.h", 21,
+                  typeid(::PdfModelBuilder), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &PdfModelBuilder_Dictionary, isa_proxy, 0,
+                  sizeof(::PdfModelBuilder) );
+      instance.SetNew(&new_PdfModelBuilder);
+      instance.SetNewArray(&newArray_PdfModelBuilder);
+      instance.SetDelete(&delete_PdfModelBuilder);
+      instance.SetDeleteArray(&deleteArray_PdfModelBuilder);
+      instance.SetDestructor(&destruct_PdfModelBuilder);
       return &instance;
    }
-   TGenericClassInfo *GenerateInitInstance(const ::WSTFileWrapper*)
+   TGenericClassInfo *GenerateInitInstance(const ::PdfModelBuilder*)
    {
-      return GenerateInitInstanceLocal((::WSTFileWrapper*)0);
+      return GenerateInitInstanceLocal((::PdfModelBuilder*)0);
    }
    // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::WSTFileWrapper*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::PdfModelBuilder*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
 
    // Dictionary for non-ClassDef classes
-   static TClass *WSTFileWrapper_Dictionary() {
-      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::WSTFileWrapper*)0x0)->GetClass();
-      WSTFileWrapper_TClassManip(theClass);
+   static TClass *PdfModelBuilder_Dictionary() {
+      TClass* theClass =::ROOT::GenerateInitInstanceLocal((const ::PdfModelBuilder*)0x0)->GetClass();
+      PdfModelBuilder_TClassManip(theClass);
    return theClass;
    }
 
-   static void WSTFileWrapper_TClassManip(TClass* ){
+   static void PdfModelBuilder_TClassManip(TClass* ){
    }
 
 } // end of namespace ROOT
 
 namespace ROOT {
    // Wrappers around operator new
-   static void *new_PdfModelBuilder(void *p) {
-      return  p ? new(p) ::PdfModelBuilder : new ::PdfModelBuilder;
+   static void *new_RooPowerLawSum(void *p) {
+      return  p ? new(p) ::RooPowerLawSum : new ::RooPowerLawSum;
    }
-   static void *newArray_PdfModelBuilder(Long_t nElements, void *p) {
-      return p ? new(p) ::PdfModelBuilder[nElements] : new ::PdfModelBuilder[nElements];
+   static void *newArray_RooPowerLawSum(Long_t nElements, void *p) {
+      return p ? new(p) ::RooPowerLawSum[nElements] : new ::RooPowerLawSum[nElements];
    }
    // Wrapper around operator delete
-   static void delete_PdfModelBuilder(void *p) {
-      delete ((::PdfModelBuilder*)p);
+   static void delete_RooPowerLawSum(void *p) {
+      delete ((::RooPowerLawSum*)p);
    }
-   static void deleteArray_PdfModelBuilder(void *p) {
-      delete [] ((::PdfModelBuilder*)p);
+   static void deleteArray_RooPowerLawSum(void *p) {
+      delete [] ((::RooPowerLawSum*)p);
    }
-   static void destruct_PdfModelBuilder(void *p) {
-      typedef ::PdfModelBuilder current_t;
+   static void destruct_RooPowerLawSum(void *p) {
+      typedef ::RooPowerLawSum current_t;
       ((current_t*)p)->~current_t();
    }
-} // end of namespace ROOT for class ::PdfModelBuilder
+} // end of namespace ROOT for class ::RooPowerLawSum
 
 namespace ROOT {
-   // Wrappers around operator new
-   static void *new_ProfileMultiplePdfs(void *p) {
-      return  p ? new(p) ::ProfileMultiplePdfs : new ::ProfileMultiplePdfs;
-   }
-   static void *newArray_ProfileMultiplePdfs(Long_t nElements, void *p) {
-      return p ? new(p) ::ProfileMultiplePdfs[nElements] : new ::ProfileMultiplePdfs[nElements];
-   }
    // Wrapper around operator delete
-   static void delete_ProfileMultiplePdfs(void *p) {
-      delete ((::ProfileMultiplePdfs*)p);
+   static void delete_WSTFileWrapper(void *p) {
+      delete ((::WSTFileWrapper*)p);
    }
-   static void deleteArray_ProfileMultiplePdfs(void *p) {
-      delete [] ((::ProfileMultiplePdfs*)p);
+   static void deleteArray_WSTFileWrapper(void *p) {
+      delete [] ((::WSTFileWrapper*)p);
    }
-   static void destruct_ProfileMultiplePdfs(void *p) {
-      typedef ::ProfileMultiplePdfs current_t;
+   static void destruct_WSTFileWrapper(void *p) {
+      typedef ::WSTFileWrapper current_t;
       ((current_t*)p)->~current_t();
    }
-} // end of namespace ROOT for class ::ProfileMultiplePdfs
+} // end of namespace ROOT for class ::WSTFileWrapper
 
 namespace ROOT {
    // Wrappers around operator new
@@ -399,54 +391,61 @@ namespace ROOT {
 
 namespace ROOT {
    // Wrappers around operator new
-   static void *new_RooPowerLawSum(void *p) {
-      return  p ? new(p) ::RooPowerLawSum : new ::RooPowerLawSum;
+   static void *new_ProfileMultiplePdfs(void *p) {
+      return  p ? new(p) ::ProfileMultiplePdfs : new ::ProfileMultiplePdfs;
    }
-   static void *newArray_RooPowerLawSum(Long_t nElements, void *p) {
-      return p ? new(p) ::RooPowerLawSum[nElements] : new ::RooPowerLawSum[nElements];
+   static void *newArray_ProfileMultiplePdfs(Long_t nElements, void *p) {
+      return p ? new(p) ::ProfileMultiplePdfs[nElements] : new ::ProfileMultiplePdfs[nElements];
    }
    // Wrapper around operator delete
-   static void delete_RooPowerLawSum(void *p) {
-      delete ((::RooPowerLawSum*)p);
+   static void delete_ProfileMultiplePdfs(void *p) {
+      delete ((::ProfileMultiplePdfs*)p);
    }
-   static void deleteArray_RooPowerLawSum(void *p) {
-      delete [] ((::RooPowerLawSum*)p);
+   static void deleteArray_ProfileMultiplePdfs(void *p) {
+      delete [] ((::ProfileMultiplePdfs*)p);
    }
-   static void destruct_RooPowerLawSum(void *p) {
-      typedef ::RooPowerLawSum current_t;
+   static void destruct_ProfileMultiplePdfs(void *p) {
+      typedef ::ProfileMultiplePdfs current_t;
       ((current_t*)p)->~current_t();
    }
-} // end of namespace ROOT for class ::RooPowerLawSum
+} // end of namespace ROOT for class ::ProfileMultiplePdfs
 
 namespace ROOT {
+   // Wrappers around operator new
+   static void *new_PdfModelBuilder(void *p) {
+      return  p ? new(p) ::PdfModelBuilder : new ::PdfModelBuilder;
+   }
+   static void *newArray_PdfModelBuilder(Long_t nElements, void *p) {
+      return p ? new(p) ::PdfModelBuilder[nElements] : new ::PdfModelBuilder[nElements];
+   }
    // Wrapper around operator delete
-   static void delete_WSTFileWrapper(void *p) {
-      delete ((::WSTFileWrapper*)p);
+   static void delete_PdfModelBuilder(void *p) {
+      delete ((::PdfModelBuilder*)p);
    }
-   static void deleteArray_WSTFileWrapper(void *p) {
-      delete [] ((::WSTFileWrapper*)p);
+   static void deleteArray_PdfModelBuilder(void *p) {
+      delete [] ((::PdfModelBuilder*)p);
    }
-   static void destruct_WSTFileWrapper(void *p) {
-      typedef ::WSTFileWrapper current_t;
+   static void destruct_PdfModelBuilder(void *p) {
+      typedef ::PdfModelBuilder current_t;
       ((current_t*)p)->~current_t();
    }
-} // end of namespace ROOT for class ::WSTFileWrapper
+} // end of namespace ROOT for class ::PdfModelBuilder
 
 namespace {
   void TriggerDictionaryInitialization_RootDict_Impl() {
     static const char* headers[] = {
-"interface/PdfModelBuilder.h",
-"interface/ProfileMultiplePdfs.h",
-"interface/RooExponentialSum.h",
-"interface/RooPowerLaw.h",
 "interface/RooPowerLawSum.h",
 "interface/WSTFileWrapper.h",
+"interface/RooExponentialSum.h",
+"interface/RooPowerLaw.h",
+"interface/ProfileMultiplePdfs.h",
+"interface/PdfModelBuilder.h",
 0
     };
     static const char* includePaths[] = {
-"/cvmfs/cms.cern.ch/slc7_amd64_gcc900/lcg/root/6.22.08-ljfedo//include",
-"/cvmfs/cms.cern.ch/slc7_amd64_gcc900/lcg/root/6.22.08-ljfedo/include/",
-"/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V9/CMSSW_11_3_4/src/flashggFinalFit/Background/",
+"/cvmfs/cms.cern.ch/slc7_amd64_gcc700/lcg/root/6.12.07-gnimlf5//include",
+"/cvmfs/cms.cern.ch/slc7_amd64_gcc700/lcg/root/6.12.07-gnimlf5/include",
+"/afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Background/",
 0
     };
     static const char* fwdDeclCode = R"DICTFWDDCLS(
@@ -454,43 +453,45 @@ namespace {
 #pragma clang diagnostic ignored "-Wkeyword-compat"
 #pragma clang diagnostic ignored "-Wignored-attributes"
 #pragma clang diagnostic ignored "-Wreturn-type-c-linkage"
-extern int __Cling_AutoLoading_Map;
-class __attribute__((annotate("$clingAutoload$interface/PdfModelBuilder.h")))  PdfModelBuilder;
-class __attribute__((annotate("$clingAutoload$interface/ProfileMultiplePdfs.h")))  ProfileMultiplePdfs;
-class __attribute__((annotate("$clingAutoload$interface/RooExponentialSum.h")))  RooExponentialSum;
-class __attribute__((annotate("$clingAutoload$interface/RooPowerLaw.h")))  RooPowerLaw;
+extern int __Cling_Autoloading_Map;
 class __attribute__((annotate("$clingAutoload$interface/RooPowerLawSum.h")))  RooPowerLawSum;
 class __attribute__((annotate("$clingAutoload$interface/WSTFileWrapper.h")))  WSTFileWrapper;
+class __attribute__((annotate("$clingAutoload$interface/RooExponentialSum.h")))  RooExponentialSum;
+class __attribute__((annotate("$clingAutoload$interface/RooPowerLaw.h")))  RooPowerLaw;
+class __attribute__((annotate("$clingAutoload$interface/ProfileMultiplePdfs.h")))  ProfileMultiplePdfs;
+class __attribute__((annotate("$clingAutoload$interface/PdfModelBuilder.h")))  PdfModelBuilder;
 )DICTFWDDCLS";
     static const char* payloadCode = R"DICTPAYLOAD(
 #line 1 "RootDict dictionary payload"
 
+#ifndef G__VECTOR_HAS_CLASS_ITERATOR
+  #define G__VECTOR_HAS_CLASS_ITERATOR 1
+#endif
 
 #define _BACKWARD_BACKWARD_WARNING_H
-// Inline headers
-#include "interface/PdfModelBuilder.h"
-#include "interface/ProfileMultiplePdfs.h"
-#include "interface/RooExponentialSum.h"
-#include "interface/RooPowerLaw.h"
 #include "interface/RooPowerLawSum.h"
 #include "interface/WSTFileWrapper.h"
+#include "interface/RooExponentialSum.h"
+#include "interface/RooPowerLaw.h"
+#include "interface/ProfileMultiplePdfs.h"
+#include "interface/PdfModelBuilder.h"
 
 #undef  _BACKWARD_BACKWARD_WARNING_H
 )DICTPAYLOAD";
-    static const char* classesHeaders[] = {
+    static const char* classesHeaders[]={
 "PdfModelBuilder", payloadCode, "@",
 "ProfileMultiplePdfs", payloadCode, "@",
 "RooExponentialSum", payloadCode, "@",
 "RooPowerLaw", payloadCode, "@",
 "RooPowerLawSum", payloadCode, "@",
 "WSTFileWrapper", payloadCode, "@",
-nullptr
-};
+nullptr};
+
     static bool isInitialized = false;
     if (!isInitialized) {
       TROOT::RegisterModule("RootDict",
         headers, includePaths, payloadCode, fwdDeclCode,
-        TriggerDictionaryInitialization_RootDict_Impl, {}, classesHeaders, /*hasCxxModule*/false);
+        TriggerDictionaryInitialization_RootDict_Impl, {}, classesHeaders);
       isInitialized = true;
     }
   }
