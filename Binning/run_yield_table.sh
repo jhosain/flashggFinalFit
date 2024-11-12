@@ -4,12 +4,15 @@
 RED='\033[0;31m'  # Red color for highlighting
 NC='\033[0m'      # No color (reset)
 
+echo -n "YEAR : "
+read year
+
 # Prompt user for the input directory path
-echo -n "Input the path directory of your workspace: "
+echo -n "Name of the directory of your workspace: "
 read InputDirectory
 
 # Change directory to the user-specified workspace
-cd "$InputDirectory" || { echo -e "${RED}Error: Unable to access directory $InputDirectory.${NC}"; exit 1; }
+cd "BINS/Opt_$year/$InputDirectory" || { echo -e "${RED}Error: Unable to access directory BINS/Opt_$year/$InputDirectory.${NC}"; exit 1; }
 
 # Define the number of bins for different categories
 Nbinx=5  # Number of Dzero bins
@@ -20,7 +23,7 @@ Nbinz=2  # Number of CPodd BDT bins
 Nbins=$((Nbinx * Nbiny * Nbinz))
 
 # Output file to store the results
-output_file="bin_table.txt"
+output_file="bin_table_${year}.txt"
 
 # Write the header for the table with columns for each Proc value
 echo -ne "Bin" > "$output_file"
@@ -83,7 +86,7 @@ for ((bin_index = 0; bin_index < Nbins; bin_index++)); do
 done
 
 # Go back to the original directory
-cd ..
+cd ../../../
 
 # Notify the user that the table has been created
 echo -e "${RED}Table has been written to $output_file${NC}"

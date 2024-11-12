@@ -1,12 +1,16 @@
-# Prompt for directory input
-echo -n "Input the path directory of your workspace : "
+
+echo -n "YEAR : "
+read year
+
+# Prompt user for the input directory path
+echo -n "Name of the directory of your workspace: "
 read InputDirectory
 
 # Navigate to the input directory
-cd "$InputDirectory" || { echo "Directory not found!"; exit 1; }
+cd "BINS/Opt_$year/$InputDirectory" || { echo "Directory not found!"; exit 1; }
 
 # Output file to store the results
-output_file="bin_structure.txt"
+output_file="bin_structure_${year}.txt"
 
 # Write the header for the table with columns
 echo -e "Bin\tDCP_ggH Range\tDiPho_MVA Range\tD0_minus_ggH Range" > "$output_file"
@@ -64,7 +68,7 @@ for ((bin_index = 0; bin_index < Nbins; bin_index++)); do
 done
 
 # Move back to the initial directory
-cd ..
+cd ../../../
 
 # Confirmation message
 echo "Table successfully saved to $output_file."
