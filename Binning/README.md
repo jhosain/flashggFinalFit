@@ -1,5 +1,7 @@
 ########
 
+**** Do not run this shell script in the singularity environment ******
+
 source run_treemaker.sh 
 
 ###

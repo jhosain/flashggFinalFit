@@ -48,23 +48,35 @@ else
     QUEUE=" --batch condor --queue longlunch "
 fi
 
-if [[ $STEP == "mc" ]]; then
+if [[ $STEP == "test" ]]; then
+
+python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0P --year ${YEAR} --doSystematics True
+
+elif [[ $STEP == "mc-ggh" ]]; then
 
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0P --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_GluGluHToGGPlusTwoJets_CPodd_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0M --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_GluGluHToGGPlusTwoJets_MM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0Mf05ph0  --year ${YEAR} --doSystematics True
 
+elif [[ $STEP == "mc-vbf" ]]; then
+
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_VBFHToGG_M125_TuneCP5_13TeV-amcatnlo-pythia8.root --productionMode vbf0P  --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_VBFHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode vbf0M  --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_VBFHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode vbf0Mf05ph0  --year ${YEAR} --doSystematics True
+
+elif [[ $STEP == "mc-wh" ]]; then
 
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_WHiggs0PMToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0P --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_WHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0M --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_WHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode wh0Mf05ph0  --year ${YEAR} --doSystematics True
 
+elif [[ $STEP == "mc-zh" ]]; then
+
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_ZH_HToGG_ZToAll_M125_TuneCP5_13TeV-powheg-pythia8.root --productionMode zh0P --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_ZHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode zh0M --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_ZHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode zh0Mf05ph0  --year ${YEAR} --doSystematics True
+
+elif [[ $STEP == "mc-tth" ]]; then
 
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_ttHJetToGG_M125_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8.root --productionMode tth0P --year ${YEAR} --doSystematics True
     python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_ttHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8.root --productionMode tth0M --year ${YEAR} --doSystematics True
@@ -76,6 +88,8 @@ if [[ $STEP == "mc" ]]; then
 elif [[ $STEP == "data" ]]; then
     
     python trees2ws_data.py  --inputConfig config.py --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_Data.root 
+
+    cp Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/ws/output_Data.root Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/ws/allData.root
     #python RunWSScripts.py --inputConfig config.py --inputDir Trees/Opt_${YEAR}/${DIR}/Trees_${YEAR} --mode trees2ws_data --year ${YEAR} --ext ${YEAR} ${QUEUE}
 else
     echo "Step $STEP is not one among mc, data. Exiting."

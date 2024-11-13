@@ -110,8 +110,16 @@ Finally, there is a light weight script to rename workspace ROOT files and make 
 
 # for data 
 
-source run_tree2ws.sh -s data -y 2018 -d targetdir -i
+source run_tree2ws.sh -s data -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
 
 # for monte carlo
 
-source run_tree2ws.sh -s mc -y 2018 -d targetdir -i
+source run_tree2ws.sh -s mc-ggh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
+
+source run_tree2ws.sh -s mc-vbf -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
+
+source run_tree2ws.sh -s mc-wh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
+
+source run_tree2ws.sh -s mc-zh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
+
+source run_tree2ws.sh -s mc-tth -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
