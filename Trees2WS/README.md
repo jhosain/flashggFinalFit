@@ -104,3 +104,14 @@ The output is a mass shifted workspace in the same directory as the input worksp
 ## Renaming
 
 Finally, there is a light weight script to rename workspace ROOT files and make them suitable for the FinalFits package. This is the `WSRenamer.py` script which takes as input the path to the input workspaces. Before using this, you must first change the script to match your particular analysis... should be pretty clear from the examples in the script how it can work.
+
+
+## Steps to run the script
+
+# for data 
+
+source run_tree2ws.sh -s data -y 2018 -d targetdir -i
+
+# for monte carlo
+
+source run_tree2ws.sh -s mc -y 2018 -d targetdir -i

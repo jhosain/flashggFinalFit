@@ -58,3 +58,12 @@ The output is a ROOT file containing the `RooMultiPdf`'s for each analysis categ
  * Pythonize everything to make the code more accessible.
 
  * Include the 2D fTest functionality (as used in the HH analysis)
+
+
+## Steps to run the background fit
+
+source run_bkg.sh  
+
+# once the jobs are finished run the script to move the output to the target directory
+
+source run_move_results.sh 
