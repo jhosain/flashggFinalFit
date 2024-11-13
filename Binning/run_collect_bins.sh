@@ -15,7 +15,7 @@ cd "BINS/Opt_$year/$InputDirectory" || { echo -e "\e[31mError: Unable to access 
 mkdir -p "Trees2WS_${year}"
 
 #echo -n "Number of Bin? "
-#read bin
+bin=30
 
 proc=(
     "Data"
@@ -88,10 +88,10 @@ for index in "${index_array[@]}"; do
 
     hadd -f "output_${selected_proc}.root" $file_list
 
-    # Remove the Trees for each bins
+    
     
 done
-
-   rm $file_list
+    # Remove the Trees for each bins 
+    rm -f ${file_list}
 
 cd ../../../../ #exit input directory
