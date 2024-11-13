@@ -217,7 +217,7 @@ globalReplacementMap['AC'] = od()
 #  * use proc x cat with highest number of WV events
 
 globalReplacementMap['AC']['procWV'] = "GG2HbsmM"
-globalReplacementMap['AC']['catWV'] = "AC_Bin17"
+globalReplacementMap['AC']['catWV'] = "AC_Bin7"
 
 #globalReplacementMap['AC']['procWV'] = "VBF"
 #globalReplacementMap['AC']['catWV'] = "AC_Bin17"
