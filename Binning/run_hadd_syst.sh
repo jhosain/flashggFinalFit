@@ -66,7 +66,7 @@ for index in "${index_array[@]}"; do
         cd "Bin$bin_index" || exit 1
 
         # Perform hadd for the selected process
-        hadd "output_${selected_proc}.root" "output_${selected_proc}"*".root"
+        hadd -f "output_${selected_proc}.root" "output_${selected_proc}"*".root"
 
         # Echo the associated bin number
         echo "Hadd completed for bin $bin_index"
