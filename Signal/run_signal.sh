@@ -40,8 +40,9 @@ echo "Available strings: ${string_array[*]}"
 if [ "$value" -eq 0 ]; then
 
 	echo  "Processing All "
+	strings_to_process=("ZHsm")
 	#strings_to_process=("GG2HbsmM" "GG2Hsm" "GG2HMf05ph0" "VBFbsmM" "VBFsm" "VBFMf05ph0")
-	strings_to_process=("GG2Hsm" "GG2HMf05ph0" "GG2HbsmM" "VBFbsmM" "VBFsm" "VBFMf05ph0" "WHbsmM" "WHsm" "WHMf05ph0" "ZHbsmM" "ZHsm" "ZHMf05ph0" "TTHbsmM" "TTHsm" "TTHMf05ph0")
+	#strings_to_process=("GG2Hsm" "GG2HMf05ph0" "GG2HbsmM" "VBFbsmM" "VBFsm" "VBFMf05ph0" "WHbsmM" "WHsm" "WHMf05ph0" "ZHbsmM" "ZHsm" "ZHMf05ph0" "TTHbsmM" "TTHsm" "TTHMf05ph0")
 else
 	echo -n "Enter the string to process: "
 	read -r proc_string
@@ -103,10 +104,10 @@ signalScriptCfg = {
   'smears':'HighR9EBPhi,HighR9EBRho,HighR9EEPhi,HighR9EERho,LowR9EBPhi,LowR9EBRho,LowR9EEPhi,LowR9EERho', # separate nuisance per year
 
   # Job submission options
-  #'batch':'local', # ['condor','SGE','IC','local']
-  #'queue':'hep.q'
-  'batch':'condor', # ['condor','SGE','IC','local']
-  'queue':'longlunch',
+  'batch':'local', # ['condor','SGE','IC','local']
+  'queue':'hep.q'
+  #'batch':'condor', # ['condor','SGE','IC','local']
+  #'queue':'longlunch',
 
 }" > config_sig_$k\_$YEAR.py
 
