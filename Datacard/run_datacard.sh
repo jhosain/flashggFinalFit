@@ -53,7 +53,9 @@ fi
 
 if [ -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_* ]; then
 rm -rf yields_*
-mv -f yields_ Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/
 fi
+
+mv -if yields_* Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/
+
 
 echo " ########### End ############## "

@@ -31,7 +31,7 @@ echo
 
 # Define the list of strings
 
-string_array=("GG2HbsmM" "GG2Hsm" "GG2HMf05ph0" "VBFbsmM" "VBFsm" "VBFMf05ph0")
+string_array=("GG2HbsmM" "GG2Hsm" "GG2HMf05ph0" "VBFbsmM" "VBFsm" "VBFMf05ph0" "WHbsmM" "WHsm" "WHMf05ph0" "ZHbsmM" "ZHsm" "ZHMf05ph0" "TTHbsmM" "TTHsm" "TTHMf05ph0")
 
 # Prompt the user to enter the string to skip
 
@@ -40,9 +40,8 @@ echo "Available strings: ${string_array[*]}"
 if [ "$value" -eq 0 ]; then
 
 	echo  "Processing All "
-	strings_to_process=("GG2Hsm" "GG2HMf05ph0" "GG2HbsmM")
 	#strings_to_process=("GG2HbsmM" "GG2Hsm" "GG2HMf05ph0" "VBFbsmM" "VBFsm" "VBFMf05ph0")
-	#strings_to_process=("WHbsmM" "WHsm" "WHMf05ph0" "ZHbsmM" "ZHsm" "ZHMf05ph0" "TTHbsmM" "TTHsm" "TTHMf05ph0")
+	strings_to_process=("GG2Hsm" "GG2HMf05ph0" "GG2HbsmM" "VBFbsmM" "VBFsm" "VBFMf05ph0" "WHbsmM" "WHsm" "WHMf05ph0" "ZHbsmM" "ZHsm" "ZHMf05ph0" "TTHbsmM" "TTHsm" "TTHMf05ph0")
 else
 	echo -n "Enter the string to process: "
 	read -r proc_string
