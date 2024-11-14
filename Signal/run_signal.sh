@@ -37,57 +37,27 @@ string_array=("GG2HbsmM" "GG2Hsm" "GG2HMf05ph0" "VBFbsmM" "VBFsm" "VBFMf05ph0" "
 
 echo "Available strings: ${string_array[*]}"
 
-if [ "$value" -eq 0 ]; then
 
-	echo  "Processing All "
-	strings_to_process=("ZHsm")
-	#strings_to_process=("GG2HbsmM" "GG2Hsm" "GG2HMf05ph0" "VBFbsmM" "VBFsm" "VBFMf05ph0")
-	#strings_to_process=("GG2Hsm" "GG2HMf05ph0" "GG2HbsmM" "VBFbsmM" "VBFsm" "VBFMf05ph0" "WHbsmM" "WHsm" "WHMf05ph0" "ZHbsmM" "ZHsm" "ZHMf05ph0" "TTHbsmM" "TTHsm" "TTHMf05ph0")
-else
-	echo -n "Enter the string to process: "
-	read -r proc_string
-	IFS=', ' read -r -a strings_to_process <<< "$proc_string"
-fi
 
 
 ###################
 
 
-for k in "${strings_to_process[@]}"; do
-
-    found=false  # Initialize a flag to track if the string is found in the array
-    # Loop over the array of strings to check if the current string should be processed
-    for string in "${string_array[@]}"; do
-        if [[ "$string" = "$k" ]]; then
-            echo "Processing: $k"
-            found=true  # Set the flag to true as the string is found
-            break  # Exit the loop once the string is found
-        fi
-    done
-
-    # If the string is not found in the array, print a message
-    if ! "$found"; then
-        echo "String '$k' not found in the list of strings."
-    fi
-
-echo
-echo "Processing: $k"
-echo
 
 echo "##############################################################"
-echo "    Making config_sig_$k_bin_$i_$YEAR.py "
+echo "    Making config_sig_$YEAR.py "
 echo "##############################################################"
 
 echo
 
-touch config_sig_$k\_$YEAR.py
+touch config_sig_$YEAR.py
 echo -e "# Config file: options for signal fitting 
 _year = '$YEAR' 
 
 signalScriptCfg = {
 
   # Setup
-  'inputWSDir':'Trees/Opt_$YEAR/$InputWSDirPath/Trees2WS_$YEAR/ws_$k/',
+  'inputWSDir':'Trees/Opt_$YEAR/$InputWSDirPath/Trees2WS_$YEAR/WS/',
   'procs':'auto', # if auto: inferred automatically from filenames
   'cats':'auto', # if auto: inferred automatically from (0) workspace
   'ext': '%s'%_year,
@@ -104,24 +74,17 @@ signalScriptCfg = {
   'smears':'HighR9EBPhi,HighR9EBRho,HighR9EEPhi,HighR9EERho,LowR9EBPhi,LowR9EBRho,LowR9EEPhi,LowR9EERho', # separate nuisance per year
 
   # Job submission options
-  'batch':'local', # ['condor','SGE','IC','local']
-  'queue':'hep.q'
-  #'batch':'condor', # ['condor','SGE','IC','local']
-  #'queue':'longlunch',
+  #'batch':'local', # ['condor','SGE','IC','local']
+  #'queue':'hep.q'
+  'batch':'condor', # ['condor','SGE','IC','local']
+  'queue':'tomorrow',
 
-}" > config_sig_$k\_$YEAR.py
+}" > config_sig_$YEAR.py
 
-python RunSignalScripts.py --inputConfig config_sig_$k\_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots "
-python RunSignalScripts.py --inputConfig config_sig_$k\_$YEAR.py --mode calcPhotonSyst
-python RunSignalScripts.py --inputConfig config_sig_$k\_$YEAR.py --mode signalFit  --modeOpts "$skip --doPlots"
+python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots "
+python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode calcPhotonSyst
+python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip --doPlots"
 
-
-
-echo
-echo " ################## Finished the whole process for Bin$i Process $k  ################ "
-echo
-
-done   # clsoe the proc loop
 
 echo " ########### End ############## "
 

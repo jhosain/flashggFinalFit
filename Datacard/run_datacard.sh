@@ -52,7 +52,7 @@ mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output
 fi
 
 if [ -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_* ]; then
-rm -rf yields_*
+rm -rf Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_*
 fi
 
 mv -if yields_* Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/
