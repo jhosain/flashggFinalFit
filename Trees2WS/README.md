@@ -114,12 +114,12 @@ source run_tree2ws.sh -s data -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
 
 # for monte carlo
 
-source run_tree2ws.sh -s mc-ggh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
 
-source run_tree2ws.sh -s mc-vbf -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
+source run_tree2ws.sh -s mc-ggh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i &> output_log_ggh.txt & 
+source run_tree2ws.sh -s mc-vbf -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i &> output_log_vbf.txt &
+source run_tree2ws.sh -s mc-wh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i &> output_log_wh.txt &
+source run_tree2ws.sh -s mc-zh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i &> output_log_zh.txt &
+source run_tree2ws.sh -s mc-tth -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i &> output_log_tth.txt &
 
-source run_tree2ws.sh -s mc-wh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
 
-source run_tree2ws.sh -s mc-zh -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
-
-source run_tree2ws.sh -s mc-tth -y 2018 -d 3D_DCP_CPodd_p25_Bkg_p60 -i
+###################
