@@ -1,11 +1,29 @@
-
 #!bin/sh
+
+# Define colors using ANSI escape codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
 
 echo -n "YEAR :"
 read year
 
 echo -n "Name of the directory of your workspace:"
 read InputTreePathdirectory
+
+echo -n -e "${RED} doSystematics --> YES or NO:  ${NC}"
+read flag
+echo
+
+# Checking if the variable is False
+if [ "$flag" = "NO" ]; then
+    syst=" "
+    echo "Not doing Systematics "
+else
+    syst="--doSystematics"
+    echo "Doing Systematics"
+fi
 
 
 if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS ]; then
@@ -34,18 +52,18 @@ fi
 echo "all the root files are copied to WS"
 
 
-#python RunYields.py --inputWSDirMap $year=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS --skipZeroes True --cats "AC_Bin0,AC_Bin1,AC_Bin2,AC_Bin3,AC_Bin4,AC_Bin5,AC_Bin6,AC_Bin7,AC_Bin8,AC_Bin9,AC_Bin10,AC_Bin11,AC_Bin12,AC_Bin13,AC_Bin14,AC_Bin15,AC_Bin16,AC_Bin17,AC_Bin18,AC_Bin19,AC_Bin20,AC_Bin21,AC_Bin22,AC_Bin23,AC_Bin24,AC_Bin25,AC_Bin26,AC_Bin27,AC_Bin28,AC_Bin29" --procs auto --batch local --queue hep.q --ext $year --doSystematics
+python RunYields.py --inputWSDirMap $year=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS --skipZeroes True --cats "AC_Bin0,AC_Bin1,AC_Bin2,AC_Bin3,AC_Bin4,AC_Bin5,AC_Bin6,AC_Bin7,AC_Bin8,AC_Bin9,AC_Bin10,AC_Bin11,AC_Bin12,AC_Bin13,AC_Bin14,AC_Bin15,AC_Bin16,AC_Bin17,AC_Bin18,AC_Bin19,AC_Bin20,AC_Bin21,AC_Bin22,AC_Bin23,AC_Bin24,AC_Bin25,AC_Bin26,AC_Bin27,AC_Bin28,AC_Bin29" --procs auto --batch local --queue hep.q $syst
 
-python RunYields.py --inputWSDirMap $year=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS --cats auto  --procs auto --doSystematics --batch local --queue hep.q --ext $year
+#python RunYields.py --inputWSDirMap $year=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS --cats auto  --procs auto --doSystematics --batch local --queue hep.q 
 
-python makeDatacard.py --years $year --prune --doSystematics --ext $year --output Datacard_$year
+python makeDatacard.py --years $year --prune $syst --ext $year --output Datacard_$year
 
 
 if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Results ]; then
 mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Results 
 fi
 
-mv Datacard* Trees/Opt_$year/$InputTreePathdirectory/Results/
+cp Datacard*.txt Trees/Opt_$year/$InputTreePathdirectory/Results/
 
 if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output ]; then
 mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output                                                                
@@ -55,7 +73,7 @@ if [ -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_* ]; then
 rm -rf Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_*
 fi
 
-mv -if yields_* Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/
+cp -rf yields_* Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/
 
 
 echo " ########### End ############## "

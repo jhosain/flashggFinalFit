@@ -42,7 +42,8 @@ def addConstantSyst(sd,_syst,options):
 
 def getValueFromJson(row,uncertainties,sname):
   # uncertainties is a dict of the form proc:{sname:X}
-  p = re.sub("_2016_%s"%decayMode,"",row['proc'])
+  p = re.sub("_2016PreVFP_%s"%decayMode,"",row['proc'])
+  p = re.sub("_2016PostVFP_%s"%decayMode,"",p)
   p = re.sub("_2017_%s"%decayMode,"",p)
   p = re.sub("_2018_%s"%decayMode,"",p)
   if p in uncertainties: 
@@ -69,8 +70,8 @@ def factoryType(d,s):
     dataHistDown = "%s_%sDown01sigma"%(r.nominalDataName,s['name'])
 
     # Check if syst is var (i.e. weight) in workspace
-    if ws.allVars().selectByName("%s*"%(s['name'])).getSize():
-      nWeights = ws.allVars().selectByName("%s*"%(s['name'])).getSize()
+    if ws.allVars().selectByName("%s*sigma"%(s['name'])).getSize():
+      nWeights = ws.allVars().selectByName("%s*sigma"%(s['name'])).getSize()
       ws.Delete()
       f.Close()
       if nWeights == 2: return "a_w"
@@ -326,7 +327,7 @@ def theorySystFactory(d,systs,ftype,options,stxsMergeScheme=None,_removal=False)
     # Extract factory type
     f = ftype[s['name']]
     # For ggH theory uncertainties: require proc contains "ggH"
-    if "THU_ggH" in s['name']: mask = (d['type']=='sig')&(d['nominal_yield']!=0)&(d['proc'].str.contains('ggH'))
+    if "THU_ggH" in s['name']: mask = (d['type']=='sig')&(d['nominal_yield']!=0)&(d['proc'].str.contains('GG2H'))
     else: mask = (d['type']=='sig')&(d['nominal_yield']!=0)
     # Loop over tiers and use appropriate mode for compareYield function: skip mnorm as treated separately below
     for tier in s['tiers']: 

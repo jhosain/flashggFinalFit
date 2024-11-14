@@ -1,87 +1,152 @@
 {
-    "ggH_FWDH":{
+    "GG2H_AC_Bin":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_0J_PTH_0_10":{
+    "GG2HMf05ph0_AC_Bin":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_0J_PTH_GT10":{
+    "ggH_GG2HMf05ph0_2018":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_1J_PTH_0_60":{
+    "GG2HMf05ph0_2018":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_1J_PTH_60_120":{
+    "ggH_GG2HMf05ph0_hgg":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_1J_PTH_120_200":{
+    "GG2HMf05ph0_2018_hgg":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_GE2J_MJJ_0_350_PTH_0_60":{
+    "ggH_AC_Bin6":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_GE2J_MJJ_0_350_PTH_60_120":{
+    "ggH_AC_Bin7":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_GE2J_MJJ_0_350_PTH_120_200":{
+    "ggH_AC_Bin8":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_GE2J_MJJ_350_700_PTH_0_200_PTHJJ_0_25":{
+    "ggH_AC_Bin9":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_GE2J_MJJ_350_700_PTH_0_200_PTHJJ_GT25":{
+    "ggH_AC_Bin10":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_GE2J_MJJ_GT700_PTH_0_200_PTHJJ_0_25":{
+    "ggH_AC_Bin11":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_GE2J_MJJ_GT700_PTH_0_200_PTHJJ_GT25":{
+    "ggH_AC_Bin12":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_PTH_200_300":{
+    "ggH_AC_Bin13":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_PTH_300_450":{
+    "ggH_AC_Bin14":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_PTH_450_650":{
+    "ggH_AC_Bin15":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
     },
-    "ggH_PTH_GT650":{
+    "ggH_AC_Bin16":{
         "QCDscale_ggH":[1.047,0.931],
         "pdf_Higgs_ggH":1.019,
         "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin17":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin18":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin19":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin20":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin21":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin22":{
+        "QCDscale_ggH":[1.047,0.931],
+	"pdf_Higgs_ggH":1.019,
+	"alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin23":{
+        "QCDscale_ggH":[1.047,0.931],
+	"pdf_Higgs_ggH":1.019,
+	"alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin24":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin25":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin26":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin27":{
+	"QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+	"alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin28":{
+        "QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+        "alphaS_ggH":1.026
+    },
+    "ggH_AC_Bin29":{
+	"QCDscale_ggH":[1.047,0.931],
+        "pdf_Higgs_ggH":1.019,
+	"alphaS_ggH":1.026
     }
 }
