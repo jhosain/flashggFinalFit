@@ -1,11 +1,12 @@
 #!/bin/sh
 
 year=2017
-echo "YEAR : "$year 
-type=syst
-echo "Type of the trees (cent or syst) : "$type 
+type=cent
 InputDirectory="Opt_2017"
-echo "Name the directory of your work sapce : "$InputDirectory  
+
+echo "YEAR : "$year 
+echo "Directory of your work space : "$InputDirectory  
+echo "Type of the trees (cent or syst) : "$type
 
 if [ ! -d $InputDirectory ]; then
     mkdir $InputDirectory
@@ -86,15 +87,12 @@ for ((k = 0; k < $Nbinz; k++)); do
 	    if [ ! -d Bin$bin_index ]; then
 		mkdir -p Bin$bin_index
 		echo "$InputDirectory/Bin$bin_index directory has been created"
-	    fi
-	    
+	    fi    
 	    cd Bin$bin_index || exit 1
 	    
 	    #Copy files
 	    cp ../TreeMakerForWorkspace_multiclassBDT_3D_Central.C .
 	    cp ../TreeMakerForWorkspace_multiclassBDT_3D_SYS.C .
-	    #Generate HTcondor sumbission file 
-	    echo "##### Running Treemaker #####"
 
 	    #Process loop
 	    for ((p =0; p < $last_p; p++)); do
@@ -105,31 +103,29 @@ for ((k = 0; k < $Nbinz; k++)); do
 
                 echo "#!/bin/bash" > $wrapper
                 echo "source /cvmfs/cms.cern.ch/cmsset_default.sh" >> $wrapper
-		echo "cd "$cmssw_dir"/src" >> $wrapper
-		echo "eval \$(scram runtime -sh)" >> $wrapper
-		echo "cd -" >> $wrapper
-		echo "cp "$cwr"/TreeMakerForWorkspace_multiclassBDT_3D_SYS.C ." >> $wrapper
+		echo "cd "$cmssw_dir"/src ; eval \$(scram runtime -sh); cd -" >> $wrapper
 		echo "cp "$cwr"/TMVAClassification__BDT_Xgrad_multiclass_CPodd_threeclass_VBF.weights.xml ." >> $wrapper
-
                 chmod +x $wrapper
+		subfile="Bin${bin_index}_process${p}_cent.sub"
 
 		if  [ "$type" = "cent" ]; then
+		 # Generate a submission file for central tree
 		    #Central tree loop
-		    root -l -b -q TreeMakerForWorkspace_multiclassBDT_3D_Central.C\($i,$j,$k,$p,$bin_index,\"$year\"\) &> run$bin_index$p.log &  
-		    echo "Processing TreeMakerForWorkspace_multiclassBDT_3D_Central.C($i,$j,$k,$p,$bin_index,$year)"
-
+		    echo "cp "$cwr"/TreeMakerForWorkspace_multiclassBDT_3D_Central.C ." >> $wrapper
+		    echo "root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_Central.C($i,$j,$k,$p,$bin_index,\"$year\")'"  >> $wrapper
+		    
 		elif [ "$type" = "syst" ]; then
-                 # Generate a single Condor submission file for all systematic variations
-                    subfile="Bin${bin_index}_process${p}.sub"
+                 # Generate a submission file for all systematic variations
+                    subfile="Bin${bin_index}_process${p}_sys.sub"
+		    echo "cp "$cwr"/TreeMakerForWorkspace_multiclassBDT_3D_SYS.C ." >> $wrapper
                     for systematic in "${systematics[@]}"; do
                         for var in "${vars[@]}"; do
 			    echo "root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C($i,$j,$k,$p,$bin_index,\"$systematic\",\"$var\",\"$year\")'" >> $wrapper
 			    done
 		    done
 
-# Create Condor submission file
-# My singularity image needed on el7 
-                    cat > $subfile << EOF
+		    # Create Condor submission file: my singularity image needed on el7 
+                cat > $subfile << EOF
 universe              = vanilla
 executable            = $wrapper
 output                = run_${bin_index}_${p}_all_systematics.out
@@ -144,11 +140,11 @@ when_to_transfer_output = ON_EXIT
 MY.SingularityImage     = "/cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-cat/cmssw-lxplus/cmssw-el7-lxplus:latest/"
 queue 1                                                                                                                                                                                                   
 EOF
-		    echo " "
-		    echo "HTCondor submission file created: $subfile"
-		    condor_submit $subfile
+		echo " "
+		echo "HTCondor submission file created: $subfile"
+		condor_submit $subfile
 
-		else echo "Type is not cent or syst"
+		else echo "Type is not central or systematic variation"
 		fi
 
 	    done #process loop
@@ -161,6 +157,6 @@ EOF
     done #biny
 done #binz
 
-echo "All jobs completed"
+echo "All jobs submitted"
 
 
