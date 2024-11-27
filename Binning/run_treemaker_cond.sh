@@ -3,7 +3,6 @@
 year=2017
 type=cent
 InputDirectory="Opt_2017"
-
 echo "YEAR : "$year 
 echo "Directory of your work space : "$InputDirectory  
 echo "Type of the trees (cent or syst) : "$type
@@ -107,6 +106,7 @@ for ((k = 0; k < $Nbinz; k++)); do
 		echo "cp "$cwr"/TMVAClassification__BDT_Xgrad_multiclass_CPodd_threeclass_VBF.weights.xml ." >> $wrapper
                 chmod +x $wrapper
 		subfile="Bin${bin_index}_process${p}_cent.sub"
+		#ls -ltr | tail -n 2
 
 		if  [ "$type" = "cent" ]; then
 		 # Generate a submission file for central tree
@@ -124,15 +124,18 @@ for ((k = 0; k < $Nbinz; k++)); do
 			    done
 		    done
 
+		else echo "Type is not central or systematic variation"
+		fi
 		    # Create Condor submission file: my singularity image needed on el7 
+		    # Use espresso for central tree, tomorrow for systematic variations
                 cat > $subfile << EOF
 universe              = vanilla
 executable            = $wrapper
-output                = run_${bin_index}_${p}_all_systematics.out
-error                 = run_${bin_index}_${p}_all_systematics.err
-log                   = run_${bin_index}_${p}_all_systematics.log
+output                = $subfile.out
+error                 = $subfile.err
+log                   = $subfile.log
 request_cpus          = 1
-+JobFlavour = "tomorrow"
++JobFlavour = "espresso" 
 request_memory        = 4GB
 request_disk          = 1GB
 should_transfer_files = YES
@@ -140,16 +143,8 @@ when_to_transfer_output = ON_EXIT
 MY.SingularityImage     = "/cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-cat/cmssw-lxplus/cmssw-el7-lxplus:latest/"
 queue 1                                                                                                                                                                                                   
 EOF
-		echo " "
-		echo "HTCondor submission file created: $subfile"
 		condor_submit $subfile
-
-		else echo "Type is not central or systematic variation"
-		fi
-
 	    done #process loop
-
-	    wait
 	    cd ..
        	    ((bin_index++))
 
