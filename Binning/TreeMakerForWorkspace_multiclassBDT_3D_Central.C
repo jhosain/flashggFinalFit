@@ -345,7 +345,7 @@ void TreeMakerForWorkspace_multiclassBDT_3D_Central( int binx, int biny, int bin
    Float_t dipho_H_0T, dipho_H_1T, dipho_H_2T;
    Float_t dijet_cosphi, dijet_cosomega;
  
-   TString weightFile_= "../TMVAClassification__BDT_Xgrad_multiclass_CPodd_threeclass_VBF.weights.xml";
+   TString weightFile_= "TMVAClassification__BDT_Xgrad_multiclass_CPodd_threeclass_VBF.weights.xml";
    TString model_= "BDT_Xgrad_Pray";
 
    TMVA::Reader *reader = new TMVA::Reader( "!Color:Silent" );
