@@ -1,7 +1,7 @@
 #!/bin/sh
 
 year=2017
-type=cent
+type=syst
 InputDirectory="Opt_2017"
 echo "YEAR : "$year 
 echo "Directory of your work space : "$InputDirectory  
@@ -135,7 +135,7 @@ output                = $subfile.out
 error                 = $subfile.err
 log                   = $subfile.log
 request_cpus          = 1
-+JobFlavour = "espresso" 
++JobFlavour = "tomorrow" 
 request_memory        = 4GB
 request_disk          = 1GB
 should_transfer_files = YES
