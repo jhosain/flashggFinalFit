@@ -49,142 +49,39 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
         self.modelBuilder.factory_('expr::muVc("@1/(1+30*abs(@0))", fa3,muV)'.format(**xsecs))  
 
         # Amplitude decomposition in SM, int, bsm terms such that all terms poistive definite (to avoid negative norms for pdf in combine)
-        self.modelBuilder.factory_('expr::smCoupling_VBF("@0*@1**2 - @0*@1*@2*sqrt({sigma3_VBF}/{sigma1_VBF})", muVc,a1,a3)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::smCoupling_ZH("@0*@1**2 - @0*@1*@2*sqrt({sigma3_ZH}/{sigma1_ZH})", muVc,a1,a3)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::smCoupling_WH("@0*@1**2 - @0*@1*@2*sqrt({sigma3_WH}/{sigma1_WH})", muVc,a1,a3)'.format(**xsecs))
-
-        self.modelBuilder.factory_('expr::smCoupling_ggH("@0*@1**2 -  @0*@1*@2*sqrt({sigma_BSM_ggH}/{sigma_SM_ggH})", mu_ggH,a2_ggH,a3_ggH)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::bsmCoupling_ggH("@0*@1**2*{sigma_BSM_ggH}/{sigma_SM_ggH} - @0*@1*@2*sqrt({sigma_BSM_ggH}/{sigma_SM_ggH})", mu_ggH,a3_ggH,a2_ggH)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::intCoupling_ggH("@0*@1*@2*sqrt({sigma_BSM_ggH}/{sigma_SM_ggH})*2.", mu_ggH,a2_ggH,a3_ggH)'.format(**xsecs))
-
-        self.modelBuilder.factory_('expr::bsmCoupling_VBF("@0*@1**2*{sigma3_VBF}/{sigma1_VBF} - @0*@1*@2*sqrt({sigma3_VBF}/{sigma1_VBF})", muVc,a3,a1)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::bsmCoupling_ZH("@0*@1**2*{sigma3_ZH}/{sigma1_ZH} - @0*@1*@2*sqrt({sigma3_ZH}/{sigma1_ZH})", muVc,a3,a1)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::bsmCoupling_WH("@0*@1**2*{sigma3_WH}/{sigma1_WH} - @0*@1*@2*sqrt({sigma3_WH}/{sigma1_WH})", muVc,a3,a1)'.format(**xsecs))
-
-        self.modelBuilder.factory_('expr::intCoupling_VBF("@0*@1*@2*sqrt({sigma3_VBF}/{sigma1_VBF})*{sigmaa1a3int_VBF}/{sigma1_VBF}", muVc,a1,a3)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::intCoupling_ZH("@0*@1*@2*sqrt({sigma3_ZH}/{sigma1_ZH})*{sigmaa1a3int_ZH}/{sigma1_ZH}", muVc,a1,a3)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::intCoupling_WH("@0*@1*@2*sqrt({sigma3_WH}/{sigma1_WH})*{sigmaa1a3int_WH}/{sigma1_WH}", muVc,a1,a3)'.format(**xsecs))
+        self.modelBuilder.factory_('expr::smCoupling_ggH("@0*@1**2", mu_ggH,a2_ggH)'.format(**xsecs))
+        self.modelBuilder.factory_('expr::smCoupling_VBF("@0*@1**2", muVc,a1)'.format(**xsecs))
+        self.modelBuilder.factory_('expr::smCoupling_ZH("@0*@1**2", muVc,a1)'.format(**xsecs))
+        self.modelBuilder.factory_('expr::smCoupling_WH("@0*@1**2", muVc,a1)'.format(**xsecs))
+        
+        self.modelBuilder.factory_('expr::bsmCoupling_ggH("@0*@1**2*{sigma_BSM_ggH}/{sigma_SM_ggH}", mu_ggH,a3_ggH)'.format(**xsecs))
+        self.modelBuilder.factory_('expr::bsmCoupling_VBF("@0*@1**2*{sigma3_VBF}/{sigma1_VBF}", muVc,a3)'.format(**xsecs))
+        self.modelBuilder.factory_('expr::bsmCoupling_ZH("@0*@1**2*{sigma3_ZH}/{sigma1_ZH}", muVc,a3)'.format(**xsecs))
+        self.modelBuilder.factory_('expr::bsmCoupling_WH("@0*@1**2*{sigma3_WH}/{sigma1_WH}", muVc,a3)'.format(**xsecs))
 
 
     def getYieldScale(self,bin,process):
-
-        if process in ["GG2Hsm_2016preVFP_hgg",]:
+        
+        years = ["2016preVFP","2016postVFP","2017","2018"]         
+        if process in ["GG2Hsm_%s_hgg"%y for y in years]:
             return 'smCoupling_ggH'
-        if process in ["GG2HbsmM_2016preVFP_hgg",]:
+        if process in ["GG2HbsmM_%s_hgg"%y for y in years]:
             return 'bsmCoupling_ggH'
-        if process in ["GG2HMf05ph0_2016preVFP_hgg"]:
-            return 'intCoupling_ggH'
-        if process in ["vbf0P_2016preVFP_hgg",]:
+        if process in ["vbf0P_%s_hgg"%y for y in years]:
             return 'smCoupling_VBF'
-        if process in ["vbf0M_2016preVFP_hgg",]:
+        if process in ["vbf0M_%s_hgg"%y for y in years]:
             return 'bsmCoupling_VBF'
-        if process in ["vbf0Mf05ph0_2016preVFP_hgg"]:
-            return 'intCoupling_VBF'
-        if process in ["wh0P_2016preVFP_hgg",]:
+        if process in ["wh0P_%s_hgg"%y for y in years]:
             return 'smCoupling_WH'
-        if process in ["wh0M_2016preVFP_hgg",]:
+        if process in ["wh0M_%s_hgg"%y for y in years]:
             return 'bsmCoupling_WH'
-        if process in ["wh0Mf05ph0_2016preVFP_hgg"]:
-            return 'intCoupling_WH'
-        if process in ["zh0P_2016preVFP_hgg",]:
+        if process in ["zh0P_%s_hgg"%y for y in years]:
             return 'smCoupling_ZH'
-        if process in ["zh0M_2016preVFP_hgg",]:
+        if process in ["zh0M_%s_hgg"%y for y in years]:
             return 'bsmCoupling_ZH'
-        if process in ["zh0Mf05ph0_2016preVFP_hgg"]:
-            return 'intCoupling_ZH'
-
-        if process in ["tth0P_2016preVFP_hgg",]:
+        if process in ["tth0P_%s_hgg"%y for y in years]:
             return 'mu_ggH'
-
-
-        if process in ["GG2Hsm_2016postVFP_hgg",]:
-            return 'smCoupling_ggH'
-        if process in ["GG2HbsmM_2016postVFP_hgg",]:
-            return 'bsmCoupling_ggH'
-        if process in ["GG2HMf05ph0_2016postVFP_hgg"]:
-            return 'intCoupling_ggH'
-        if process in ["vbf0P_2016postVFP_hgg",]:
-            return 'smCoupling_VBF'
-        if process in ["vbf0M_2016postVFP_hgg",]:
-            return 'bsmCoupling_VBF'
-        if process in ["vbf0Mf05ph0_2016postVFP_hgg"]:
-            return 'intCoupling_VBF'
-        if process in ["wh0P_2016postVFP_hgg",]:
-            return 'smCoupling_WH'
-        if process in ["wh0M_2016postVFP_hgg",]:
-            return 'bsmCoupling_WH'
-        if process in ["wh0Mf05ph0_2016postVFP_hgg"]:
-            return 'intCoupling_WH'
-        if process in ["zh0P_2016postVFP_hgg",]:
-            return 'smCoupling_ZH'
-        if process in ["zh0M_2016postVFP_hgg",]:
-            return 'bsmCoupling_ZH'
-        if process in ["zh0Mf05ph0_2016postVFP_hgg"]:
-            return 'intCoupling_ZH'
-
-        if process in ["tth0P_2016postVFP_hgg",]:
-            return 'mu_ggH'
-
-
-        if process in ["GG2Hsm_2017_hgg",]:
-            return 'smCoupling_ggH'
-        if process in ["GG2HbsmM_2017_hgg",]:
-            return 'bsmCoupling_ggH'
-        if process in ["GG2HMf05ph0_2017_hgg"]:
-            return 'intCoupling_ggH'
-        if process in ["vbf0P_2017_hgg",]:
-            return 'smCoupling_VBF'
-        if process in ["vbf0M_2017_hgg",]:
-            return 'bsmCoupling_VBF'
-        if process in ["vbf0Mf05ph0_2017_hgg"]:
-            return 'intCoupling_VBF'
-        if process in ["wh0P_2017_hgg",]:
-            return 'smCoupling_WH'
-        if process in ["wh0M_2017_hgg",]:
-            return 'bsmCoupling_WH'
-        if process in ["wh0Mf05ph0_2017_hgg"]:
-            return 'intCoupling_WH'
-        if process in ["zh0P_2017_hgg",]:
-            return 'smCoupling_ZH'
-        if process in ["zh0M_2017_hgg",]:
-            return 'bsmCoupling_ZH'
-        if process in ["zh0Mf05ph0_2017_hgg"]:
-            return 'intCoupling_ZH'
-
-        if process in ["tth0P_2017_hgg",]:
-            return 'mu_ggH'
-
-
-        if process in ["GG2Hsm_2018_hgg",]:
-            return 'smCoupling_ggH'
-        if process in ["GG2HbsmM_2018_hgg",]:
-            return 'bsmCoupling_ggH'
-        if process in ["GG2HMf05ph0_2018_hgg"]:
-            return 'intCoupling_ggH'
-        if process in ["vbf0P_2018_hgg",]:
-            return 'smCoupling_VBF'
-        if process in ["vbf0M_2018_hgg",]:
-            return 'bsmCoupling_VBF'
-        if process in ["vbf0Mf05ph0_2018_hgg"]:
-            return 'intCoupling_VBF'
-        if process in ["wh0P_2018_hgg",]:
-            return 'smCoupling_WH'
-        if process in ["wh0M_2018_hgg",]:
-            return 'bsmCoupling_WH'
-        if process in ["wh0Mf05ph0_2018_hgg"]:
-            return 'intCoupling_WH'
-        if process in ["zh0P_2018_hgg",]:
-            return 'smCoupling_ZH'
-        if process in ["zh0M_2018_hgg",]:
-            return 'bsmCoupling_ZH'
-        if process in ["zh0Mf05ph0_2018_hgg"]:
-            return 'intCoupling_ZH'
-
-        if process in ["tth0P_2018_hgg",]:
-            return 'mu_ggH'
-
         return 1
-
 
 FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase = FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase()
 
