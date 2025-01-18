@@ -18,20 +18,34 @@ echo -n -e "${RED} --skipVertexScenarioSplit --> False(0); True(1) :  ${NC}"
 read value
 echo
 
+echo -n -e "${RED} --skipSystematics --> False(0); True(1) :  ${NC}"
+read val
+echo
+
 # Checking if the variable is False
 if [ "$value" -eq 0 ]; then
-    skip=" "
+    split=" "
     echo "Splitting VertexScenario"
 else
-    skip="--skipVertexScenarioSplit"
+    split="--skipVertexScenarioSplit True"
     echo "Skipping VertexScenario Splitting"
+fi
+
+# Checking if the variable is False                                                                                                            
+if [ "$val" -eq 0 ]; then
+    skip=" "
+    echo "Doing Systematics"
+else
+    skip="--skipSystematics True"
+    echo "Skipping Systematics"
 fi
 
 echo
 
 # Define the list of strings
 
-string_array=("GG2HbsmM" "GG2Hsm" "GG2HMf05ph0" "VBFbsmM" "VBFsm" "VBFMf05ph0" "WHbsmM" "WHsm" "WHMf05ph0" "ZHbsmM" "ZHsm" "ZHMf05ph0" "TTHbsmM" "TTHsm" "TTHMf05ph0")
+string_array=("GG2HbsmM" "GG2Hsm" "GG2HMf05ph0" "VBFbsmM" "VBFsm" "VBFMf05ph0")
+# "WHbsmM" "WHsm" "WHMf05ph0" "ZHbsmM" "ZHsm" "ZHMf05ph0" "TTHbsmM" "TTHsm" "TTHMf05ph0")
 
 # Prompt the user to enter the string to skip
 
@@ -58,7 +72,7 @@ signalScriptCfg = {
 
   # Setup
   'inputWSDir':'Trees/Opt_$YEAR/$InputWSDirPath/Trees2WS_$YEAR/WS/',
-  'procs':'auto', # if auto: inferred automatically from filenames
+  'procs':'GG2HbsmM,GG2Hsm,GG2HMf05ph0,VBFbsmM,VBFsm,VBFMf05ph0', # if auto: inferred automatically from filenames
   'cats':'auto', # if auto: inferred automatically from (0) workspace
   'ext': '%s'%_year,
   'analysis':'AC', # To specify which replacement dataset mapping (defined in ./python/replacementMap.py)
@@ -77,13 +91,13 @@ signalScriptCfg = {
   #'batch':'local', # ['condor','SGE','IC','local']
   #'queue':'hep.q'
   'batch':'condor', # ['condor','SGE','IC','local']
-  'queue':'tomorrow',
+  'queue':'workday',
 
 }" > config_sig_$YEAR.py
 
-python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots "
-python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode calcPhotonSyst
-python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip --doPlots"
+#python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots "
+#python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode calcPhotonSyst
+python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip $split --doPlots"
 
 
 echo " ########### End ############## "

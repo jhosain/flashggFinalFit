@@ -1,8 +1,8 @@
 #!/bin/sh
 
 year=2017
-type=syst
-InputDirectory="Opt_2017"
+type=cent #cent or syst
+InputDirectory=$year
 echo "YEAR : "$year 
 echo "Directory of your work space : "$InputDirectory  
 echo "Type of the trees (cent or syst) : "$type
@@ -65,7 +65,7 @@ vars=("Up" "Down")
 systematics=( "FNUFEE" "FNUFEB" "JEC" "JER" "MCScaleGain1EB" "MCScaleGain6EB" "MCScaleHighR9EB" "MCScaleHighR9EE" "MCScaleLowR9EB" "MCScaleLowR9EE" "MCSmearHighR9EBPhi" "MCSmearHighR9EBRho" "MCSmearHighR9EEPhi" "MCSmearHighR9EERho" "MCSmearLowR9EBPhi" "MCSmearLowR9EBRho" "MCSmearLowR9EEPhi" "MCSmearLowR9EERho" "MaterialCentralBarrel" "MaterialForward" "MaterialOuterBarrel" "MvaShift" "PUJIDShift" "ShowerShapeHighR9EB" "ShowerShapeHighR9EE" "ShowerShapeLowR9EB" "ShowerShapeLowR9EE" "SigmaEOverEShift" ) 
 
 if [ "$year" = "2018" ]; then
-    systematics+=( "JetHEM" "ExtraSystFor2018" )
+    systematics+=( "JetHEM")
 fi
 
 #Number of processes ggH, VBF, WH, ZH, ttH * SM/BSM/mixed
@@ -98,7 +98,7 @@ for ((k = 0; k < $Nbinz; k++)); do
 
 		#Executable for condor submission for each process
 		#Copying of files to condor pool
-		wrapper="Bin${bin_index}_process${p}.sh"
+		wrapper="Bin${bin_index}_process${p}_tree${type}.sh"
 
                 echo "#!/bin/bash" > $wrapper
                 echo "source /cvmfs/cms.cern.ch/cmsset_default.sh" >> $wrapper
@@ -135,7 +135,7 @@ output                = $subfile.out
 error                 = $subfile.err
 log                   = $subfile.log
 request_cpus          = 1
-+JobFlavour = "tomorrow" 
++JobFlavour = "longlunch" 
 request_memory        = 4GB
 request_disk          = 1GB
 should_transfer_files = YES

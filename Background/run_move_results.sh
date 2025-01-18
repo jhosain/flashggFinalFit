@@ -15,7 +15,11 @@ for ((i = 0 ; i < $bin; i++));
 do
 echo "############### Renaming Output Root Files for the Datacard Maker & Storing the Results to the EOS WS Directory #######"
 
+if [[ $year=RunII ]]; then 
+cp outdir_$year/CMS-HGG_multipdf_AC_Bin$i.root Trees/Opt_$year/$InputWSDirPath/Results/Models/background/
+else
 cp outdir_$year/CMS-HGG_multipdf_AC_Bin$i.root  Trees/Opt_$year/$InputWSDirPath/Results/Models/background/CMS-HGG_multipdf_AC_Bin$i\_$year.root
+fi
 
 done
 

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Prompt for year
 echo -n "YEAR: "
 read year
 
@@ -15,7 +16,6 @@ Nbiny=3 # stxsMVA bins
 Nbinz=2  # CPodd bdt bins
 
 proc=(
-
     "GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8"
     "GluGluHToGGPlusTwoJets_MM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8"
     "GluGluHToGGPlusTwoJets_CPodd_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8"
@@ -31,48 +31,86 @@ proc=(
     "ttHJetToGG_M125_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8"
     "ttHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8"
     "ttHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8"
-
 )
 
-echo "Select process(es) by entering the index/indices separated by commas:"
-for i in "${!proc[@]}"; do
-    echo "$i: ${proc[i]}"
-done
+# Initialize error log
+error_log="error_log.txt"
+> "$error_log"
 
-read -p "Enter the index/indices of the process(es): " indices
+# Expected file count
+expected_files=57
+[[ "$year" == "2018" ]] && expected_files=58
 
-# Validate the indices
-if ! [[ "$indices" =~ ^[0-9,]+$ ]]; then
-    echo "Invalid input. Please enter comma-separated numbers corresponding to the process indices."
-    exit 1
-fi
+# Function to process each process
+process_task() {
+    local index=$1
+    local selected_proc="${proc[index]}"
+    echo "Processing: $selected_proc"
 
-# Convert the comma-separated string into an array of indices
-IFS=',' read -r -a index_array <<< "$indices"
-
-# Perform the hadd operation for each selected process
-for index in "${index_array[@]}"; do
-    if ((index < 0)) || ((index >= ${#proc[@]})); then
-        echo "Invalid index: $index"
-        continue
-    fi
-
-    selected_proc="${proc[index]}"
-    echo "Selected process: $selected_proc"
-
-    # Perform the hadd operation
     Nbins=$((Nbinx * Nbiny * Nbinz))
     for ((bin_index = 0; bin_index < Nbins; bin_index++)); do
-        cd "Bin$bin_index" || exit 1
+        cd "Bin$bin_index" || { echo "Error: Unable to access Bin$bin_index" >> "../$error_log"; continue; }
 
-        # Perform hadd for the selected process
-        hadd -f "output_${selected_proc}.root" "output_${selected_proc}"*".root"
+        # Count the number of files to merge
+        file_count=$(ls -1q "output_${selected_proc}"*.root 2>/dev/null | wc -l)
+        if ((file_count == 0)); then
+            echo -e "\e[33mNo files to merge for process $selected_proc in bin $bin_index.\e[0m"
+            cd ..
+            continue
+        fi
 
-        # Echo the associated bin number
-        echo "Hadd completed for bin $bin_index"
+        echo -e "\e[34mMerging $file_count files for bin $bin_index...\e[0m"
+
+        # Remove existing output file if it exists
+        if [[ -f "output_${selected_proc}.root" ]]; then
+            echo -e "\e[33mRemoving existing output file: output_${selected_proc}.root\e[0m"
+            rm "output_${selected_proc}.root"
+        fi
+
+	if [[ -f "output_${selected_proc}_ExtraSystFor2018_Down.root" ]]; then
+            echo -e "\e[33mRemoving existing output file: output_${selected_proc}.root\e[0m"
+            rm "output_${selected_proc}_ExtraSystFor2018_Down.root"
+        fi
+
+	if [[ -f "output_${selected_proc}_ExtraSystFor2018_Up.root" ]]; then
+            echo -e "\e[33mRemoving existing output file: output_${selected_proc}.root\e[0m"
+            rm "output_${selected_proc}_ExtraSystFor2018_Up.root"
+        fi
+
+	# Perform hadd for the selected process
+        hadd -f "output_${selected_proc}.root" "output_${selected_proc}"*.root
+        if [[ $? -ne 0 ]]; then
+            echo -e "\e[31mError: hadd failed for bin $bin_index and process $selected_proc.\e[0m"
+            echo "Error: hadd failed for bin $bin_index and process $selected_proc." >> "../$error_log"
+            echo -en "\a" # Beep sound
+        else
+            echo -e "\e[32mHadd completed successfully for bin $bin_index.\e[0m"
+        fi
+
+        # Check if the total file count matches the expected
+        if ((file_count != expected_files)); then
+            echo -e "\e[33mWarning: Expected $expected_files files but found $file_count for process $selected_proc in bin $bin_index.\e[0m"
+            echo "Warning: Expected $expected_files files but found $file_count for process $selected_proc in bin $bin_index." >> "../$error_log"
+        fi
 
         cd ..
     done
+}
+
+# Run tasks in parallel by sending them to the background
+for i in {0..14}; do
+    process_task "$i" &> log_$i.txt
 done
+
+# Wait for all background processes to complete
+wait
+
+# Print all errors and warnings at the end of the run
+if [[ -s "$error_log" ]]; then
+    echo -e "\e[31mErrors and warnings encountered during the run:\e[0m"
+    cat "$error_log"
+else
+    echo -e "\e[32mNo errors or warnings encountered during the run.\e[0m"
+fi
 
 cd ../../../

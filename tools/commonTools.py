@@ -72,7 +72,7 @@ def signalFromFileName(_fileName):
     if "ZToLL" in _fileName: d = "_ZToLL"
     elif "ZToNuNu" in _fileName: d = "_ZToNuNu"
     else: d = "_ZToQQ"
-  elif "GluGlu" in _fileName: p = "jjh"
+  elif "GluGlu" in _fileName: p = "ggh"
   elif "VBF" in _fileName: p = "vbf"
   elif "WH" in _fileName: p = "wh"
   elif "ZH" in _fileName: p = "zh"
@@ -83,34 +83,7 @@ def signalFromFileName(_fileName):
   else:
     print " --> [ERROR]: cannot extract production mode from input file name. Please update tools.commonTools.signalFromFileName"
     exit(1)
-  if "minlo" in _fileName:
-    if "SM" in _fileName:
-      p += "0P"
-    elif "MM" in _fileName:
-      p += "0Mf05ph0"
-    elif "CPodd" in _fileName:
-      p += "0M"
-    else:
-      print " --> [ERROR]: cannot extract production mode from input file name. Please update tools.commonTools.signalFromFileName"
-      exit(1)
-  if "JHUGen" in _fileName:
-    if "f05ph0" in _fileName:
-      p += "0Mf05ph0"
-    elif "0M" in _fileName:
-      p += "0M"
-    elif "0PM" in _fileName:
-      p += "0P"
-    else:
-      print " --> [ERROR]: cannot extract production mode from input file name. Please update tools.commonTools.signalFromFileName"
-      exit(1)
-  if "-powheg-" in _fileName:
-    p += "0P"
-  elif "-amcatnlo-" in _fileName:
-    p += "0P"
-  else:
-    print " --> [ERROR]: cannot extract production mode from input file name. Please update tools.commonTools.signalFromFileName"
-    exit(1)
-    return p,d
+  return p,d
 
 # Function for converting STXS process to production mode in dataset name
 procToDataMap = od()
@@ -160,9 +133,6 @@ procToDatacardNameMap['HHH'] = "gghhh"
 procToDatacardNameMap['GGH2JetspseudoscalarM'] = 'jjh0M'
 procToDatacardNameMap['GGH2JetspseudoscalarMf05ph0'] = 'jjh0Mf05ph0'
 procToDatacardNameMap['GGH2Jetssm'] = 'jjh0P'
-procToDatacardNameMap['GG2HbsmM'] = 'jjh0M'
-procToDatacardNameMap['GG2HMf05ph0'] = 'jjh0Mf05ph0'
-procToDatacardNameMap['GG2Hsm'] = 'jjh0P'
 procToDatacardNameMap['VBF'] = "vbf"
 procToDatacardNameMap['VBFbsmM'] = 'vbf0M'
 procToDatacardNameMap['VBFMf05ph0'] = 'vbf0Mf05ph0'

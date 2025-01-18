@@ -52,28 +52,25 @@ fi
 echo "all the root files are copied to WS"
 
 
-python RunYields.py --inputWSDirMap $year=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS --skipZeroes True --cats "AC_Bin0,AC_Bin1,AC_Bin2,AC_Bin3,AC_Bin4,AC_Bin5,AC_Bin6,AC_Bin7,AC_Bin8,AC_Bin9,AC_Bin10,AC_Bin11,AC_Bin12,AC_Bin13,AC_Bin14,AC_Bin15,AC_Bin16,AC_Bin17,AC_Bin18,AC_Bin19,AC_Bin20,AC_Bin21,AC_Bin22,AC_Bin23,AC_Bin24,AC_Bin25,AC_Bin26,AC_Bin27,AC_Bin28,AC_Bin29" --procs auto --batch local --queue hep.q $syst --ext $year
+python RunYields.py --inputWSDirMap $year=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS --cats auto  --procs auto $syst --batch local --queue hep.q --ext $year $syst
 
-#python RunYields.py --inputWSDirMap $year=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS --cats auto  --procs auto $syst --batch local --queue hep.q 
-
-#python makeDatacard.py --years $year $syst --ext $year --output Datacard_$year
 python makeDatacard.py --years $year $syst --ext $year --output Datacard_$year 
 
 if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Results ]; then
 mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Results 
 fi
 
-cp Datacard*.txt Trees/Opt_$year/$InputTreePathdirectory/Results/
+cp Datacard_$year.txt Trees/Opt_$year/$InputTreePathdirectory/Results/
 
 if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output ]; then
 mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output                                                                
 fi
 
-if [ -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_* ]; then
-rm -rf Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_*
+if [ -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_$year ]; then
+rm -rf Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_$year
 fi
 
-cp -rf yields_* Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/
+cp -rf yields_$year Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/
 
 
 echo " ########### End ############## "

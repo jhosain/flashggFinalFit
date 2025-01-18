@@ -1,0 +1,63 @@
+#!/bin/bash
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+cd /afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src ; eval $(scram runtime -sh); cd -
+cp /afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Binning/TMVAClassification__BDT_Xgrad_multiclass_CPodd_threeclass_VBF.weights.xml .
+cp /afs/cern.ch/user/j/jhossain/Hgg_AC_Analysis/Combine/Combine_V8/CMSSW_10_2_13/src/flashggFinalFit/Binning/TreeMakerForWorkspace_multiclassBDT_3D_SYS.C .
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"FNUFEE","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"FNUFEE","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"FNUFEB","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"FNUFEB","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"JEC","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"JEC","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"JER","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"JER","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleGain1EB","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleGain1EB","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleGain6EB","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleGain6EB","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleHighR9EB","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleHighR9EB","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleHighR9EE","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleHighR9EE","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleLowR9EB","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleLowR9EB","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleLowR9EE","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCScaleLowR9EE","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearHighR9EBPhi","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearHighR9EBPhi","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearHighR9EBRho","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearHighR9EBRho","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearHighR9EEPhi","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearHighR9EEPhi","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearHighR9EERho","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearHighR9EERho","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearLowR9EBPhi","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearLowR9EBPhi","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearLowR9EBRho","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearLowR9EBRho","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearLowR9EEPhi","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearLowR9EEPhi","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearLowR9EERho","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MCSmearLowR9EERho","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MaterialCentralBarrel","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MaterialCentralBarrel","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MaterialForward","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MaterialForward","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MaterialOuterBarrel","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MaterialOuterBarrel","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MvaShift","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"MvaShift","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"PUJIDShift","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"PUJIDShift","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"ShowerShapeHighR9EB","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"ShowerShapeHighR9EB","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"ShowerShapeHighR9EE","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"ShowerShapeHighR9EE","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"ShowerShapeLowR9EB","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"ShowerShapeLowR9EB","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"ShowerShapeLowR9EE","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"ShowerShapeLowR9EE","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"SigmaEOverEShift","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"SigmaEOverEShift","Down","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"JetHEM","Up","2018")' &
+root -l -b -q 'TreeMakerForWorkspace_multiclassBDT_3D_SYS.C(4,2,1,2,27,"JetHEM","Down","2018")' &

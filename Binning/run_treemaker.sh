@@ -116,6 +116,7 @@ for ((k = 0; k < $Nbinz; k++)); do
 		if  [ "$type" = "cent" ]; then
 
 		    #Central tree loop
+		    cp ../TMVAClassification__BDT_Xgrad_multiclass_CPodd_threeclass_VBF.weights.xml .
 		    root -l -b -q TreeMakerForWorkspace_multiclassBDT_3D_Central.C\($i,$j,$k,$p,$bin_index,\"$year\"\) &> run$bin_index$p.log &  
 		    echo "Processing TreeMakerForWorkspace_multiclassBDT_3D_Central.C($i,$j,$k,$p,$bin_index,$year)"
 
@@ -124,7 +125,8 @@ for ((k = 0; k < $Nbinz; k++)); do
 		    #Systematic tree loop
 		    for var in "${vars[@]}"; do
 			for systematic in "${systematics[@]}"; do
-			    echo "Running" $systematic " " $var "variation" 
+			    echo "Running" $systematic " " $var "variation"
+			    cp ../TMVAClassification__BDT_Xgrad_multiclass_CPodd_threeclass_VBF.weights.xml .
     			    root -l -b -q TreeMakerForWorkspace_multiclassBDT_3D_SYS.C\($i,$j,$k,$p,$bin_index,\"$systematic\",\"$var\",\"$year\"\) &> run_higbkg$bin_index$p$systematic$var.log & #change to name of systematic tree maker
 			    echo "Processing TreeMakerForWorkspace_multiclassBDT_3D_SYS.C($i,$j,$k,$p,$bin_index,\"$systematic\",\"$var\",\"$year\")"
 

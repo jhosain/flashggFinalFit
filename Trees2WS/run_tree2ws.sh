@@ -5,6 +5,7 @@
 YEAR=-753
 STEP=0
 DIR=-753
+TYPE=-753
 
 usage(){
     echo "The script runs background scripts:"
@@ -40,7 +41,6 @@ done
 
 echo "Input directory : $DIR "
 
-
 QUEUE=""
 if [[ $I ]]; then
     QUEUE=" --batch local "
@@ -50,7 +50,9 @@ fi
 
 if [[ $STEP == "test" ]]; then
 
-python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0P --year ${YEAR} --doSystematics True
+python trees2ws.py  --inputConfig config.py  --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root --productionMode jjh0P --year ${YEAR} 
+
+#python RunWSScripts.py --inputConfig config.py --inputDir Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR} --mode trees2ws --modeOpts "--inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8.root" --year ${YEAR} --ext ${YEAR} ${QUEUE} 
 
 elif [[ $STEP == "mc-ggh" ]]; then
 
@@ -90,7 +92,7 @@ elif [[ $STEP == "data" ]]; then
     python trees2ws_data.py  --inputConfig config.py --inputTreeFile Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/output_Data.root 
 
     cp Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/ws/output_Data.root Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR}/ws/allData.root
-    #python RunWSScripts.py --inputConfig config.py --inputDir Trees/Opt_${YEAR}/${DIR}/Trees_${YEAR} --mode trees2ws_data --year ${YEAR} --ext ${YEAR} ${QUEUE}
+    #python RunWSScripts.py --inputConfig config.py --inputDir Trees/Opt_${YEAR}/${DIR}/Trees2WS_${YEAR} --mode trees2ws_data --year ${YEAR} --ext ${YEAR} ${QUEUE}
 else
     echo "Step $STEP is not one among mc, data. Exiting."
 fi

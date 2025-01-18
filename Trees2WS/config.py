@@ -4,7 +4,7 @@ trees2wsCfg = {
                                                                                                                                  
   # Name of RooDirectory storing input tree                                                                                      
 
-  'inputTreeDir':'tagsDumper/trees',                                                                                                                                 
+  'inputTreeDir':'tagsDumper/trees', 
 
   # Variables to be added to dataframe: use wildcard * for common strings                                                        
   'mainVars':["CMS_hgg_mass","weight","dZ","*sigma","*Weight"], # Vars to add to nominal RooDatasets
@@ -12,7 +12,7 @@ trees2wsCfg = {
   'stxsVar':'', # Var for STXS splitting: if using option doSTXSSplitting                                             
   'notagVars':["weight","*sigma"], # Vars to add to NOTAG RooDataset                                                        
   'systematicsVars':["CMS_hgg_mass","weight"], # Variables to add to sytematic RooDataHists                                
-    'theoryWeightContainers':{}, # Theory weights to add to nominal + NOTAG RooDtasets, value corresponds to number of weights (0-N)                                                                              
+  'theoryWeightContainers':{}, # Theory weights to add to nominal + NOTAG RooDtasets, value corresponds to number of weights (0-N)                                                                              
 
   # List of systematics: use string YEAR for year-dependent systematics
   'systematics':['FNUFEB', 'FNUFEE', 'JEC', 'JER', 'MCScaleGain1EB', 'MCScaleGain6EB', 'MCScaleHighR9EB', 'MCScaleHighR9EE', 'MCScaleLowR9EB', 'MCScaleLowR9EE', 'MCSmearHighR9EBPhi', 'MCSmearHighR9EBRho', 'MCSmearHighR9EEPhi', 'MCSmearHighR9EERho', 'MCSmearLowR9EBPhi', 'MCSmearLowR9EBRho', 'MCSmearLowR9EEPhi', 'MCSmearLowR9EERho', 'MaterialCentralBarrel', 'MaterialForward', 'MaterialOuterBarrel', 'MvaShift', 'PUJIDShift', 'ShowerShapeHighR9EB', 'ShowerShapeHighR9EE', 'ShowerShapeLowR9EB', 'ShowerShapeLowR9EE', 'SigmaEOverEShift'],

@@ -17,8 +17,10 @@ echo " @@@@@@@################## Finished the whole process  @@@@@@@@@@@########
 
 echo " ############### Renaming Output Root Files for the Datacard Maker & Storing the Results to the EOS WS Directory ############ "
 
-cp outdir_packaged_$YEAR/*.root Trees/Opt_$YEAR/$InputWSDirPath/Results/Models/signal/
-
+for ((i = 0; i < 30; i++));
+do
+cp outdir_packaged_$YEAR/CMS-HGG_sigfit_packaged_$YEAR\_AC_Bin$i.root Trees/Opt_$YEAR/$InputWSDirPath/Results/Models/signal/CMS-HGG_sigfit_packaged_AC_Bin$i\_$YEAR.root
+done
 
 echo " ############### Moving output ############## "
 

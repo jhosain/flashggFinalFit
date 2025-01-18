@@ -36,7 +36,7 @@ with open(opt.inputDatacard,'r') as f:
 procs = []
 cats = []
 for c in catLine.split(" "):
-  if "ch" in c: cats.append(c)
+  if "AC_Bin" in c: cats.append(c)
 for p in procLine.split(" "):
   if ("hgg" in p)|("bkg" in p): procs.append(p)
 
