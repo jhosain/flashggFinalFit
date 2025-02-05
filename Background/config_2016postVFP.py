@@ -12,7 +12,7 @@ backgroundScriptCfg = {
 
   # Job submission options                                                                                                        
   'batch':'condor', # [condor,SGE,IC,local]                                                                                        
-  'queue':'longlunch' # for condor e.g. microcentury for local e.g. hep.q                                                                  
+  'queue':'espresso' # for condor e.g. microcentury for local e.g. hep.q                                                                  
   #'batch':'local', # [condor,SGE,IC,local]                                                                                                   
   #'queue':'hep.q' # for condor e.g. microcentury               
 

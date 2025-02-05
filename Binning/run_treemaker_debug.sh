@@ -1,6 +1,6 @@
 #!/bin/sh
 
-year=2018
+year=2016PreVFP
 type=syst #cent or syst
 InputDirectory=$year
 echo "YEAR : "$year 
@@ -47,7 +47,7 @@ if [ "$type" = "syst" ]; then
     last_p=15
 fi
 
-bin_index=28
+bin_index=0
 
 
 #Loop over all 3 categories
@@ -68,7 +68,7 @@ for ((k = 0; k < $Nbinz; k++)); do
 	    cp ../TreeMakerForWorkspace_multiclassBDT_3D_SYS.C .
 
 	    #Process loop
-	    for ((p =3; p < 4; p++)); do
+	    for ((p =10; p < 12; p++)); do
 
 		#Executable for condor submission for each process
 		#Copying of files to condor pool
@@ -120,7 +120,7 @@ EOF
 		condor_submit $subfile
 	    done #process loop
 	    cd ..
-       	    #((bin_index++))
+       	    ((bin_index++))
 
 	done #binx
     done #biny

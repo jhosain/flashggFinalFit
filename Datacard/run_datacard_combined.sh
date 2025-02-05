@@ -33,7 +33,7 @@ fi
 
 python RunYields.py --inputWSDirMap 2016preVFP=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS_2016preVFP,2016postVFP=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS_2016postVFP,2017=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS_2017,2018=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS_2018 --cats auto  --procs auto --mergeYears $syst --batch local --queue hep.q --ext $year $syst --ignore-warnings
 
-python makeDatacard.py --years 2016preVFP,2016postVFP,2017,2018 $syst --ext $year --output Datacard_woint_$year 
+python makeDatacard.py --years 2016preVFP,2016postVFP,2017,2018 $syst --ext $year --output Datacard_$year 
 
 if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Results ]; then
 mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Results 

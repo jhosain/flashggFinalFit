@@ -5,7 +5,7 @@ signalScriptCfg = {
 
   # Setup
   'inputWSDir':'Trees/Opt_2017/2017/Trees2WS_2017/WS/',
-  'procs':'WHbsmM,WHsm,WHMf05ph0,ZHbsmM,ZHsm,ZHMf05ph0,TTHsm', # if auto: inferred automatically from filenames
+  'procs':'GG2HbsmM,GG2Hsm,GG2HMf05ph0,VBFbsmM,VBFsm,VBFMf05ph0', # if auto: inferred automatically from filenames
   'cats':'auto', # if auto: inferred automatically from (0) workspace
   'ext': '%s'%_year,
   'analysis':'AC', # To specify which replacement dataset mapping (defined in ./python/replacementMap.py)

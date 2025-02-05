@@ -1,0 +1,79 @@
+#!bin/sh
+
+# Define colors using ANSI escape codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+echo -n "YEAR :"
+read year
+
+echo -n "Name of the directory of your workspace:"
+read InputTreePathdirectory
+
+echo -n -e "${RED} doSystematics --> YES or NO:  ${NC}"
+read flag
+echo
+
+# Checking if the variable is False
+if [ "$flag" = "NO" ]; then
+    syst=" "
+    echo "Not doing Systematics "
+else
+    syst="--doSystematics"
+    echo "Doing Systematics"
+fi
+
+
+if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS ]; then
+        mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        echo "WS directory is created"
+fi
+
+        cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws/allData.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_GG2Hsm/output_GluGluHToGGPlusTwoJets_SM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8_GG2Hsm.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_GG2HMf05ph0/output_GluGluHToGGPlusTwoJets_MM_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8_GG2HMf05ph0.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_GG2HbsmM/output_GluGluHToGGPlusTwoJets_CPodd_M125_TuneCP5_13TeV-amcatnlopowheg-minlo-pythia8_GG2HbsmM.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        
+	cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_VBFbsmM/output_VBFHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_VBFbsmM.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_VBFMf05ph0/output_VBFHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_VBFMf05ph0.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_VBFsm/output_VBFHToGG_M125_TuneCP5_13TeV-amcatnlo-pythia8_VBFsm.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+	
+        #cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_WHbsmM/output_WHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_WHbsmM.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        #cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_WHMf05ph0/output_WHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_WHMf05ph0.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        #cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_WHsm/output_WHiggs0PMToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_WHsm.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        
+	#cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_ZHbsmM/output_ZHiggs0MToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_ZHbsmM.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        #cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_ZHMf05ph0/output_ZHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_ZHMf05ph0.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        #cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_ZHsm/output_ZH_HToGG_ZToAll_M125_TuneCP5_13TeV-powheg-pythia8_ZHsm.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        
+	#cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_TTHbsmM/output_ttHiggs0PMToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_TTHbsmM.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        #cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_TTHMf05ph0/output_ttHiggs0Mf05ph0ToGG_M125_TuneCP5_13TeV-JHUGenV7011-pythia8_TTHMf05ph0.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+        #cp Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/ws_TTHsm/output_ttHJetToGG_M125_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8_TTHsm.root Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS
+
+echo "all the root files are copied to WS"
+
+
+python RunYields.py --inputWSDirMap $year=Trees/Opt_$year/$InputTreePathdirectory/Trees2WS_$year/WS --cats auto  --procs auto --batch local --queue hep.q --ext $year  --ignore-warnings
+
+python makeDatacard.py --years $year --ext $year --output Datacard_$year 
+
+if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Results ]; then
+mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Results 
+fi
+
+cp Datacard_$year.txt Trees/Opt_$year/$InputTreePathdirectory/Results/
+
+if [ ! -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output ]; then
+mkdir -p Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output                                                                
+fi
+
+if [ -d Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_$year ]; then
+rm -rf Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/yields_$year
+fi
+
+cp -rf yields_$year Trees/Opt_$year/$InputTreePathdirectory/Datacard_Output/
+
+
+echo " ########### End ############## "

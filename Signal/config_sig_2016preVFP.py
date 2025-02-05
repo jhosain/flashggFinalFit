@@ -5,8 +5,7 @@ signalScriptCfg = {
 
   # Setup
   'inputWSDir':'Trees/Opt_2016preVFP/2016PreVFP/Trees2WS_2016preVFP/WS/',
-  #'procs':'WHbsmM,WHsm,WHMf05ph0,ZHbsmM,ZHsm,ZHMf05ph0,TTHsm', # if auto: inferred automatically from filenames
-  'procs': 'ZHMf05ph0',
+  'procs':'WHbsmM,WHsm,WHMf05ph0,ZHbsmM,ZHsm,ZHMf05ph0,TTHsm', # if auto: inferred automatically from filenames
   'cats':'auto', # if auto: inferred automatically from (0) workspace
   'ext': '%s'%_year,
   'analysis':'AC', # To specify which replacement dataset mapping (defined in ./python/replacementMap.py)
@@ -22,9 +21,9 @@ signalScriptCfg = {
   'smears':'HighR9EBPhi,HighR9EBRho,HighR9EEPhi,HighR9EERho,LowR9EBPhi,LowR9EBRho,LowR9EEPhi,LowR9EERho', # separate nuisance per year
 
   # Job submission options
-  'batch':'local', # ['condor','SGE','IC','local']
-  'queue':'hep.q'
-  #'batch':'condor', # ['condor','SGE','IC','local']
-  #'queue':'workday',
+  #'batch':'local', # ['condor','SGE','IC','local']
+  #'queue':'hep.q'
+  'batch':'condor', # ['condor','SGE','IC','local']
+  'queue':'workday',
 
 }

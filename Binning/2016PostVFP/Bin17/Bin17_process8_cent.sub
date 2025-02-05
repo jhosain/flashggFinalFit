@@ -1,0 +1,13 @@
+universe              = vanilla
+executable            = Bin17_process8_treecent.sh
+output                = Bin17_process8_cent.sub.out
+error                 = Bin17_process8_cent.sub.err
+log                   = Bin17_process8_cent.sub.log
+request_cpus          = 1
++JobFlavour = "longlunch"            
+request_memory        = 4GB
+request_disk          = 1GB
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+MY.SingularityImage     = "/cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-cat/cmssw-lxplus/cmssw-el7-lxplus:latest/"
+queue 1                                                                                                                                                                                                   

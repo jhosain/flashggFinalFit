@@ -1,6 +1,6 @@
 #!/bin/sh
 
-year=2017
+year=2016PostVFP
 type=cent #cent or syst
 InputDirectory=$year
 echo "YEAR : "$year 
@@ -128,6 +128,7 @@ for ((k = 0; k < $Nbinz; k++)); do
 		fi
 		    # Create Condor submission file: my singularity image needed on el7 
 		    # Use espresso for central tree, tomorrow for systematic variations
+		    # espresso for cent and workday for syst
                 cat > $subfile << EOF
 universe              = vanilla
 executable            = $wrapper
@@ -135,7 +136,7 @@ output                = $subfile.out
 error                 = $subfile.err
 log                   = $subfile.log
 request_cpus          = 1
-+JobFlavour = "longlunch" 
++JobFlavour = "longlunch"            
 request_memory        = 4GB
 request_disk          = 1GB
 should_transfer_files = YES

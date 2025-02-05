@@ -98,7 +98,7 @@ signalScriptCfg = {
 
 #python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots "
 #python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode calcPhotonSyst
-python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip $split --doPlots"
+python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip --skipVertexScenarioSplit True --doPlots"
 
 
 echo " ########### End ############## "

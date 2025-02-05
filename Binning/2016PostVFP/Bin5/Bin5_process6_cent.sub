@@ -1,0 +1,13 @@
+universe              = vanilla
+executable            = Bin5_process6_treecent.sh
+output                = Bin5_process6_cent.sub.out
+error                 = Bin5_process6_cent.sub.err
+log                   = Bin5_process6_cent.sub.log
+request_cpus          = 1
++JobFlavour = "longlunch"            
+request_memory        = 4GB
+request_disk          = 1GB
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+MY.SingularityImage     = "/cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-cat/cmssw-lxplus/cmssw-el7-lxplus:latest/"
+queue 1                                                                                                                                                                                                   

@@ -294,7 +294,7 @@ globalReplacementMap["AC"]["catRVMap"]["AC_Bin24"] = "AC_Bin7"
 globalReplacementMap["AC"]["catRVMap"]["AC_Bin25"] = "AC_Bin7"
 globalReplacementMap["AC"]["catRVMap"]["AC_Bin26"] = "AC_Bin7"
 globalReplacementMap["AC"]["catRVMap"]["AC_Bin27"] = "AC_Bin7"
-globalReplacementMap["AC"]["catRVMap"]["AC_Bin27"] = "AC_Bin7"
+globalReplacementMap["AC"]["catRVMap"]["AC_Bin28"] = "AC_Bin7"
 globalReplacementMap["AC"]["catRVMap"]["AC_Bin29"] = "AC_Bin7"
 
 

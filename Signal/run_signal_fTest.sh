@@ -98,6 +98,7 @@ python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --mod
 python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode calcPhotonSyst
 #python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip $split --doPlots"
 
+# --skipWV
 
 echo " ########### End ############## "
 
