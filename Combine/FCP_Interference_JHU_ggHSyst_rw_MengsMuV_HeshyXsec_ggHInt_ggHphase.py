@@ -4,7 +4,7 @@ import re
 # Constraints on Hgg couplings, individual fit on POI, see Section VI.A. in PHYS.REV.D104,052004(2021) for notation.
 # Custodial symmetry assumed, ai_ZZ suffix dropped -> ai
 
-class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(PhysicsModel):
+class FCP_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(PhysicsModel):
     def doParametersOfInterest(self):
         #Create POI and other parameters, and define the POI set.
         # Generator specific (JHUGen) values of inclusive xsec H->ZZ>4l taken from https://twiki.cern.ch/twiki/bin/view/CMS/Run2MCProductionforHiggsProperties#JHUGen_H_2jets_Production_JHUGen
@@ -31,20 +31,30 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
         }
 
         # Individual fit with 2 POIs, fa3_ggH and mu_ggH, other params fa3 and muV profiled in fit, fai set to 0 for i !=3
-        self.modelBuilder.doVar("fa3[0.0,-1.0,1.0]");            # := a3**2 *sigma3_HZZ / {a3**2 *sigma3_HZZ + a1**2 *sigma1_HZZ}     
-        self.modelBuilder.doVar("fa3_ggH[0.0,-1.0,1.0]");        # := (a3_gg)**2 /{ (a3_gg)**2 + (a2_gg)**2 }
+        self.modelBuilder.doVar("fa3[0.0,-1.0,1.0]");            # := a3**2 *sigma3_HZZ / {a3**2 *sigma3_HZZ + a1**2 *sigma1_HZZ}        
+        self.modelBuilder.doVar("fCP_Htt[0.0,-1.0,1.0]");          # New parameter f_CP
+
         self.modelBuilder.doVar("mu_ggH[1.0,0,10]");             # := sigma{ggH/ttH,obs}     /sigma_{SM,exp} applicable for both ggH and ttH production mode
         self.modelBuilder.doVar("muV[1.0,0.0,10.0]");            # := sigma{(VBF+VH),obs}/sigma_{SM,exp}
-        self.modelBuilder.doSet("POI","fa3,fa3_ggH,muV,mu_ggH")
+    
 
+        self.modelBuilder.doSet("POI", "fa3,fCP_Htt,muV,mu_ggH")
+        
         # Derive couplings from fai using normalization sum(fai)=1, and ratio of couplings ai/aj = sqrt(fai/faj*sigmai/sigmaj) * phase
+
+        # Implementing the relation for fCP_Htt according to the formula
+       
+        self.modelBuilder.doVar('expr::fa3_ggH("1/(1 + (1/2.38)*(1/abs(@0) - 1))", fCP_Htt)')
+
         # Since all couplings assumed to be real, phase = +/- 1
         self.modelBuilder.doVar('expr::a1("sqrt(1-abs(@0))", fa3)')
         self.modelBuilder.doVar('expr::a3("(@0>0 ? 1 : -1) * sqrt(abs(@0)*{sigma1_HZZ}/{sigma3_HZZ})", fa3)'.format(**xsecs))
 
         self.modelBuilder.doVar('expr::a2_ggH("sqrt(1-abs(@0))", fa3_ggH)')
+
         self.modelBuilder.doVar('expr::a3_ggH("(@0>0 ? -1 : 1) * sqrt(abs(@0))", fa3_ggH)'.format(**xsecs)) # sigma2_ggH/sigma3_ggH = 1
 
+        
         # Convenience parameter muV_c = prefactor* muV. Prefactor reabsorbed in overall normalization, see from eq. 23, using Taylor expansion for fa1~1(SM case) and fa3~0
         self.modelBuilder.factory_('expr::muVc("@1/(1+30*abs(@0))", fa3,muV)'.format(**xsecs))  
 
@@ -65,42 +75,41 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
         self.modelBuilder.factory_('expr::intCoupling_ZH("@0*@1*@2*sqrt({sigma3_ZH}/{sigma1_ZH})*{sigmaa1a3int_ZH}/{sigma1_ZH}", muVc,a1,a3)'.format(**xsecs))
         self.modelBuilder.factory_('expr::intCoupling_WH("@0*@1*@2*sqrt({sigma3_WH}/{sigma1_WH})*{sigmaa1a3int_WH}/{sigma1_WH}", muVc,a1,a3)'.format(**xsecs))
 
-
+        
     def getYieldScale(self,bin,process):
 
         years = ["2016preVFP","2016postVFP","2017","2018"]
-        scale = '1'
-        if process in ["GG2Hsm_%s_hgg"%y for y in years]:          
-            scale = 'smCoupling_ggH'
+        if process in ["GG2Hsm_%s_hgg"%y for y in years]:
+            return 'smCoupling_ggH'
         if process in ["GG2HbsmM_%s_hgg"%y for y in years]:
-            scale = 'bsmCoupling_ggH'
+            return 'bsmCoupling_ggH'
         if process in ["GG2HMf05ph0_%s_hgg"%y for y in years]:
-            scale = 'intCoupling_ggH'
+            return 'intCoupling_ggH'
         if process in ["vbf0P_%s_hgg"%y for y in years]:
-            scale = 'smCoupling_VBF'
+            return 'smCoupling_VBF'
         if process in ["vbf0M_%s_hgg"%y for y in years]:
-            scale = 'bsmCoupling_VBF'
+            return 'bsmCoupling_VBF'
         if process in ["vbf0Mf05ph0_%s_hgg"%y for y in years]:
-            scale = 'intCoupling_VBF'
+            return 'intCoupling_VBF'
         if process in ["wh0P_%s_hgg"%y for y in years]:
-            scale = 'smCoupling_WH'
+            return 'smCoupling_WH'
         if process in ["wh0M_%s_hgg"%y for y in years]:
-            scale = 'bsmCoupling_WH'
+            return 'bsmCoupling_WH'
         if process in ["wh0Mf05ph0_%s_hgg"%y for y in years]:
-            scale = 'intCoupling_WH'
+            return 'intCoupling_WH'
         if process in ["zh0P_%s_hgg"%y for y in years]:
-            scale = 'smCoupling_ZH'
+            return 'smCoupling_ZH'
         if process in ["zh0M_%s_hgg"%y for y in years]:
-            scale = 'bsmCoupling_ZH'
+            return 'bsmCoupling_ZH'
         if process in ["zh0Mf05ph0_%s_hgg"%y for y in years]:
-            scale = 'intCoupling_ZH'
+            return 'intCoupling_ZH'
         if process in ["tth0P_%s_hgg"%y for y in years]:
-            scale = 'mu_ggH'
-        print("Bin/Process %s/%s will get scaled by %s" % (bin, process, scale))
-        return scale 
-        
+            return 'mu_ggH'
+        return 1
 
-FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase = FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase()
+
+
+FCP_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase = FCP_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase()
 
 
 
