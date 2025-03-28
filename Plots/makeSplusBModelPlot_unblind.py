@@ -40,7 +40,6 @@ def get_options():
   parser.add_option("--skipIndividualCatPlots", dest="skipIndividualCatPlots", default=False, action="store_true", help="Skip plotting of individual categories")
   parser.add_option("--doSumCategories", dest="doSumCategories", default=False, action="store_true", help="Do plot summing the categories being processed")
   parser.add_option("--doCatWeights", dest="doCatWeights", default=False, action="store_true", help="Do S/S+B weighted plot")
-  parser.add_option("--doYield", dest="doYield", default=False, action="store_true", help="Save Beff and Seff")
   parser.add_option("--loadWeights", dest="loadWeights", default='', help="JSON file storing category weights")
   parser.add_option("--saveWeights", dest="saveWeights", default=False, action='store_true', help="Save category weights to json file")
   parser.add_option("--parameterMap", dest="parameterMap", default=None, help="Comma separated pairs of model parameters:values,...")
@@ -53,30 +52,15 @@ def get_options():
   parser.add_option("--translatePOIs", dest="translatePOIs", default=None, help="JSON to store poi translations")
   parser.add_option("--problematicCats", dest="problematicCats", default='', help='Problematic analysis categories to skip when processing all')
   parser.add_option("--doHHMjjFix", dest="doHHMjjFix", default=False, action="store_true", help="Do fix for HH analysis where some cats have different Mjj var")
-  parser.add_option("--doBSM", dest="doBSM", default=False, action="store_true", help="Do BSM analysys")
-
-  parser.add_option("--doSM", dest="doSM", default=False, action="store_true", help="Do SM analysys")
-
-  parser.add_option("--pdir", dest="pdir", default="./", help="Directory where to put the final plots")
   parser.add_option("--toydir", dest="toydir", default="./", help="Directory where the toys are")
-
   return parser.parse_args()
 (opt,args) = get_options()
 
-print(opt.saveWeights)
 # Open WS
 if opt.inputWSFile is not None:
   print " --> Opening workspace: %s"%opt.inputWSFile
   f = ROOT.TFile(opt.inputWSFile)
   w = f.Get("w")
- 
-  if opt.doSM:
-    var = w.var("fa3_ggH")
-    var.setVal(0.)
-  if opt.doBSM:
-    var = w.var("fa3_ggH")
-    var.setVal(0.5)
-
   # If required loadSnapshot
   if opt.loadSnapshot is not None: 
     print "    * Loading snapshot: %s"%opt.loadSnapshot
@@ -102,6 +86,7 @@ xvar_arglist, xvar_argset = ROOT.RooArgList(xvar), ROOT.RooArgSet(xvar)
 wxvar_arglist, wxvar_argset = ROOT.RooArgList(xvar,weight), ROOT.RooArgSet(xvar,weight)
 chan = w.cat("CMS_channel")
 
+
 # Define HH fix variable
 catsfix = ['DoubleHTag_10_13TeV','DoubleHTag_11_13TeV']
 if opt.doHHMjjFix:
@@ -121,10 +106,8 @@ if opt.doHHMjjFix:
     print "     * [ERROR] pdfNBins for Mjj_90GeV is not an integer. Please use appropriate opt.pdfNBins" 
     leave()
 
-
 # Extract the total SB/B models
 sb_model, b_model = w.pdf("model_s"), w.pdf("model_b")
-
 
 # Extract dataset for opt.cats
 d_obs = w.data("data_obs")
@@ -142,6 +125,7 @@ for cidx in range(chan.numTypes()):
 # Define cateogries
 cats = data_cats.keys()
 
+
 # Load cat weights from json file if specified
 if opt.loadWeights != '':
   print " --> Loading category S/S+B weights from json file: %s"%opt.loadWeights
@@ -154,14 +138,6 @@ if opt.loadWeights != '':
 else:
   # Loop over categories to extract weights
   catsWeights = {}
-  catsBeff = {}
-  catsSeff = {}
-  catsDataEff = {}
-  catsDataRatioEff = {}
-  cateffSigma = {}
-
-  catErrDataWeight = {}
-  catsDataWeightRatio = {}
   # If option doCatWeights: first extract S/S+B weights for each category
   if opt.doCatWeights:
     print " --> Extracting S/S+B weights for categories"
@@ -192,18 +168,12 @@ else:
       effSigma = getEffSigma(h_spdf_tmp) 
       # Calculate S/B yields in +-1sigma of peak
       rangeName = "effSigma_%s"%c
-      print(w.var("MH").getVal()-effSigma,w.var("MH").getVal()+effSigma)
-      xvar.setRange(rangeName,w.var("MH").getVal()-effSigma,w.var("MH").getVal()+effSigma) #definizione intervallo di integrazione
-
-      Beff = bpdf.createIntegral(_xvar_argset,_xvar_argset,rangeName).getVal()*B #moltiplica l'integrale per B 
-      catsBeff[c] = Beff
-  
-      Seff = math.erf(1./math.sqrt(2))*S #integrale di una caussiana tra +,- una sigma
-      catsSeff[c] = Seff
+      xvar.setRange(rangeName,w.var("MH").getVal()-effSigma,w.var("MH").getVal()+effSigma)
+      Beff = bpdf.createIntegral(_xvar_argset,_xvar_argset,rangeName).getVal()*B
+      Seff = math.erf(1./math.sqrt(2))*S
       # Caclualte weight for cat
       wcat = Seff/(Seff+Beff)
       catsWeights[c] = wcat
-      cateffSigma[c]=effSigma
       print "   * %s: S = %.2f, B = %.2f --> effSigma = %.2f, S_eff = %.2f, B_eff = %.2f"%(c,S,B,effSigma,Seff,Beff)
       Stot += S
       Swtot += S*wcat
@@ -214,25 +184,18 @@ else:
       print "      * Saving S/S+B weights to json file: ./jsons/catsWeights_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0])
       if not os.path.isdir("./jsons"): os.system("mkdir ./jsons")
       with open("./jsons/catsWeights_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsWeights,jsonfile)
-    if opt.doYield:
-      print "      * Saving Seff,Beff  to json file: ./jsons/catsSeff_sospb%s_%s.json and ./jsons/catsBeff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0],opt.ext,opt.xvar.split(",")[0])
-      if not os.path.isdir("./jsons"): os.system("mkdir ./jsons")
-      with open("./jsons/catsBeff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsBeff,jsonfile)
-      with open("./jsons/catsSeff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsSeff,jsonfile)
 
 # Fill datasets
 print " --> Extracting datasets"
 # Loop over bins and add entry for each "weight" to cat datasets 
-
-for i in range(d_obs.numEntries()):#24320
+for i in range(d_obs.numEntries()):
   p = d_obs.get(i)
   if(opt.cats!='all')&(p.getCatLabel("CMS_channel") not in opt.cats.split(",")): continue
   nent = int(d_obs.weight())
-  #print('nent',nent)
   for ient in range(nent): data_cats[p.getCatLabel("CMS_channel")].add(p)
   if opt.doCatWeights: 
     for ient in range(nent): wdata_cats[p.getCatLabel("CMS_channel")].add(p,catsWeights[p.getCatLabel("CMS_channel")])
-   
+
 # if opt.doBands: make dataframe storing toy yields in each bin
 if opt.doBands:
   if opt.loadToyYields != '':
@@ -251,8 +214,10 @@ if opt.doBands:
     # Create dataframe
     df_bands = pd.DataFrame(columns=_columns)
     # Loop over toys file and add row for each toy dataset
+    #toyFiles = glob.glob("./SplusBModels%s/toys/toy_*.root"%opt.ext)
     toyFiles = glob.glob("%s/toy_*.root"%(opt.toydir))
     if len(toyFiles) == 0:
+      #print "     * [ERROR] No toys files of form ./SplusBModels%s/toys/toy_*.root. Skipping bands"%opt.ext
       print "     * [ERROR] No toys files of form %s/toy_*.root"%(opt.toydir)
       opt.doBands = False
     else:
@@ -260,6 +225,9 @@ if opt.doBands:
         print " --> Processing toy (%g/%g) ::: %s"%(tidx,len(toyFiles),toyFiles[tidx])
 	ftoy = ROOT.TFile(toyFiles[tidx])
 	toy = ftoy.Get("toys/toy_asimov")
+        #debug -->
+        #print("Available variables in dataset:")
+        #toy.Print("v") 
         # Fla for vetoing toy
         vetoToy = False
 	# Save bin contents in dict
@@ -274,13 +242,17 @@ if opt.doBands:
 	# Loop over cats
 	for cidx in range(chan.numTypes()):
 	  chan.setIndex(cidx)
+          # debug -->
+          #chan.Print("v") 
 	  c = chan.getLabel()
 	  if( opt.cats == 'all' )|( c in opt.cats.split(",") ):
             if( opt.doHHMjjFix )&( c in catsfix ): 
               _xvar, _xvar_arglist = xvarfix, xvarfix_arglist
             else:
               _xvar, _xvar_arglist = xvar, xvar_arglist
-	    dtoy = toy.reduce("CMS_channel==CMS_channel::%g"%(cidx))
+	    #dtoy = toy.reduce("CMS_channel==CMS_channel::%g"%(cidx))
+            vars_to_keep = ROOT.RooArgSet(toy.get().find("CMS_hgg_mass"), toy.get().find("CMS_channel"))
+            dtoy = toy.reduce(vars_to_keep,"CMS_channel==%g"%(cidx))          
 	    htoy = _xvar.createHistogram("h_%s"%c,ROOT.RooFit.Binning(opt.nBins,xvar.getMin(),xvar.getMax()))
 	    dtoy.fillHistogram(htoy,_xvar_arglist)
 	    for ibin in range(1,htoy.GetNbinsX()+1): 
@@ -303,8 +275,8 @@ if opt.doBands:
         else: print "   --> Toy veto: zero entries in first bin"
       # Savin toy yields dataframe to pickle file
       if opt.saveToyYields:
-        print "      * Saving toy yields to: ./SplusBModels%s/toyYields_%s.pkl"%(opt.ext,opt.xvar.split(",")[0])
-        with open("./SplusBModels%s/toyYields_%s.pkl"%(opt.ext,opt.xvar.split(",")[0]),"w") as fD: pickle.dump(df_bands,fD)
+        print "      * Saving toy yields to: SplusBModels%s/toyYields_%s.pkl"%(opt.ext,opt.xvar.split(",")[0])
+        with open("SplusBModels%s/toyYields_%s.pkl"%(opt.ext,opt.xvar.split(",")[0]),"w") as fD: pickle.dump(df_bands,fD)
 
 # Process each category separately
 for cidx in range(len(cats)):
@@ -326,16 +298,12 @@ for cidx in range(len(cats)):
   print "    * creating data histogram"
   h_data = _xvar.createHistogram("h_data_%s"%c, ROOT.RooFit.Binning(opt.nBins,xvar.getMin(),xvar.getMax()))
   h_data.SetBinErrorOption(ROOT.TH1.kPoisson)
-
-  #print(int(round(w.var("MH").getVal()-effSigma)),int(round(w.var("MH").getVal()+effSigma)))
   if opt.unblind: d.fillHistogram(h_data,_xvar_arglist)
   else: d.reduce("%s<%f|%s>%f"%(_xvar.GetName(),blindingRegion[0],_xvar.GetName(),blindingRegion[1])).fillHistogram(h_data,_xvar_arglist)
   if opt.doCatWeights:
     h_wdata = _xvar.createHistogram("h_wdata_%s"%c, ROOT.RooFit.Binning(opt.nBins,xvar.getMin(),xvar.getMax()))
     h_wdata.SetBinErrorOption(ROOT.TH1.kPoisson)
-    if opt.unblind: 
-      wd.fillHistogram(h_wdata,_xvar_arglist)             
-    
+    if opt.unblind: wd.fillHistogram(h_wdata,_xvar_arglist)
     else: wd.reduce("%s<%f|%s>%f"%(_xvar.GetName(),blindingRegion[0],_xvar.GetName(),blindingRegion[1])).fillHistogram(h_wdata,_xvar_arglist)
 
   # Scale data histogram
@@ -410,35 +378,6 @@ for cidx in range(len(cats)):
     bkgval = h_bpdf['nBins'].GetBinContent(ibin)
     h_data_ratio.SetBinContent(ibin,bval-bkgval)
     h_data_ratio.SetBinError(ibin,berr)
-  
-
-
-  if opt.doYield:
-    Bin_from = h_data_ratio.FindBin(int(round(w.var("MH").getVal()-cateffSigma[cats[cidx]])))
-    Bin_to = h_data_ratio.FindBin(int(round(w.var("MH").getVal()+cateffSigma[cats[cidx]])))-1
-                                         
-    catsDataRatioEff[cats[cidx]] = h_data_ratio.Integral(Bin_from,Bin_to)
-    print "      * Saving yield weighted data to json file: ./jsons/catsDataEff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0])
-    """
-    if not os.path.isdir("./jsons"): os.system("mkdir ./jsons")
-    with open("./jsons/catsDataRatioeff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsDataRatioEff,jsonfile)
-    catsDataEff[cats[cidx]] = h_data.Integral(Bin_from,Bin_to)
-    err_tot = 0
-    for Bin in range(Bin_from, Bin_to+1):
-       err = ( h_data_ratio.GetBinError(Bin))
-       err_tot =  err **2 + err_tot
-    err_tot = err_tot**0.5
-    catErrData[cats[cidx]]=err_tot
-    with open("./jsons/catsDataRatioErr_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catErrData,jsonfile)
-    """
-    
-  
-    print "      * Saving yield weighted data to json file: ./jsons/catsDataEff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0])
-    if not os.path.isdir("./jsons"): os.system("mkdir ./jsons")
-    with open("./jsons/catsDataeff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsDataEff,jsonfile)
-
-
-
   if opt.doCatWeights:
     h_wbpdf_ratio = h_wbpdf['pdfNBins']-h_wbpdf['pdfNBins']
     h_wspdf_ratio = h_wspdf['pdfNBins'].Clone()
@@ -451,23 +390,6 @@ for cidx in range(len(cats)):
       wbkgval = h_wbpdf['nBins'].GetBinContent(ibin)
       h_wdata_ratio.SetBinContent(ibin,wbval-wbkgval)
       h_wdata_ratio.SetBinError(ibin,wberr)
-
-
-  
-  if opt.doYield:
-    catsDataWeightRatio[cats[cidx]] = h_wdata_ratio.Integral(Bin_from,Bin_to) 
-    print("catsDataWeightRatio %s"%catsDataWeightRatio[cats[cidx]])
-    print "      * Saving yield weighted data to json file: ./jsons/catsdweighteff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0])
-    if not os.path.isdir("./jsons"): os.system("mkdir ./jsons")
-    with open("./jsons/catsDataRatioWeighteff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsDataWeightRatio,jsonfile)
-    print('-----------')
-    err_tot = 0
-    for Bin in range(Bin_from, Bin_to+1):
-       err = ( h_wdata_ratio.GetBinError(Bin))
-       err_tot =  err **2 + err_tot
-    err_tot = err_tot**0.5
-    catErrDataWeight[cats[cidx]]=err_tot
-    with open("./jsons/catsDataRatioWeightErr_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catErrDataWeight,jsonfile)
 
   # Sum histograms if processing multiple categories
   if( len(opt.cats.split(",")) > 1 )|( opt.cats == 'all' ):
@@ -509,9 +431,7 @@ for cidx in range(len(cats)):
   # Make plot for individual cats
   if not opt.skipIndividualCatPlots:
     print "    * making plot"
-    if not os.path.isdir("%s/SplusBModels%s"%(opt.pdir,opt.ext)): 
-      os.system("mkdir %s/SplusBModels%s"%(opt.pdir,opt.ext))
-      if os.path.exists("/afs/cern.ch"): os.system("cp /afs/cern.ch/user/g/gpetrucc/php/index.php %s/SplusBModels%s"%(opt.pdir,opt.ext))
+    if not os.path.isdir("./SplusBModels%s"%(opt.ext)): os.system("mkdir ./SplusBModels%s"%(opt.ext))
     if opt.doBands: makeSplusBPlot(w,h_data,h_sbpdf,h_bpdf,h_spdf,h_data_ratio,h_bpdf_ratio,h_spdf_ratio,c,opt,df_bands,_reduceRange)
     else: makeSplusBPlot(w,h_data,h_sbpdf,h_bpdf,h_spdf,h_data_ratio,h_bpdf_ratio,h_spdf_ratio,c,opt,None,_reduceRange)
 
@@ -538,9 +458,7 @@ if( len(opt.cats.split(",")) > 1 )|( opt.cats == 'all' ):
   if opt.doHHMjjFix: _reduceRange = [xvarfix.getMin(),xvarfix.getMax()]
   else: _reduceRange = None
   if opt.doSumCategories:
-    if not os.path.isdir("%s/SplusBModels%s"%(opt.pdir,opt.ext)): 
-      os.system("mkdir %s/SplusBModels%s"%(opt.pdir,opt.ext))
-      if os.path.exists("/afs/cern.ch"): os.system("cp /afs/cern.ch/user/g/gpetrucc/php/index.php %s/SplusBModels%s"%(opt.pdir,opt.ext))
+    if not os.path.isdir("./SplusBModels%s"%(opt.ext)): os.system("mkdir ./SplusBModels%s"%(opt.ext))
     print " --> Making plot for sum of categories"
     if opt.doBands: makeSplusBPlot(w,h_data_sum,h_sbpdf_sum,h_bpdf_sum,h_spdf_sum,h_data_ratio_sum,h_bpdf_ratio_sum,h_spdf_ratio_sum,'all',opt, df_bands,_reduceRange)
     else: makeSplusBPlot(w,h_data_sum,h_sbpdf_sum,h_bpdf_sum,h_spdf_sum,h_data_ratio_sum,h_bpdf_ratio_sum,h_spdf_ratio_sum,'all',opt,None,_reduceRange)
