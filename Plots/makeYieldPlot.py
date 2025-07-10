@@ -25,16 +25,16 @@ from shanePalette import set_color_palette
 
 def get_options():
   parser = OptionParser()
-  parser.add_option("--inputSeffJsonSM", dest="inputSeffJsonSM", default='jsons/catsSeff_sospbfa3_ggH_CMS_hgg_mass.json', help="")
-  parser.add_option("--inputSeffBSMJsonSM", dest="inputSeffBSMJsonSM", default='jsons/catsSeff_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="")
-  parser.add_option("--inputSeffBSMMIXJsonSM", dest="inputSeffBSMMIXJsonSM", default='jsons/catsSeff_sospbfa3_ggH_bsmmix_CMS_hgg_mass.json', help="")
-  parser.add_option("--inputBeffJsonSM", dest="inputBeffJsonSM", default='jsons/catsBeff_sospbfa3_ggH_CMS_hgg_mass.json', help="")
-  parser.add_option("--inputSeffJsonBSM", dest="inputSeffJsonBSM", default='jsons/catsSeff_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="Group of cats")
-  parser.add_option("--inputJsondataratio", dest="inputJsondataratio", default='jsons/catsDataRatioWeighteff_sospbfa3_ggH_CMS_hgg_mass.json', help="Extension for saving")
-  parser.add_option("--inputJsonDataErrRatio", dest="inputJsonDataErrRatio", default='jsons/catsDataRatioWeightErr_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="Extension for saving")
-  parser.add_option("--inputJsondata", dest="inputJsondata", default='jsons/catsDataeff_sospbfa3_ggH_CMS_hgg_mass.json', help="Extension for saving")
-  parser.add_option("--inputJsonweight", dest="inputJsonweight", default='jsons/catsWeights_sospbfa3_ggH_CMS_hgg_mass.json', help="Extension for saving")
-  parser.add_option("--inputJsonbsmweight", dest="inputJsonbsmweight", default='jsons/catsWeights_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputSeffJsonSM", dest="inputSeffJsonSM", default='jsons/catsSeff_sospb_0p0_fa3_CMS_hgg_mass.json', help="")
+  parser.add_option("--inputSeffBSMJsonSM", dest="inputSeffBSMJsonSM", default='jsons/catsSeff_sospb_1p0_fa3_CMS_hgg_mass.json', help="")
+  parser.add_option("--inputSeffBSMMIXJsonSM", dest="inputSeffBSMMIXJsonSM", default='jsons/catsSeff_sospb_0p5_fa3_CMS_hgg_mass.json', help="")
+  parser.add_option("--inputBeffJsonSM", dest="inputBeffJsonSM", default='jsons/catsBeff_sospb_0p0_fa3_CMS_hgg_mass.json', help="")
+  parser.add_option("--inputSeffJsonBSM", dest="inputSeffJsonBSM", default='jsons/catsSeff_sospb_1p0_fa3_CMS_hgg_mass.json', help="Group of cats")
+  parser.add_option("--inputJsondataratio", dest="inputJsondataratio", default='jsons/catsDataRatioWeighteff_sospb_0p0_fa3_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsonDataErrRatio", dest="inputJsonDataErrRatio", default='jsons/catsDataRatioWeightErr_sospb_0p0_fa3_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsondata", dest="inputJsondata", default='jsons/catsDataeff_sospb_0p0_fa3_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsonweight", dest="inputJsonweight", default='jsons/catsWeights_sospb_0p0_fa3_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsonbsmweight", dest="inputJsonbsmweight", default='jsons/catsWeights_sospb_1p0_fa3_CMS_hgg_mass.json', help="Extension for saving")
   parser.add_option("--cats", dest="cats", default='all', help="cats")
   parser.add_option("--translateCats", dest="translateCats", default='cats.json', help="JSON to store cat translations")
   parser.add_option("--out", dest="out", default='VBF', help="type of cat")
@@ -100,7 +100,7 @@ else:  categories = opt.cats.split(',')
 labels_latex = [cats_latex[cat] for cat in categories]
 #signal_weighted = [S[cat]  for cat in categories] 
 signal_weighted = [S[cat] * W[cat] for cat in categories] 
-#signal_bsm_weighted = [SBSM[cat] for cat in categories]
+signal_bsm_weighted = [SBSM[cat] for cat in categories]
 signal_bsmmix_weighted= [SBSMMIX[cat]* W[cat] for cat in categories] 
 signal_bsm_weighted = [SBSM[cat] * W[cat] for cat in categories] 
 weight2 = sum(signal_weighted)/sum(signal_bsm_weighted)
@@ -148,7 +148,7 @@ ax.bar(
     width=1,
     linewidth=1,  
     align='center',
-    label=r"$f_{a3}^{ggH}=0$,$f_{a3}=0$"
+    label=r"$f_{a3}^{ggH}=0.45$,$f_{a3}=0.0$"
 )
 
 #ax.bar(
@@ -168,7 +168,7 @@ ax.bar(
     width=1,
     linewidth=1.5,  
     align='center',
-    label=r"$f_{a3}^{ggH}=0.50$,$f_{a3}=0$",
+    label=r"$f_{a3}^{ggH}=0.45$,$f_{a3}=0.5$",
     edgecolor='red',
     color='red',
     facecolor='none'
@@ -180,7 +180,7 @@ ax.bar(
     width=1,
     linewidth=1.5,
     align='center',
-    label=r"$f_{a3}^{ggH}=1.0$,$f_{a3}=0$",
+    label=r"$f_{a3}^{ggH}=0.45$,$f_{a3}=1.0$",
     edgecolor='orange',
     color='orange',
     facecolor='none'
@@ -233,6 +233,6 @@ ax_ratio.set_xticklabels(labels_latex, rotation=45, fontsize=15)
 
 #plt.xticks(range(len(categories)), labels_latex, rotation=45, fontsize=15)
 
-plt.savefig('plots_stage03/fa3_ggH_%s.png' % opt.out)
+plt.savefig('plots_stage03/fa3_%s.png' % opt.out)
 
 plt.show()

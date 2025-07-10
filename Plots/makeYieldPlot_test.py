@@ -25,15 +25,15 @@ from shanePalette import set_color_palette
 
 def get_options():
   parser = OptionParser()
-  parser.add_option("--inputSeffJsonSM", dest="inputSeffJsonSM", default='jsons/catsSeff_sospbfa3_ggH_ggH_CMS_hgg_mass.json', help="")
-  parser.add_option("--inputSeffBSMJsonSM", dest="inputSeffBSMJsonSM", default='jsons/catsSeff_sospbfa3_sm_CMS_hgg_mass.json', help="")
-  parser.add_option("--inputBeffJsonSM", dest="inputBeffJsonSM", default='jsons/catsBeff_sospbfa3_ggH_ggH_CMS_hgg_mass.json', help="")
+  parser.add_option("--inputSeffJsonSM", dest="inputSeffJsonSM", default='jsons_test/catsSeff_sospbfa3_ggH_CMS_hgg_mass.json', help="")
+  parser.add_option("--inputSeffBSMJsonSM", dest="inputSeffBSMJsonSM", default='jsons_test/catsSeff_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="")
+  parser.add_option("--inputBeffJsonSM", dest="inputBeffJsonSM", default='jsons_test/catsBeff_sospbfa3_ggH_CMS_hgg_mass.json', help="")
   parser.add_option("--inputSeffJsonBSM", dest="inputSeffJsonBSM", default='jsons_test/catsSeff_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="Group of cats")
-  parser.add_option("--inputJsondataratio", dest="inputJsondataratio", default='jsons/catsDataRatioWeighteff_sospbfa3_ggH_ggH_CMS_hgg_mass.json', help="Extension for saving")
-  parser.add_option("--inputJsonDataErrRatio", dest="inputJsonDataErrRatio", default='jsons/catsDataRatioWeightErr_sospbfa3_ggH_ggH_CMS_hgg_mass.json', help="Extension for saving")
-  parser.add_option("--inputJsondata", dest="inputJsondata", default='jsons/catsDataeff_sospbfa3_ggH_CMS_hgg_mass.json', help="Extension for saving")
-  parser.add_option("--inputJsonweight", dest="inputJsonweight", default='jsons/catsWeights_sospbfa3_ggH_CMS_hgg_mass.json', help="Extension for saving")
-  parser.add_option("--inputJsonbsmweight", dest="inputJsonbsmweight", default='jsons/catsWeights_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsondataratio", dest="inputJsondataratio", default='jsons_test/catsDataRatioWeighteff_sospbfa3_ggH_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsonDataErrRatio", dest="inputJsonDataErrRatio", default='jsons_test/catsDataRatioWeightErr_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsondata", dest="inputJsondata", default='jsons_test/catsDataeff_sospbfa3_ggH_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsonweight", dest="inputJsonweight", default='jsons_test/catsWeights_sospbfa3_ggH_CMS_hgg_mass.json', help="Extension for saving")
+  parser.add_option("--inputJsonbsmweight", dest="inputJsonbsmweight", default='jsons_test/catsWeights_sospbfa3_ggH_bsm_CMS_hgg_mass.json', help="Extension for saving")
   parser.add_option("--cats", dest="cats", default='all', help="cats")
   parser.add_option("--translateCats", dest="translateCats", default='cats.json', help="JSON to store cat translations")
   parser.add_option("--out", dest="out", default='VBF', help="type of cat")
@@ -152,7 +152,7 @@ ax.bar(
     width=1,
     linewidth=6,  
     align='center',
-    label=r"$f_{a3}^{ggH}=1$,$f_{a3}=1$",
+    label=r"$f_{a3}^{ggH}=1$,$f_{a3}=0$",
     edgecolor='orange',
     color='orange',
     facecolor='none'
@@ -201,6 +201,6 @@ ax_ratio.set_xticklabels(cats_latex, rotation=45, fontsize=15)
 
 #plt.xticks(range(len(categories)), labels_latex, rotation=45, fontsize=15)
 
-plt.savefig('plots/fa3_ggH_%s_fa3.png' % opt.out)
+plt.savefig('plots/fa3_ggH_%s_test.png' % opt.out)
 
 plt.show()
