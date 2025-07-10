@@ -1,3 +1,12 @@
+
+########################################################
+#                                                      #
+# This script is originally developed my Meng for the  #
+# H->ZZ>4l and modified by Antonio V. and Jahid H.     #
+# for the Hgg analysis ( CMS AN-2023/140 , v8)         #
+#                                                      #
+########################################################
+
 from HiggsAnalysis.CombinedLimit.PhysicsModel import *
 import re
 
@@ -7,10 +16,11 @@ import re
 class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(PhysicsModel):
     def doParametersOfInterest(self):
         #Create POI and other parameters, and define the POI set.
-        # Generator specific (JHUGen) values of inclusive xsec H->ZZ>4l taken from https://twiki.cern.ch/twiki/bin/view/CMS/Run2MCProductionforHiggsProperties#JHUGen_H_2jets_Production_JHUGen
+        #Generator specific (JHUGen) values of inclusive xsec H->ZZ>4l taken from https://twiki.cern.ch/twiki/bin/view/CMS/Run2MCProductionforHiggsProperties#JHUGen_H_2jets_Production_JHUGen
         xsecs = {
             "sigma1_HZZ": 290.58626,  
             "sigma3_HZZ": 44.670158,
+	    #"sigma3_HZZ": 581.17253,		
 
             "sigma1_VBF": 968.674,   
             "sigma3_VBF": 10909.54,
@@ -26,7 +36,7 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
             "sigma_SM_ggH": 15980,
             "sigma_BSM_ggH": 15981, # sigma_BSM_ggH:=sigma2_ggH =sigma3_ggH ( follows from a2_ggH = a3_ggH = 1; fa3_ggH = 0.5 )
 
-            "categories": 30, # 500,300,200
+            "categories": 30, # 500,300,200 ( 30 is the number of bins in ggF to Hgg analysis )
 
         }
 
@@ -46,21 +56,25 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
         self.modelBuilder.doVar('expr::a3_ggH("(@0>0 ? -1 : 1) * sqrt(abs(@0))", fa3_ggH)'.format(**xsecs)) # sigma2_ggH/sigma3_ggH = 1
 
         # Convenience parameter muV_c = prefactor* muV. Prefactor reabsorbed in overall normalization, see from eq. 23, using Taylor expansion for fa1~1(SM case) and fa3~0
+        
         self.modelBuilder.factory_('expr::muVc("@1/(1+30*abs(@0))", fa3,muV)'.format(**xsecs))  
 
         # Amplitude decomposition in SM, int, bsm terms such that all terms poistive definite (to avoid negative norms for pdf in combine)
+
+        # SM (CPeven) coupling to ggH, VBF, ZH, WH
         self.modelBuilder.factory_('expr::smCoupling_VBF("@0*@1**2 - @0*@1*@2*sqrt({sigma3_VBF}/{sigma1_VBF})", muVc,a1,a3)'.format(**xsecs))
         self.modelBuilder.factory_('expr::smCoupling_ZH("@0*@1**2 - @0*@1*@2*sqrt({sigma3_ZH}/{sigma1_ZH})", muVc,a1,a3)'.format(**xsecs))
         self.modelBuilder.factory_('expr::smCoupling_WH("@0*@1**2 - @0*@1*@2*sqrt({sigma3_WH}/{sigma1_WH})", muVc,a1,a3)'.format(**xsecs))
-
         self.modelBuilder.factory_('expr::smCoupling_ggH("@0*@1**2 -  @0*@1*@2*sqrt({sigma_BSM_ggH}/{sigma_SM_ggH})", mu_ggH,a2_ggH,a3_ggH)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::bsmCoupling_ggH("@0*@1**2*{sigma_BSM_ggH}/{sigma_SM_ggH} - @0*@1*@2*sqrt({sigma_BSM_ggH}/{sigma_SM_ggH})", mu_ggH,a3_ggH,a2_ggH)'.format(**xsecs))
-        self.modelBuilder.factory_('expr::intCoupling_ggH("@0*@1*@2*sqrt({sigma_BSM_ggH}/{sigma_SM_ggH})*2.", mu_ggH,a2_ggH,a3_ggH)'.format(**xsecs))
 
+        # BSM (CPodd) Couping to ggH, VBF, ZH, WH
+        self.modelBuilder.factory_('expr::bsmCoupling_ggH("@0*@1**2*{sigma_BSM_ggH}/{sigma_SM_ggH} - @0*@1*@2*sqrt({sigma_BSM_ggH}/{sigma_SM_ggH})", mu_ggH,a3_ggH,a2_ggH)'.format(**xsecs))
         self.modelBuilder.factory_('expr::bsmCoupling_VBF("@0*@1**2*{sigma3_VBF}/{sigma1_VBF} - @0*@1*@2*sqrt({sigma3_VBF}/{sigma1_VBF})", muVc,a3,a1)'.format(**xsecs))
         self.modelBuilder.factory_('expr::bsmCoupling_ZH("@0*@1**2*{sigma3_ZH}/{sigma1_ZH} - @0*@1*@2*sqrt({sigma3_ZH}/{sigma1_ZH})", muVc,a3,a1)'.format(**xsecs))
         self.modelBuilder.factory_('expr::bsmCoupling_WH("@0*@1**2*{sigma3_WH}/{sigma1_WH} - @0*@1*@2*sqrt({sigma3_WH}/{sigma1_WH})", muVc,a3,a1)'.format(**xsecs))
 
+        # Interference (CPmix) Couping to ggH, VBF, ZH, WH
+        self.modelBuilder.factory_('expr::intCoupling_ggH("@0*@1*@2*sqrt({sigma_BSM_ggH}/{sigma_SM_ggH})*2.", mu_ggH,a2_ggH,a3_ggH)'.format(**xsecs))
         self.modelBuilder.factory_('expr::intCoupling_VBF("@0*@1*@2*sqrt({sigma3_VBF}/{sigma1_VBF})*{sigmaa1a3int_VBF}/{sigma1_VBF}", muVc,a1,a3)'.format(**xsecs))
         self.modelBuilder.factory_('expr::intCoupling_ZH("@0*@1*@2*sqrt({sigma3_ZH}/{sigma1_ZH})*{sigmaa1a3int_ZH}/{sigma1_ZH}", muVc,a1,a3)'.format(**xsecs))
         self.modelBuilder.factory_('expr::intCoupling_WH("@0*@1*@2*sqrt({sigma3_WH}/{sigma1_WH})*{sigmaa1a3int_WH}/{sigma1_WH}", muVc,a1,a3)'.format(**xsecs))
@@ -69,36 +83,40 @@ class FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase(Physics
     def getYieldScale(self,bin,process):
 
         years = ["2016preVFP","2016postVFP","2017","2018"]
-        scale = '1'
-        if process in ["GG2Hsm_%s_hgg"%y for y in years]:          
-            scale = 'smCoupling_ggH'
+
+        if process in ["GG2Hsm_%s_hgg"%y for y in years]:
+            return 'smCoupling_ggH'
         if process in ["GG2HbsmM_%s_hgg"%y for y in years]:
-            scale = 'bsmCoupling_ggH'
+            return 'bsmCoupling_ggH'
         if process in ["GG2HMf05ph0_%s_hgg"%y for y in years]:
-            scale = 'intCoupling_ggH'
+            return 'intCoupling_ggH'
+
         if process in ["vbf0P_%s_hgg"%y for y in years]:
-            scale = 'smCoupling_VBF'
+            return 'smCoupling_VBF'
         if process in ["vbf0M_%s_hgg"%y for y in years]:
-            scale = 'bsmCoupling_VBF'
+            return 'bsmCoupling_VBF'
         if process in ["vbf0Mf05ph0_%s_hgg"%y for y in years]:
-            scale = 'intCoupling_VBF'
+            return 'intCoupling_VBF'
+
         if process in ["wh0P_%s_hgg"%y for y in years]:
-            scale = 'smCoupling_WH'
+            return 'smCoupling_WH'
         if process in ["wh0M_%s_hgg"%y for y in years]:
-            scale = 'bsmCoupling_WH'
+            return 'bsmCoupling_WH'
         if process in ["wh0Mf05ph0_%s_hgg"%y for y in years]:
-            scale = 'intCoupling_WH'
+            return 'intCoupling_WH'
+
         if process in ["zh0P_%s_hgg"%y for y in years]:
-            scale = 'smCoupling_ZH'
+            return 'smCoupling_ZH'
         if process in ["zh0M_%s_hgg"%y for y in years]:
-            scale = 'bsmCoupling_ZH'
+            return 'bsmCoupling_ZH'
         if process in ["zh0Mf05ph0_%s_hgg"%y for y in years]:
-            scale = 'intCoupling_ZH'
+            return 'intCoupling_ZH'
+
         if process in ["tth0P_%s_hgg"%y for y in years]:
-            scale = 'mu_ggH'
-        print("Bin/Process %s/%s will get scaled by %s" % (bin, process, scale))
-        return scale 
-        
+            return 'mu_ggH'
+
+        return 1
+
 
 FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase = FA3_Interference_JHU_ggHSyst_rw_MengsMuV_HeshyXsec_ggHInt_ggHphase()
 

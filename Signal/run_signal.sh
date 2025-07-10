@@ -73,7 +73,8 @@ signalScriptCfg = {
   # Setup
   'inputWSDir':'Trees/Opt_$YEAR/$InputWSDirPath/Trees2WS_$YEAR/WS/',
   'procs':'GG2HbsmM,GG2Hsm,GG2HMf05ph0,VBFbsmM,VBFsm,VBFMf05ph0', # if auto: inferred automatically from filenames
-  'cats':'auto', # if auto: inferred automatically from (0) workspace
+  #'cats':'auto', # if auto: inferred automatically from (0) workspace
+  'cats':'GG2HbsmM,GG2Hsm,GG2HMf05ph0',
   'ext': '%s'%_year,
   'analysis':'AC', # To specify which replacement dataset mapping (defined in ./python/replacementMap.py)
   'year':'%s'%_year, # Use 'combined' if merging all years: not recommended

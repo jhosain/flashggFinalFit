@@ -14,7 +14,7 @@ echo -n "Name of directory of your workspace :"
 read InputWSDirPath
 #echo "$InputWSDirPath"
 
-echo -n -e "${RED} --skipVertexScenarioSplit --> False(0); True(1) :  ${NC}"
+echo -n -e "${RED} --skipWV --> False(0); True(1) :  ${NC}"
 read value
 echo
 
@@ -27,7 +27,7 @@ if [ "$value" -eq 0 ]; then
     split=" "
     echo "Splitting VertexScenario"
 else
-    split="--skipVertexScenarioSplit"
+    split="--skipWV"
     echo "Skipping VertexScenario Splitting"
 fi
 
@@ -94,7 +94,7 @@ signalScriptCfg = {
 
 }" > config_sig_$YEAR.py
 
-python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots "
+python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots $split"
 python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode calcPhotonSyst
 #python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip $split --doPlots"
 

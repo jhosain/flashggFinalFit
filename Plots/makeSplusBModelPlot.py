@@ -28,7 +28,7 @@ def get_options():
   parser.add_option("--inputWSFile", dest="inputWSFile", default=None, help="Input RooWorkspace file. If loading snapshot then use a post-fit workspace where the option --saveWorkspace was set")
   parser.add_option("--loadSnapshot", dest="loadSnapshot", default=None, help="Load best-fit snapshot name")
   parser.add_option("--cats", dest="cats", default=None, help="Analysis categories. all = loop over cats and plot sum")
-  parser.add_option("--unblind", dest="unblind", default=False, action="store_true", help="Unblind signal region")
+  parser.add_option("--unblind", dest="unblind", default=True, action="store_true", help="Unblind signal region")
   parser.add_option("--blindingRegion", dest="blindingRegion", default="116,134", help="Region in xvar to blind")
   parser.add_option("--dataScaler", dest="dataScaler", default=1., type='float', help="Scaling term for data histogram")
   parser.add_option("--doBkgRenormalization", dest="doBkgRenormalization", default=False, action="store_true", help="Do Bkg renormalization")
@@ -54,9 +54,6 @@ def get_options():
   parser.add_option("--problematicCats", dest="problematicCats", default='', help='Problematic analysis categories to skip when processing all')
   parser.add_option("--doHHMjjFix", dest="doHHMjjFix", default=False, action="store_true", help="Do fix for HH analysis where some cats have different Mjj var")
   parser.add_option("--doBSM", dest="doBSM", default=False, action="store_true", help="Do BSM analysys")
-
-  parser.add_option("--doSM", dest="doSM", default=False, action="store_true", help="Do SM analysys")
-
   parser.add_option("--pdir", dest="pdir", default="./", help="Directory where to put the final plots")
   parser.add_option("--toydir", dest="toydir", default="./", help="Directory where the toys are")
 
@@ -69,18 +66,17 @@ if opt.inputWSFile is not None:
   print " --> Opening workspace: %s"%opt.inputWSFile
   f = ROOT.TFile(opt.inputWSFile)
   w = f.Get("w")
+
+  
  
-  if opt.doSM:
-    var = w.var("fa3_ggH")
-    var.setVal(0.)
-  if opt.doBSM:
-    var = w.var("fa3_ggH")
-    var.setVal(0.5)
 
   # If required loadSnapshot
   if opt.loadSnapshot is not None: 
     print "    * Loading snapshot: %s"%opt.loadSnapshot
     w.loadSnapshot(opt.loadSnapshot)
+  if opt.doBSM:
+    var = w.var("CMS_zz4l_fai1")
+    var.setVal(1.)
   # Also loop over parameters in map and set
   if opt.parameterMap is not None:
     if opt.loadSnapshot is not None:
@@ -280,7 +276,9 @@ if opt.doBands:
               _xvar, _xvar_arglist = xvarfix, xvarfix_arglist
             else:
               _xvar, _xvar_arglist = xvar, xvar_arglist
-	    dtoy = toy.reduce("CMS_channel==CMS_channel::%g"%(cidx))
+	    vars_to_keep = ROOT.RooArgSet(toy.get().find("CMS_hgg_mass"), toy.get().find("CMS_channel")) 
+            dtoy = toy.reduce(vars_to_keep,"CMS_channel==%g"%(cidx))
+            #dtoy = toy.reduce("CMS_channel==CMS_channel::%g"%(cidx))            
 	    htoy = _xvar.createHistogram("h_%s"%c,ROOT.RooFit.Binning(opt.nBins,xvar.getMin(),xvar.getMax()))
 	    dtoy.fillHistogram(htoy,_xvar_arglist)
 	    for ibin in range(1,htoy.GetNbinsX()+1): 
@@ -334,7 +332,11 @@ for cidx in range(len(cats)):
     h_wdata = _xvar.createHistogram("h_wdata_%s"%c, ROOT.RooFit.Binning(opt.nBins,xvar.getMin(),xvar.getMax()))
     h_wdata.SetBinErrorOption(ROOT.TH1.kPoisson)
     if opt.unblind: 
-      wd.fillHistogram(h_wdata,_xvar_arglist)             
+      wd.fillHistogram(h_wdata,_xvar_arglist)
+
+       
+     
+      
     
     else: wd.reduce("%s<%f|%s>%f"%(_xvar.GetName(),blindingRegion[0],_xvar.GetName(),blindingRegion[1])).fillHistogram(h_wdata,_xvar_arglist)
 
@@ -351,6 +353,7 @@ for cidx in range(len(cats)):
       if h_data.GetBinContent(ibin)==0.: 
         h_data.SetBinError(ibin,1)
         if opt.doCatWeights: h_wdata.SetBinError(ibin,catsWeights[c])
+
 
   # Extract pdfs for category and create histograms
   print "    * creating pdf histograms: S+B, B"
@@ -419,7 +422,7 @@ for cidx in range(len(cats)):
                                          
     catsDataRatioEff[cats[cidx]] = h_data_ratio.Integral(Bin_from,Bin_to)
     print "      * Saving yield weighted data to json file: ./jsons/catsDataEff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0])
-    """
+    catErrData = []
     if not os.path.isdir("./jsons"): os.system("mkdir ./jsons")
     with open("./jsons/catsDataRatioeff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsDataRatioEff,jsonfile)
     catsDataEff[cats[cidx]] = h_data.Integral(Bin_from,Bin_to)
@@ -428,11 +431,12 @@ for cidx in range(len(cats)):
        err = ( h_data_ratio.GetBinError(Bin))
        err_tot =  err **2 + err_tot
     err_tot = err_tot**0.5
-    catErrData[cats[cidx]]=err_tot
-    with open("./jsons/catsDataRatioErr_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catErrData,jsonfile)
-    """
+    #catErrData[cats[cidx]]=err_tot
+    #with open("./jsons/catsDataRatioErr_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catErrData,jsonfile)
+ 
     
   
+
     print "      * Saving yield weighted data to json file: ./jsons/catsDataEff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0])
     if not os.path.isdir("./jsons"): os.system("mkdir ./jsons")
     with open("./jsons/catsDataeff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsDataEff,jsonfile)
@@ -461,7 +465,7 @@ for cidx in range(len(cats)):
     if not os.path.isdir("./jsons"): os.system("mkdir ./jsons")
     with open("./jsons/catsDataRatioWeighteff_sospb%s_%s.json"%(opt.ext,opt.xvar.split(",")[0]),'w') as jsonfile: json.dump(catsDataWeightRatio,jsonfile)
     print('-----------')
-    err_tot = 0
+    err_tot=0
     for Bin in range(Bin_from, Bin_to+1):
        err = ( h_wdata_ratio.GetBinError(Bin))
        err_tot =  err **2 + err_tot

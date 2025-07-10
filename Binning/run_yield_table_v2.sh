@@ -25,18 +25,19 @@ Nbinu=2
 Nbins=$((Nbinx * Nbiny * Nbinz ))
 
 # Output file to store the results
-output_file="bin_table_${year}.txt"
+output_file="ttH_bin_table_${year}.txt"
 
 # Write the header for the table with columns for each Proc value
 echo -ne "Bin" > "$output_file"
-for ((proc = 1; proc <= 6; proc++)); do
+for ((proc = 13; proc < 14; proc++)); do
     case $proc in
-        1) column_header="ggH SM Yield" ;;
-        2) column_header="ggH MIX Yield" ;;
-        3) column_header="ggH BSM Yield" ;;
-        4) column_header="VBF SM Yield" ;;
-        5) column_header="VBF MIX Yield" ;;
-        6) column_header="VBF BSM Yield" ;;
+        #1) column_header="ggH SM Yield" ;;
+        #2) column_header="ggH MIX Yield" ;;
+        #3) column_header="ggH BSM Yield" ;;
+        #4) column_header="VBF SM Yield" ;;
+        #5) column_header="VBF MIX Yield" ;;
+        #6) column_header="VBF BSM Yield" ;;
+	13) column_header="TTH SM Yield" ;; 
         #0) column_header="Data Yield" ;;
         *) column_header="Unknown" ;;
     esac
@@ -50,7 +51,7 @@ for ((bin_index = 0; bin_index < Nbins; bin_index++)); do
     echo -ne "${bin_index}" >> "$output_file"
 
     # Loop through Proc values from 0 to 6
-    for ((proc = 1; proc <= 6; proc++)); do
+    for ((proc = 13; proc < 14; proc++)); do
         # Change to the corresponding Bin directory
         cd "Bin$bin_index" || { echo -e "${RED}Error: Unable to access Bin$bin_index directory.${NC}"; exit 1; }
 

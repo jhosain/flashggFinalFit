@@ -12,3 +12,6 @@ python makeToys.py --inputWSFile higgsCombine.bestfit.MultiDimFit.mH125.38.root 
 
 
 python makeSplusBModelPlot.py --inputWSFile higgsCombine.bestfit.MultiDimFit.mH125.38.root --loadSnapshot MultiDimFit --cats all --doZeroes --ext _test_with_bands --unblind --doBands --saveToyYields --doSumCategories --doCatWeights --saveWeights
+
+
+python makeSplusBModelPlot.py --toydir /afs/cern.ch/user/j/jhossain/eos/Hgg_AC_analysis/Analysis_2024/Unblind_RE/Stage02_RunII --inputWSFile higgsCombine.bestfit.MultiDimFit.mH125.38.root --loadSnapshot MultiDimFit --cats all --doZeroes --ext _unblind_with_bands_bonly_RunII --mass 125.38 --blindingRegion 125,125 --translateCats cats.json --doBands --doToyVeto --saveToyYields --doSumCategories --doCatWeights --saveWeights

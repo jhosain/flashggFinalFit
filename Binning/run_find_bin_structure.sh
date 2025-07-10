@@ -28,7 +28,7 @@ for ((bin_index = 0; bin_index < Nbins; bin_index++)); do
     cd "Bin$bin_index" || { echo "Bin$bin_index not found!"; cd ..; continue; }
 
     # Specify the log file
-    log_file="run${bin_index}${Proc}.log"
+    log_file="Bin${bin_index}_process${Proc}_cent.sub.out"
 
     # Check if the log file exists
     if [[ ! -f "$log_file" ]]; then

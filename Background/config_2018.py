@@ -11,9 +11,9 @@ backgroundScriptCfg = {
   'year':'2018', # Use combined when merging all years in category (for plots)                                                
 
   # Job submission options                                                                                                        
-  'batch':'condor', # [condor,SGE,IC,local]                                                                                        
-  'queue':'espresso' # for condor e.g. microcentury for local e.g. hep.q                                                                  
-  #'batch':'local', # [condor,SGE,IC,local]                                                                                                   
-  #'queue':'hep.q' # for condor e.g. microcentury               
+  #'batch':'condor', # [condor,SGE,IC,local]                                                                                        
+  #'queue':'espresso' # for condor e.g. microcentury for local e.g. hep.q                                                                  
+  'batch':'local', # [condor,SGE,IC,local]                                                                                                   
+  'queue':'hep.q' # for condor e.g. microcentury               
 
 }

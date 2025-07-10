@@ -1,0 +1,21 @@
+python addLineToDatacard.py --inputDatacard Datacard_RunII.txt --systMap CMS_hgg_pdfWeight_0to59_ggH_2016preVFP:const_GG2H_AC_Bin_2016postVFP
+       P:1.004+CMS_hgg_pdfWeight_0to59_ggH_2016postVFP:const_GG2H_AC_Bin_2016postVFP:1.006+CMS_hgg_pdfWeight_0to59_ggH_2017:2017_const_GG2H_AC_Bin:1.006+CMS_hgg_pdfWeight_0to59_ggH_2018:const_GG2H_AC_Bin:1.006
+
+
+#CMS_hgg_pdfWeight_0to59_ggH_2016preVFP:const_GG2H_2016preVFP_AC_Bin:1.004
+
+#CMS_hgg_scale_gr2_ggH_2016preVFP:const_GG2H_AC_Bin:1.080/0.917+CMS_hgg_scale_gr2_ggH_2016postVFP:const_GG2H_AC_Bin:1.071/0.929+CMS_hgg_scale_gr2_ggH_2017:const_GG2H_AC_Bin:1.071/0.929+CMS_hgg_scale_gr2_ggH_2018:const_GG2H_AC_Bin:1.071/0.929+CMS_hgg_alphaSWeight_gr0_ggH_2016preVFP:const_GG2H_AC_Bin:1.014/0.985+CMS_hgg_alphaSWeight_gr0_ggH_2016postVFP:const_GG2H_AC_Bin:1.014/0.985+CMS_hgg_alphaSWeight_gr0_ggH_2017:const_GG2H_AC_Bin:1.014/0.985+CMS_hgg_alphaSWeight_gr0_ggH_2018:const_GG2H_AC_Bin:1.014/0.985
+
+#CMS_hgg_pdfWeight_0to59_ggH_2016preVFP:const_GG2H_2016preVFP_AC_Bin:1.004+CMS_hgg_pdfWeight_0to59_ggH_2016postVFP:const_GG2H_2016postVFP_AC_Bin:1.006+CMS_hgg_pdfWeight_0to59_ggH_2017:const_GG2H_2017_hgg_AC_Bin:1.006+CMS_hgg_pdfWeight_0to59_ggH_2018:const_GG2H_2018_hgg_AC_Bin:1.006 
+
+
+
+
+
+
+
+
+
+
+
+

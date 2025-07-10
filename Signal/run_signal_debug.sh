@@ -74,7 +74,7 @@ signalScriptCfg = {
   # Setup
   'inputWSDir':'Trees/Opt_$YEAR/$InputWSDirPath/Trees2WS_$YEAR/WS/',
   #'procs':'WHbsmM,WHsm,WHMf05ph0,ZHbsmM,ZHsm,ZHMf05ph0,TTHsm', # if auto: inferred automatically from filenames
-  'procs':'ZHbsmM,ZHMf05ph0',
+  'procs':'GG2HbsmM,GG2Hsm,GG2HMf05ph0',
   'cats':'auto', # if auto: inferred automatically from (0) workspace
   'ext': '%s'%_year,
   'analysis':'AC', # To specify which replacement dataset mapping (defined in ./python/replacementMap.py)
@@ -97,9 +97,9 @@ signalScriptCfg = {
 
 }" > config_sig_$YEAR.py
 
-#python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots "
+python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode fTest  --modeOpts "--nProcsToFTest -1 --doPlots "
 #python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode calcPhotonSyst
-python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip --skipVertexScenarioSplit True --doPlots"
+#python RunSignalScripts.py --inputConfig config_sig_$YEAR.py --mode signalFit  --modeOpts "$skip --skipVertexScenarioSplit True --doPlots"
 
 
 echo " ########### End ############## "

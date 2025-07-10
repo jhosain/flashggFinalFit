@@ -18,6 +18,7 @@ if not os.path.exists( opt.inputDatacard ):
 
 catLine = ''
 procLine = ''
+yearLine=''
 sprior = 'lnN'
 
 nBinLine = 0
@@ -35,10 +36,13 @@ with open(opt.inputDatacard,'r') as f:
 
 procs = []
 cats = []
+years = []
 for c in catLine.split(" "):
   if "AC_Bin" in c: cats.append(c)
 for p in procLine.split(" "):
   if ("hgg" in p)|("bkg" in p): procs.append(p)
+for y in yearLine.split(" "):
+  if ("2016preVFP" in y)|("2016postVFP" in y)|("2017" in y)|("2018" in y): years.append(y)
 
 # Initiate ordered dict for each line
 systs = od()

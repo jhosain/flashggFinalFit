@@ -72,6 +72,7 @@ def signalFromFileName(_fileName):
     if "ZToLL" in _fileName: d = "_ZToLL"
     elif "ZToNuNu" in _fileName: d = "_ZToNuNu"
     else: d = "_ZToQQ"
+  elif "GG2H" in _fileName: p = "ggH"
   elif "GluGlu" in _fileName: p = "ggh"
   elif "VBF" in _fileName: p = "vbf"
   elif "WH" in _fileName: p = "wh"
@@ -130,6 +131,9 @@ def dataToProc( _d ):
 procToDatacardNameMap = od()
 procToDatacardNameMap['GG2H'] = "ggH"
 procToDatacardNameMap['HHH'] = "gghhh"
+procToDataMap['GG2HbsmM'] = 'jjh0M'
+procToDataMap['GG2HMf05ph0'] = 'jjh0Mf05ph0'
+procToDataMap['GG2Hsm'] = 'jjh0P'
 procToDatacardNameMap['GGH2JetspseudoscalarM'] = 'jjh0M'
 procToDatacardNameMap['GGH2JetspseudoscalarMf05ph0'] = 'jjh0Mf05ph0'
 procToDatacardNameMap['GGH2Jetssm'] = 'jjh0P'
